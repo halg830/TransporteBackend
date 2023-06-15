@@ -14,9 +14,3 @@ const vendedor = new Schema({
 })
 
 export default mongoose.model("vendedor", vendedor)
-
-
-
-
-
-

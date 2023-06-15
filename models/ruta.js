@@ -7,3 +7,5 @@ const ruta = new Schema({
     destino:{type: String,required:true},
     hora_salida: {type: Date, required: true}
 })
+
+export default mongoose.model("ruta", ruta)
