@@ -7,7 +7,7 @@ const cliente = new Schema({
     cedula:{type: String, require: true, maxlength:10},
     mayor:{type: boolean, default: false},
     createdAt:{type: Date, default: Date.now},
-    status:{type: Boolean}
+    estado:{type: Boolean, default: true},
 });
 
 export default mongoose.model("cliente", cliente)

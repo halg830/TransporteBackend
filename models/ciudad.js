@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const ciudad = new Schema({
     nombre:{type: String, required: true},
-    estado:{type: String, default: "1"},
+    estado:{type: Boolean, default: true},
     createAd:{type: Date, default:Date.now}
 })
 

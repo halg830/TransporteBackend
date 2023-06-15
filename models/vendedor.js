@@ -9,7 +9,7 @@ const vendedor = new Schema({
     telefono:{type: String, required: true},
     usuario:{type: String, required: true},
     contraseña:{type: String, required: true},
-    estado:{type: String, default: "1"},
+    estado:{type: Boolean, default: true},
     createAd:{type: Date, default:Date.now}
 })
 
