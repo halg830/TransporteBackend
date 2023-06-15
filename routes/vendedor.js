@@ -5,8 +5,9 @@ import { mongo } from "mongoose";
 
 const router = new Router
 
-router.get('/vendedor',[
+router.post('/vendedor',[
     check("nombre","El nombre es obligatorio").not().isEmpty(),
     check("nombre","minimo 8 caracteres").isLength(),
-    
+
+
 ], httpCliente.getcliente)
