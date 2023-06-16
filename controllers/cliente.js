@@ -1,15 +1,13 @@
 // import cliente from "../models/cliente.js";
 
 const httpCliente = {
-
     getCliente: async(req,res) => {
     try {
-        const clientes = await cliente.find()
-        res.json({ cliente })
+        const clientes = await clientes.find()
+        res.json({ clientes })
     } catch (error) {
         res.status(400).json({ error })
     }
-
 },
 getClienteCedula: async(req,res) => {
     try {
@@ -24,10 +22,8 @@ getClienteCedula: async(req,res) => {
     } catch (error) {
         res.status(400).json({ error })
     }
-
 },
 postCliente: async (req, res) => {
-
     try {
         const { } = req.body
         const cliente = new cliente({})

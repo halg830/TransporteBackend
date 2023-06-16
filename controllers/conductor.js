@@ -4,8 +4,8 @@ const httpConductor = {
 
     getConductor: async (req, res) => {
         try {
-            const clientes = await cliente.find()
-            res.json({ cliente })
+            const clientes = await clientes.find()
+            res.json({ clientes })
         } catch (error) {
             res.status(400).json({ error })
         }
