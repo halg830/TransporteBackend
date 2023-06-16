@@ -6,5 +6,5 @@ import { mongo } from "mongoose";
 const router = new Router
 
 router.get('/ruta',[
-    check("nombre","El nombre es obligatorio").not().isEmpty()
+    check("hora_salida","La hora es obligatoria").notEmpty()
 ], httpRuta.getRuta)
