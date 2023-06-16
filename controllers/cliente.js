@@ -1,5 +1,3 @@
-// import cliente from "../models/cliente.js";
-
 const httpCliente = {
     getCliente: async(req,res) => {
     try {

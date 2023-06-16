@@ -5,6 +5,8 @@ import { mongo } from "mongoose";
 
 const router = new Router
 
-router.get('/ruta',[
-    check("hora_salida","La hora es obligatoria").notEmpty()
-], httpRuta.getRuta)
+router.post('/ruta',[
+    check("hora_salida","La hora es obligatoria").notEmpty(),
+    check("fecha_salida","La fecha es obligatoria").notEmpty(),
+    check("valor", "El valor es obligatoria").notEmpty()
+], httpRuta.postRuta)

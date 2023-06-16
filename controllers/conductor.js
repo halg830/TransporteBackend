@@ -1,5 +1,3 @@
-// import Conductor from "../models/conductor.js";
-
 const httpConductor = {
 
     getConductor: async (req, res) => {

@@ -14,5 +14,7 @@ router.post('/vendedor',[
     check("telefono", "El numero es obligatorio").notEmpty(),
     check("telefono", "El numero debe tener 10 digitos").isLength({max:10, min:10}),
     check("usuario", "El usuario es obligatorio").notEmpty(),
-    check("usuario", "El usuario debe tener 6 digitos o más").isLength({min:6})
+    check("usuario", "El usuario debe tener 6 digitos o más").isLength({min:6}),
+    check("contraseña", "La contraseña es obligatoria").notEmpty(),
+    check("contraseña", "La contraseña debe tener al menos 8 caracteres").isLength({min: 8})
 ], httpVendedor.postVendedor)
