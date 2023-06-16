@@ -11,6 +11,7 @@ const httpCliente = {
 },
 getClienteCedula: async(req,res) => {
     try {
+        
         const cliente = await cliente.find(cedula)
         // const cliente = await cliente.find({
         //     $and:[
