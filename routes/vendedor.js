@@ -13,4 +13,6 @@ router.post('/vendedor',[
     check("cedula", "La cedula debe tener 10 digitos").isLength({max:10, min:10}),
     check("telefono", "El numero es obligatorio").notEmpty(),
     check("telefono", "El numero debe tener 10 digitos").isLength({max:10, min:10}),
+    check("usuario", "El usuario es obligatorio").notEmpty(),
+    check("usuario", "El usuario debe tener 6 digitos o más").isLength({min:6})
 ], httpVendedor.postVendedor)

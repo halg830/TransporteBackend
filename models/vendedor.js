@@ -7,7 +7,7 @@ const vendedor = new Schema({
     apellido: { type: String, required: true },
     cedula: { type: String, required: true, minlength:10, maxlength: 10},
     telefono: { type: String, required: true, minlength:10, maxlength: 10 },
-    usuario: { type: String, required: true },
+    usuario: { type: String, required: true, minlength: 6 },
     contraseña: { type: String, required: true },
     estado: { type: Number, default: 1 },
     createAd: { type: Date, default: Date.now }
