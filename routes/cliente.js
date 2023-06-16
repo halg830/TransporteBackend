@@ -10,4 +10,4 @@ router.post('/hola', [
     check("nombre", "Minimo 8 caracteres").isLength({ min: 8 }),
     check("cedula", "La cedula es obligatoria").notEmpty(),
     check("cedula", "Tiene que tener 10 digitos "), isLength({ min: 10, max: 10 })
-], httpCliente.getcliente)
+], httpCliente.postCliente)

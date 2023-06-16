@@ -1,4 +1,4 @@
-import cliente from "../models/cliente.js";
+// import cliente from "../models/cliente.js";
 
 const httpCliente = {
 
@@ -46,3 +46,4 @@ postCliente: async (req, res) => {
     }
 
 }
+export default httpCliente
