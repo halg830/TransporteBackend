@@ -1,44 +1,39 @@
 const httpCliente = {
-    getCliente: async(req,res) => {
+  getCliente: async (req, res) => {
     try {
-        const clientes = await clientes.find()
-        res.json({ clientes })
+      const clientes = await clientes.find();
+      res.json({ clientes });
     } catch (error) {
-        res.status(400).json({ error })
+      res.status(400).json({ error });
     }
-},
-getClienteCedula: async(req,res) => {
+  },
+  getClienteCedula: async (req, res) => {
     try {
-        
-        const cliente = await cliente.find(cedula)
-        // const cliente = await cliente.find({
-        //     $and:[
-        //         {cedula},
-        //         {stado:1}
-        //     ]
-        // })v
-        res.json({ cliente })
+      const cliente = await cliente.find(cedula);
+      // const cliente = await cliente.find({
+      //     $and:[
+      //         {cedula},
+      //         {stado:1}
+      //     ]
+      // })v
+      res.json({ cliente });
     } catch (error) {
-        res.status(400).json({ error })
+      res.status(400).json({ error });
     }
-},
-postCliente: async (req, res) => {
+  },
+  postCliente: async (req, res) => {
     try {
-        const { } = req.body
-        const cliente = new cliente({})
-        cliente.save()
+      const {} = req.body;
+      const cliente = new cliente({});
+      cliente.save();
 
-        res.json({ cliente })
+      res.json({ cliente });
     } catch (error) {
-        res.json({ error })
+      res.json({ error });
     }
-},
-    putcliente: async () => {
-    },
+  },
+  putcliente: async () => {},
 
-    deleteCliente: async ()=>{
-
-    }
-
-}
-export default httpCliente
+  deleteCliente: async () => {},
+};
+export default httpCliente;
