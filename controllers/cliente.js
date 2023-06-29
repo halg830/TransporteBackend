@@ -1,3 +1,5 @@
+import Cliente from "../models/cliente.js"
+
 const httpCliente = {
   getCliente: async (req, res) => {
     try {
@@ -23,8 +25,8 @@ const httpCliente = {
   },
   postCliente: async (req, res) => {
     try {
-      const {} = req.body;
-      const cliente = new cliente({});
+      const {nombre, cedula} = req.body;
+      const cliente = new Cliente({nombre, cedula});
       cliente.save();
 
       res.json({ cliente });
