@@ -1,4 +1,4 @@
-import { Router, Router } from "express";
+import { Router } from "express";
 import httpConductor from "../controllers/conductor.js";
 import { check } from "express-validator";
 import { mongo } from "mongoose";
@@ -14,5 +14,7 @@ router.post(
     check("cedula", "Tiene que tener 10 digitos "),
     isLength({ min: 10, max: 10 }),
   ],
-  httpCliente.postCondcutor
+  httpConductor.postConductor
 );
+
+export default router

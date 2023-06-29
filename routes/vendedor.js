@@ -1,4 +1,4 @@
-import { Router, Router } from "express";
+import { Router } from "express";
 import httpVendedor from "../controllers/vendedor.js";
 import { check } from "express-validator";
 import { mongo } from "mongoose";
@@ -35,3 +35,5 @@ router.post(
   ],
   httpVendedor.postVendedor
 );
+
+export default router

@@ -1,4 +1,4 @@
-import { Router, Router } from "express";
+import { Router } from "express";
 import httpRuta from "../controllers/ruta.js";
 import { check } from "express-validator";
 import { mongo } from "mongoose";
@@ -14,3 +14,5 @@ router.post(
   ],
   httpRuta.postRuta
 );
+
+export default router
