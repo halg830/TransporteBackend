@@ -1,7 +1,7 @@
 import Ciudad from "../models/ciudad.js";
 
 const httpCiudad = {
-    //post
+    //GET
     getCiudades: async (req, res) => {
         try {
             const ciudades = await Ciudad.find()
@@ -10,9 +10,18 @@ const httpCiudad = {
             res.status(400).json({ error })
         }
     },
+    postCiudad: async (req, res) => {
+        try {
+            const {nombre}= req.params
+            const ciudad = await Ciudad.find(nombre)
+            res.json(ciudad)
+        } catch (error) {
+            res.status(400).json({ error })
+        }
+    },
 
 
-    //post
+    //POST
     postCiudades: async (req, res) => {
         try {
             const {nombre, estado} = req.body;
