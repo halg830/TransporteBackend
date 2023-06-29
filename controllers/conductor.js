@@ -1,3 +1,5 @@
+import Conductor from "../models/conductor.js";
+
 const httpConductor = {
   getConductor: async (req, res) => {
     try {
@@ -24,10 +26,10 @@ const httpConductor = {
   postConductor: async (req, res) => {
     try {
       const {} = req.body;
-      const cliente = new cliente({});
-      cliente.save();
+      const conductor = new Conductor({});
+      conductor.save();
 
-      res.json({ cliente });
+      res.json({ conductor });
     } catch (error) {
       res.json({ error });
     }
