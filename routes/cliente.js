@@ -1,12 +1,14 @@
 import { Router} from "express";
 import httpCliente from "../controllers/cliente.js";
 import { check } from "express-validator";
-import {validationResult} from "express-validator"
+import {validarCampos} from "../"
 import { mongo } from "mongoose";
 
 const router = new Router();
 
 router.get("/allClientes", httpCliente.getAllCliente)
+
+router.get("/cliente/:cedula", httpCliente.getClienteCedula)
 
 router.post(
   "/guardar",
@@ -16,14 +18,8 @@ router.post(
     check("cedula", "La cedula es obligatoria").notEmpty(),
     check("cedula", "Tiene que tener 10 digitos").isLength({ min: 10, max: 10 }),
   ],
-  
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    httpCliente.postCliente(req, res);
-  }
+  validarCampos,
+  httpCliente.postCliente
   
 );
 

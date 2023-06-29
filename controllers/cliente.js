@@ -12,6 +12,7 @@ const httpCliente = {
       res.status(400).json({ error });
     }
   },
+  
   getClienteCedula: async (req, res) => {
     try {
       const cliente = await cliente.find({ cedula });
