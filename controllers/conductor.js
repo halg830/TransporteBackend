@@ -3,7 +3,7 @@ import Conductor from "../models/conductor.js";
 const httpConductor = {
 
   //GET
-  getConductor: async (req, res) => {
+  getAllConductor: async (req, res) => {
     try {
       const conductor = await Conductor.find();
       res.json({ conductor });
@@ -20,7 +20,6 @@ const httpConductor = {
       res.status(400).json({ error });
     }
   },
-
 
   //POST
   postConductor: async (req, res) => {

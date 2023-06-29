@@ -1,6 +1,1 @@
-import Vendedor from "../models/vendedor";
-
-
-
-
-export default httpCliente;
+// import Vendedor from "../models/vendedor";

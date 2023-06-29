@@ -1,4 +1,4 @@
-import { Router } from "express";
+/* import { Router } from "express";
 import httpBus from "../controllers/bus.js";
 import { check } from "express-validator";
 import { mongo } from "mongoose";
@@ -23,4 +23,4 @@ router.get(
   httpBus.getbus
 );
 
-export default router
+export default router */
