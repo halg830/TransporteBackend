@@ -1,7 +1,7 @@
 import { Router} from "express";
 import httpCliente from "../controllers/cliente.js";
 import { check } from "express-validator";
-import {validarCampos} from "../"
+/* import {validarCampos} from "../" */
 import { mongo } from "mongoose";
 
 const router = new Router();
@@ -17,10 +17,7 @@ router.post(
     check("nombre", "Mínimo 8 caracteres").isLength({ min: 8 }),
     check("cedula", "La cedula es obligatoria").notEmpty(),
     check("cedula", "Tiene que tener 10 digitos").isLength({ min: 10, max: 10 }),
-  ],
-  validarCampos,
-  httpCliente.postCliente
-  
-);
+  ], httpCliente.postCliente
+  );
 
 export default router
