@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+/* import mongoose from "mongoose";
 
 try {
   await mongoose.connect(process.env.URI_MONGODB);
@@ -6,3 +6,4 @@ try {
 } catch (error) {
   console.log("Error de conexión a mongodb" + error);
 }
+ */

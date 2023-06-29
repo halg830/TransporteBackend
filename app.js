@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 import "./database/connectDb.js";
 // import persona  from "./routes/persona.js";
 
-/* mongoose.connect(`${process.env.DB}`)
-  .then(() => console.log('Connected!')); */
+mongoose.connect(`${process.env.DB}`)
+  .then(() => console.log('Connected!'));
 
 const app = express();
 app.use(express.json());
