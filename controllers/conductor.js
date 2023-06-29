@@ -1,4 +1,8 @@
+import Conductor from "../models/conductor.js";
+
 const httpConductor = {
+
+  //GET
   getConductor: async (req, res) => {
     try {
       const conductor = await Conductor.find();
@@ -7,33 +11,36 @@ const httpConductor = {
       res.status(400).json({ error });
     }
   },
+  
   getConductorCedula: async (req, res) => {
     try {
       const conductor = await Conductor.find(cedula);
-      // const cliente = await cliente.find({
-      //     $and:[
-      //         {cedula},
-      //         {stado:1}
-      //     ]
-      // })v
       res.json({ conductor });
     } catch (error) {
       res.status(400).json({ error });
     }
   },
+
+
+  //POST
   postConductor: async (req, res) => {
     try {
-      const {} = req.body;
-      const cliente = new cliente({});
-      cliente.save();
+      const {nombre,cedula} = req.body;
+      const conductor = new Conductor({nombre,cedula});
+      conductor.save();
 
-      res.json({ cliente });
+      res.json({ conductor });
     } catch (error) {
       res.json({ error });
     }
   },
+
+
+  //PUT
   putConductor: async () => {},
 
+
+  //DELETE
   deleteConductor: async () => {},
 };
 export default httpConductor;

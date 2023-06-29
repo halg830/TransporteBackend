@@ -4,9 +4,9 @@ const httpCliente = {
 
 
   //GET
-  getCliente: async (req, res) => {
+  getAllCliente: async (req, res) => {
     try {
-      const clientes = await clientes.find();
+      const clientes = await Cliente.find();
       res.json({ clientes });
     } catch (error) {
       res.status(400).json({ error });
