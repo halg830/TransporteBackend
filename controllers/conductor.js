@@ -1,22 +1,22 @@
 const httpConductor = {
   getConductor: async (req, res) => {
     try {
-      const clientes = await clientes.find();
-      res.json({ clientes });
+      const conductor = await Conductor.find();
+      res.json({ conductor });
     } catch (error) {
       res.status(400).json({ error });
     }
   },
   getConductorCedula: async (req, res) => {
     try {
-      const cliente = await cliente.find(cedula);
+      const conductor = await Conductor.find(cedula);
       // const cliente = await cliente.find({
       //     $and:[
       //         {cedula},
       //         {stado:1}
       //     ]
       // })v
-      res.json({ cliente });
+      res.json({ conductor });
     } catch (error) {
       res.status(400).json({ error });
     }

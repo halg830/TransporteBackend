@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const vendedor = new Schema({
+const Vendedor = new Schema({
   nombre: { type: String, required: true, minlength: 8 },
   apellido: { type: String, required: true },
   cedula: { type: String, required: true, minlength: 10, maxlength: 10 },
@@ -13,4 +13,4 @@ const vendedor = new Schema({
   createAd: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("vendedor", vendedor);
+export default mongoose.model("Vendedor", Vendedor);
