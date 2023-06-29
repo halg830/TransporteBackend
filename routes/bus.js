@@ -16,9 +16,7 @@ router.get(
     }),
     check("createdAt", "debe especificar la fecha").not().isEmpty(),
     check("estado", "estado invalido").not().isEmpty(),
-    check("conductor", "debe especificar el nombre del conductor")
-      .not()
-      .isEmpty(),
+    check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
   ],
   httpBus.getbus
 );

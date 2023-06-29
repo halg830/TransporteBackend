@@ -11,7 +11,7 @@ router.post(
   [
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("estado", "tiene que especificar el estado").not().isEmpty(),
-    
+  
   ],
   httpCiudad.postCiudades
 );
