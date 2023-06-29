@@ -2,6 +2,8 @@ import { Router } from "express";
 import httpRuta from "../controllers/ruta.js";
 import { check } from "express-validator";
 import { mongo } from "mongoose";
+import { validarCampos } from "../miderwars/validar.js";
+
 
 const router = new Router();
 
