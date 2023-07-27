@@ -1,12 +1,16 @@
-/* import { Router } from "express";
+import { Router } from "express";
 import httpBus from "../controllers/bus.js";
 import { check } from "express-validator";
 import { mongo } from "mongoose";
 
 const router = new Router();
 
-router.get(
-  "/hola",
+router.get("/buses", httpBus.getBuses);
+
+router.post("/buscarbus", httpBus.postbuscarBus);
+
+router.post(
+  "/nuevobus",
   [
     check("empresa", "debe especificar la empresa").not().isEmpty(),
     check("asiento", "debe especificar el asiento").not().isEmpty(),
@@ -17,8 +21,6 @@ router.get(
     check("createdAt", "debe especificar la fecha").not().isEmpty(),
     check("estado", "estado invalido").not().isEmpty(),
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
-  ],
-  httpBus.getbus
-);
+  ], httpBus.postnuevoBus);
 
-export default router */
+export default router 
