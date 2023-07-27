@@ -41,8 +41,8 @@ const httpCliente = {
   //POST
   postCliente: async (req, res) => {
     try {
-      const {nombre, cedula, contrasena} = req.body;
-      const cliente = new Cliente({nombre, cedula, contrasena});
+      const {nombre, email, cedula, contrasena} = req.body;
+      const cliente = new Cliente({nombre, email, cedula, contrasena});
 
       const salt = bcryptjs.genSaltSync()
       cliente.contrasena = bcryptjs.hashSync(contrasena, salt)
@@ -102,6 +102,43 @@ const httpCliente = {
     }
   },
 
+  login: async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const cliente = await Cliente.findOne({ email })
+        if (!cliente) {
+            return res.status(400).json({
+                msg: "Cliente / Password no son correctos"
+            })
+        }
+
+        if (cliente.estado === 0) {
+            return res.status(400).json({
+                msg: "Cliente Inactivo"
+            })
+        }
+
+        const validPassword = bcryptjs.compareSync(password, cliente.password);
+        if (!validPassword) {
+            return res.status(401).json({
+                msg: "Cliente / Password no son correctos"
+            })
+        }
+
+        const token = await generarJWT(cliente.id);
+
+        res.json({
+            cliente,
+            token
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            msg: "Hable con el WebMaster"
+        })
+    }
+},
   
 };
 export default httpCliente;

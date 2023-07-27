@@ -3,6 +3,8 @@ import httpCliente from "../controllers/cliente.js";
 import { check } from "express-validator";
 import { validarCampos } from "../miderwars/validar.js";
 import { mongo } from "mongoose";
+import { generarJWT, validarJWT } from "../miderwars/validar-jwt.js"
+
 
 const router = new Router();
 
@@ -13,6 +15,7 @@ router.get("/cliente/:cedula", httpCliente.getClienteCedula);
 router.post(
   "/guardar",
   [
+    validarJWT,
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("nombre", "Mínimo 8 caracteres").isLength({ min: 8 }),
     check("cedula", "La cedula es obligatoria").notEmpty(),
@@ -22,6 +25,6 @@ router.post(
     }),
   ],
   httpCliente.postCliente
-);
+  );
 
 export default router;
