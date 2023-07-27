@@ -8,7 +8,7 @@ const Bus = new Schema({
   placa: { type: String, maxlength: 7 },
   createdAt: { type: Date, default: Date.now },
   estado: { type: Number, default: 1 },
-  conductor: { type: mongoose.Schema.Types.Objectid, ref: "conductor", require:true },
+  conductor: { type: mongoose.Schema.Types.ObjectId, ref: "conductor", require:true },
 });
 
 export default mongoose.model("Bu", Bus);
