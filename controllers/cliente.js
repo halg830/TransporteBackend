@@ -101,5 +101,7 @@ const httpCliente = {
       
     }
   },
+
+  
 };
 export default httpCliente;
