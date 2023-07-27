@@ -32,6 +32,8 @@ const httpVendedor = {
         try {
             const { id } = req.params
             const vendedor = await Vendedor.findById(id)
+            
+            res.json({ vendedor });
         } catch (error) {
             res.status(400).json({ error })
 

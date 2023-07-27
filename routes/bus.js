@@ -21,6 +21,6 @@ router.post(
     check("createdAt", "debe especificar la fecha").not().isEmpty(),
     check("estado", "estado invalido").not().isEmpty(),
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
-  ], httpBus.postnuevoBus);
+  ], httpBus.postNuevoBus);
 
 export default router 
