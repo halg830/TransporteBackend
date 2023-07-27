@@ -22,7 +22,7 @@ app.use(   "/api/ciudad",  ciudad)
 app.use(   "/api/conductor",  conductor)
 app.use(   "/api/ruta",  ruta)
 // app.use(   "/api/tiquete",  tiquete)
-// app.use(   "/api/vendedor",  vendedor)
+app.use(   "/api/vendedor",  vendedor)
 
 app.listen(process.env.PORT, () => {
   console.log(`Servidor escuchando en el puerto ${process.env.PORT}`);

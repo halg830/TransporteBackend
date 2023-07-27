@@ -1,4 +1,5 @@
 import Vendedor from "../models/vendedor.js";
+import bcryptjs from "bcrypt"
 
 const httpVendedor = {
 
@@ -43,9 +44,10 @@ const httpVendedor = {
             const { nombre, cedula, contrasena } = req.body;
             const vendedor = new Vendedor({ nombre, cedula, contrasena });
 
-            const salt = ""
-
-            vendedor.save();
+            const salt = bcryptjs.genSaltSync()
+            vendedor.contrasena = bcryptjs.hashSync(contrasena, salt)
+      
+            await vendedor.save();
 
             res.json({ vendedor });
         } catch (error) {
