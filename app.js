@@ -9,7 +9,7 @@ import ciudad  from "./routes/ciudad.js";
 import conductor  from "./routes/conductor.js";
 import ruta  from "./routes/ruta.js";
 // import tiquete  from "./routes/tiquete.js";
-// import vendedor  from "./routes/vendedor.js";
+import vendedor  from "./routes/vendedor.js";
 
 mongoose.connect(`${process.env.DB}`)
   .then(() => console.log('Connected!'));

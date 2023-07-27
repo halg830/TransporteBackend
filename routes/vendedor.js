@@ -1,5 +1,5 @@
 import { Router } from "express";
-/* import httpVendedor from "../controllers/vendedor.js"; */
+import httpVendedor from "../controllers/vendedor.js";
 import { check } from "express-validator";
 import { mongo } from "mongoose";
 

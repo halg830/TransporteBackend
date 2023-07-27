@@ -41,8 +41,8 @@ const httpVendedor = {
     //POST
     postVendedor: async (req, res) => {
         try {
-            const { nombre, cedula, contrasena } = req.body;
-            const vendedor = new Vendedor({ nombre, cedula, contrasena });
+            const { nombre, apellido, cedula, telefono, usuario, contrasena } = req.body;
+            const vendedor = new Vendedor({ nombre, apellido, cedula, telefono, usuario, contrasena });
 
             const salt = bcryptjs.genSaltSync()
             vendedor.contrasena = bcryptjs.hashSync(contrasena, salt)
