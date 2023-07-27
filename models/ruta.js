@@ -8,7 +8,7 @@ const Ruta = new Schema({
   hora_salida: { type: Date, required: true },
   fecha_salida: { type: Date, required: true },
   valor: { type: Number, required: true, minlength: 4 },
-  bus: { type: mongoose.Schema.Types.Objectid, ref: "bus" },
+  bus: { type: mongoose.Schema.Types.ObjectId, ref: "bus" },
 });
 
 export default mongoose.model("Ruta", Ruta);
