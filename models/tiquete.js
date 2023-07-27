@@ -7,7 +7,7 @@ const Tiquete = new Schema({
   ruta: { type: mongoose.Schema.Types.ObjectId, ref: "ruta" },
   createdAt: { type: Date, default: Date.now },
   estado: { type: Number, default: 1 },
-  cliente: { type: mongoose.Schema.Types.Objectid, ref: "cliente" },
+  cliente: { type: mongoose.Schema.Types.ObjectId, ref: "cliente" },
 });
 
 export default mongoose.model("Tiquete", Tiquete);
