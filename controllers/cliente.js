@@ -126,12 +126,14 @@ const httpCliente = {
             })
         }
 
-        const token = await generarJWT(cliente.id);
+        // const token = await generarJWT(cliente.id);
 
-        res.json({
+        /* res.json({
             cliente,
             token
-        })
+        }) */
+
+        res.json({msg: "hola"})
 
     } catch (error) {
         return res.status(500).json({

@@ -12,10 +12,11 @@ router.get("/allClientes", httpCliente.getAllCliente);
 
 router.get("/cliente/:cedula", httpCliente.getClienteCedula);
 
+router.get("/login", httpCliente.login)
+
 router.post(
   "/guardar",
   [
-    validarJWT,
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("nombre", "Mínimo 8 caracteres").isLength({ min: 8 }),
     check("cedula", "La cedula es obligatoria").notEmpty(),
@@ -23,6 +24,7 @@ router.post(
       min: 10,
       max: 10,
     }),
+    validarCampos
   ],
   httpCliente.postCliente
   );
