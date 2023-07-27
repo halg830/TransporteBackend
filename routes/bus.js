@@ -16,7 +16,7 @@ router.post(
     check("asiento", "debe especificar el asiento").not().isEmpty(),
     check("placa", "debe especificar el asiento").not().isEmpty(),
     check("placa", "la placa no puede tener mas de 7 caracteres").isLength({
-      max: 10,
+      max: 7
     }),
     check("createdAt", "debe especificar la fecha").not().isEmpty(),
     check("estado", "estado invalido").not().isEmpty(),

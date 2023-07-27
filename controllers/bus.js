@@ -26,11 +26,10 @@ const httpbus = {
 
     postnuevoBus: async (req, res) => {
         try {
-            const {empresa, asiento, placa, createdAt, estado, conductor} = req.body;
-            const bus = new bus({nombre, estado});
+            const {empresa, asiento, placa, conductor} = req.body;
+            const bus = new bus({empresa, asiento, placa, conductor});
             bus.save();
-
-            res.json(bus)
+            res.json({bus})
         } catch (error) {
             res.status(400).json({ error })
         }
