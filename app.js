@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import "./database/connectDb.js";
 
 import cliente  from "./routes/cliente.js";
-// import bus  from "./routes/bus.js";
+import bus  from "./routes/bus.js";
 import ciudad  from "./routes/ciudad.js";
 import conductor  from "./routes/conductor.js";
 import ruta  from "./routes/ruta.js";
@@ -17,7 +17,7 @@ mongoose.connect(`${process.env.DB}`)
 const app = express();
 app.use(express.json());
 app.use(   "/api/cliente",  cliente)
-// app.use(   "/api/bus",  bus)
+app.use(   "/api/bus",  bus)
 app.use(   "/api/ciudad",  ciudad)
 app.use(   "/api/conductor",  conductor)
 app.use(   "/api/ruta",  ruta)
