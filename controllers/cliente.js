@@ -40,8 +40,11 @@ const httpCliente = {
   //POST
   postCliente: async (req, res) => {
     try {
-      const {nombre, cedula} = req.body;
-      const cliente = new Cliente({nombre, cedula});
+      const {nombre, cedula, contrasena} = req.body;
+      const cliente = new Cliente({nombre, cedula, contrasena});
+
+      const salt = ""
+
       cliente.save();
 
       res.json({ cliente });

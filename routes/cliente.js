@@ -1,7 +1,7 @@
 import { Router} from "express";
 import httpCliente from "../controllers/cliente.js";
 import { check } from "express-validator";
-/* import {validarCampos} from "../" */
+import {validarCampos} from "../miderwars/validar.js"
 import { mongo } from "mongoose";
 
 const router = new Router();
