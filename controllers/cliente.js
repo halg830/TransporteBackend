@@ -1,4 +1,5 @@
 import Cliente from "../models/cliente.js"
+import bcryptjs from "bcrypt"
 
 const httpCliente = {
 
@@ -43,9 +44,10 @@ const httpCliente = {
       const {nombre, cedula, contrasena} = req.body;
       const cliente = new Cliente({nombre, cedula, contrasena});
 
-      const salt = ""
+      const salt = bcryptjs.genSaltSync()
+      cliente.contrasena = bcryptjs.hashSync(contrasena, salt)
 
-      cliente.save();
+      await cliente.save();
 
       res.json({ cliente });
     } catch (error) {
