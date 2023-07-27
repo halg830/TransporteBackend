@@ -12,7 +12,7 @@ const httpCliente = {
     } catch (error) {
       res.status(400).json({ error });
     }
-  },
+  }, 
   
   getClienteCedula: async (req, res) => {
     try {
