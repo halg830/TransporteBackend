@@ -3,14 +3,14 @@ import httpCliente from "../controllers/cliente.js";
 import { check } from "express-validator";
 import { validarCampos } from "../miderwars/validar.js";
 import { mongo } from "mongoose";
-import { generarJWT, validarJWT } from "../miderwars/validar-jwt.js"
+import { validarJWT } from "../miderwars/validar-jwt.js"
 
 
 const router = new Router();
 
-router.get("/allClientes", httpCliente.getAllCliente);
+router.get("/allClientes", validarJWT, httpCliente.getAllCliente);
 
-router.get("/cliente/:cedula", httpCliente.getClienteCedula);
+router.get("/cliente/:cedula", validarJWT, httpCliente.getClienteCedula);
 
 router.post("/login", httpCliente.login)
 
@@ -42,5 +42,7 @@ router.put("/editar/:cedula",
 ],
 httpCliente.putCliente
 )
+
+router.delete("eliminar/:cedula", validarJWT, httpCliente.deleteCliente)
 
 export default router;

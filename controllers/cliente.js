@@ -17,7 +17,8 @@ const httpCliente = {
   
   getClienteCedula: async (req, res) => {
     try {
-      const cliente = await cliente.find({ cedula });
+      const {cedula} = req.params
+      const cliente = await Cliente.find({ cedula });
       // const cliente = await cliente.find({
       //     $and:[
       //         {cedula},
@@ -61,6 +62,10 @@ const httpCliente = {
   putCliente: async (req, res) =>{
     const {cedula}= req.params
     const {nombre, email, contrasena} = req.body
+
+    const salt = bcryptjs.genSaltSync()
+    contrasena = bcryptjs.hashSync(contrasena, salt)
+
     const cliente = await Cliente.findOneAndUpdate({cedula},{nombre,email, contrasena},{new:true})
 
     if (!cliente) {
@@ -92,9 +97,9 @@ const httpCliente = {
 
 
   //DELETE
-  deleteCliente: async () => {
+  deleteCliente: async (req, res) => {
     const { cedula } = req.params
-    const cliente = await cliente.findOneAndDelete({ cedula })
+    const cliente = await Cliente.findOneAndDelete({ cedula })
     res.json({ cliente })
   },
 
