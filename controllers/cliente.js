@@ -61,7 +61,11 @@ const httpCliente = {
   putCliente: async (req, res) =>{
     const {cedula}= req.params
     const {nombre, email, contrasena} = req.body
-    const cliente = await Cliente.findOneAndUpdate(cedula,{nombre,email, contrasena},{new:true})
+    const cliente = await Cliente.findOneAndUpdate({cedula},{nombre,email, contrasena},{new:true})
+
+    if (!cliente) {
+      return res.status(404).json({ mensaje: 'Cliente no encontrado' });
+    }
 
     res.json({cliente})
   },
