@@ -12,7 +12,7 @@ router.get("/allClientes", httpCliente.getAllCliente);
 
 router.get("/cliente/:cedula", httpCliente.getClienteCedula);
 
-router.get("/login", httpCliente.login)
+router.post("/login", httpCliente.login)
 
 router.post(
   "/guardar",
