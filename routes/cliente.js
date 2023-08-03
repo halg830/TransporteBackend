@@ -4,15 +4,13 @@ import { check } from "express-validator";
 import { validarCampos } from "../miderwars/validar.js";
 import { mongo } from "mongoose";
 import { validarJWT } from "../miderwars/validar-jwt.js"
-import {helpers} from "../helpers"
+
 
 const router = new Router();
 
-router.get("/allClientes", validarJWT, httpCliente.getAllCliente);
+router.get("/allClientes", httpCliente.getAllCliente);
 
-router.get("/cliente/:cedula", validarJWT, httpCliente.getClienteCedula);
-
-router.post("/login", httpCliente.login)
+router.get("/cliente/:cedula", httpCliente.getClienteCedula);
 
 router.post(
   "/guardar",
@@ -24,8 +22,7 @@ router.post(
       min: 10,
       max: 10,
     }),
-    check("id", "No esta el id").custom(),
-    validarCampos
+    validarCampos 
   ],
   httpCliente.postCliente
   );
@@ -44,6 +41,6 @@ router.put("/editar/:cedula",
 httpCliente.putCliente
 )
 
-router.delete("eliminar/:cedula", validarJWT, httpCliente.deleteCliente)
+router.delete("eliminar/:cedula", httpCliente.deleteCliente)
 
 export default router;

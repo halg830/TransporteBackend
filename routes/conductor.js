@@ -9,7 +9,7 @@ const router = new Router();
 
 router.get("/buscar", httpConductor.getAllConductor)
 
-router.post("/hola",
+router.post("/agregar",
   [
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("nombre", "Minimo 8 caracteres").isLength({ min: 8 }),

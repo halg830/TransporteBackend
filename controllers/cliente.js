@@ -64,9 +64,9 @@ const httpCliente = {
     const {nombre, email, contrasena} = req.body
 
     const salt = bcryptjs.genSaltSync()
-    contrasena = bcryptjs.hashSync(contrasena, salt)
+    const contrasenaEncryp = bcryptjs.hashSync(contrasena, salt)
 
-    const cliente = await Cliente.findOneAndUpdate({cedula},{nombre,email, contrasena},{new:true})
+    const cliente = await Cliente.findOneAndUpdate({cedula},{nombre,email, contrasena:contrasenaEncryp},{new:true})
 
     if (!cliente) {
       return res.status(404).json({ mensaje: 'Cliente no encontrado' });
@@ -113,7 +113,7 @@ const httpCliente = {
     }
   },
 
-  login: async (req, res) => {
+  /* login: async (req, res) => {
     const { email, contrasena } = req.body;
 
     try {
@@ -151,7 +151,7 @@ const httpCliente = {
             msg: "Hable con el WebMaster"
         })
     }
-},
+} */
   
 };
 export default httpCliente;
