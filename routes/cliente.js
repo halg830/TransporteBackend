@@ -29,4 +29,18 @@ router.post(
   httpCliente.postCliente
   );
 
+router.put("/editar/:cedula",
+[
+  check("nombre", "El nombre es obligatorio").not().isEmpty(),
+  check("nombre", "Mínimo 8 caracteres").isLength({ min: 8 }),
+  /* check("cedula", "La cedula es obligatoria").notEmpty(),
+  check("cedula", "Tiene que tener 10 digitos").isLength({
+    min: 10,
+    max: 10,
+  }),
+  validarCampos */
+],
+httpCliente.putCliente
+)
+
 export default router;
