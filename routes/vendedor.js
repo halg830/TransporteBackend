@@ -1,6 +1,7 @@
 import { Router } from "express";
 import httpVendedor from "../controllers/vendedor.js";
 import { check } from "express-validator";
+import {validarCampos} from "../miderwars/validar.js"
 import { mongo } from "mongoose";
 
 const router = new Router();
@@ -19,6 +20,7 @@ router.post(
     check("usuario", "El usuario debe tener 6 digitos o más").isLength({min: 6}),
     check("contraseña", "La contraseña es obligatoria").notEmpty(),
     check("contraseña","La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
+    validarCampos
   ],
   httpVendedor.postVendedor
 );

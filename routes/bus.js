@@ -7,7 +7,7 @@ const router = new Router();
 
 router.get("/buses", httpBus.getBuses);
 
-router.post("/buscarbus", httpBus.postbuscarBus);
+router.get("/buscarbus", httpBus.getBuscarBus);
 
 router.post(
   "/nuevobus",
@@ -18,8 +18,6 @@ router.post(
     check("placa", "la placa no puede tener mas de 7 caracteres").isLength({
       max: 7
     }),
-    check("createdAt", "debe especificar la fecha").not().isEmpty(),
-    check("estado", "estado invalido").not().isEmpty(),
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
   ], httpBus.postNuevoBus);
 

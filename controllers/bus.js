@@ -14,7 +14,7 @@ const httpbus = {
 
     //POST
 
-    postbuscarBus: async (req, res) => {
+    getBuscarBus: async (req, res) => {
         try {
             const {nombre}= req.params
             const buses = await Bus.find(nombre)
@@ -28,12 +28,35 @@ const httpbus = {
         try {
             const {empresa, asiento, placa, conductor} = req.body;
             const bus = new Bus({empresa, asiento, placa, conductor});
-            bus.save();
+            await bus.save(); 
             res.json({bus})
         } catch (error) {
             res.status(400).json({ error })
         }
-    }
+    },
+
+    // putBusInactivar: async () => {
+    //     try {
+    //         const { id } = req.params
+    //         const bus = await Bus.findByIdAndUpdate(id, { estado: 0 }, { new: true })
+    //         res.json({ bus })
+    //     } catch (error) {
+    //         res.status(400).json({ error })
+
+    //     }
+    // },
+
+    // putBusActivar: async () => {
+    //     try {
+    //         const { id } = req.params
+    //         const bus = await Bus.findByIdAndUpdate(id, { estado: 1 }, { new: true })
+    //         res.json({ bus })
+    //     } catch (error) {
+    //         res.status(400).json({ error })
+
+    //     }
+    // },
+
 
 } 
 
