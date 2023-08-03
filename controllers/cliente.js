@@ -1,5 +1,6 @@
 import Cliente from "../models/cliente.js"
 import bcryptjs from "bcrypt"
+import { generarJWT } from "../miderwars/validar-jwt.js";
 
 const httpCliente = {
 
@@ -103,10 +104,12 @@ const httpCliente = {
   },
 
   login: async (req, res) => {
-    const { email, password } = req.body;
+    const { email, contrasena } = req.body;
 
     try {
         const cliente = await Cliente.findOne({ email })
+        
+
         if (!cliente) {
             return res.status(400).json({
                 msg: "Cliente / Password no son correctos"
@@ -119,21 +122,19 @@ const httpCliente = {
             })
         }
 
-        const validPassword = bcryptjs.compareSync(password, cliente.password);
+        const validPassword = bcryptjs.compareSync(contrasena, cliente.contrasena);
         if (!validPassword) {
             return res.status(401).json({
-                msg: "Cliente / Password no son correctos"
+                msg: "Password no es correcta"
             })
-        }
+        } 
 
-        // const token = await generarJWT(cliente.id);
+        const token = await generarJWT(cliente.id);
 
-        /* res.json({
+        res.json({
             cliente,
             token
-        }) */
-
-        res.json({msg: "hola"})
+        })
 
     } catch (error) {
         return res.status(500).json({

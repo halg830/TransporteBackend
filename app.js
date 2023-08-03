@@ -1,7 +1,6 @@
 import express from "express";
 import "dotenv/config";
 import mongoose from "mongoose";
-import "./database/connectDb.js";
 
 import cliente  from "./routes/cliente.js";
 import bus  from "./routes/bus.js";
