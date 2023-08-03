@@ -15,6 +15,7 @@ const httpVendedor = {
 
     getVendedorCedula: async (req, res) => {
         try {
+            const {cedula} = req.params
             const vendedor = await Vendedor.find({ cedula });
             // const vendedor = await vendedor.find({
             //     $and:[

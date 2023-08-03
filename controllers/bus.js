@@ -35,6 +35,16 @@ const httpbus = {
         }
     },
 
+        geteliminarBus: async (req, res) => {
+        try {
+            const {nombre}= req.params
+            const buses = await Bus.findOneAndDelete(nombre)
+            res.json(buses)
+        } catch (error) {
+            res.status(400).json({ error })
+        }
+    },
+
     // putBusInactivar: async () => {
     //     try {
     //         const { id } = req.params
