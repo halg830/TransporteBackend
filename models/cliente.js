@@ -3,10 +3,9 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const Cliente = new Schema({
-  nombre: { type: String, require: true },
-  cedula: { type: String, require: true, minlength:7, maxlength: 10 },
+  nombre: { type: String, require: true, maxlength: 15 },
+  cedula: { type: String, unique:true, require: true, minlength:7, maxlength: 10 },
   email: {type: String, require: true, unique: true},
-  contrasena: {type: String, require: true, minlength:8},
   createdAt: { type: Date, default: Date.now },
   estado: { type: Number, default: 1 },
 });

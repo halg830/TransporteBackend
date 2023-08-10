@@ -8,7 +8,7 @@ const validarCampos = ( req, res, next ) => {
             return res.status(req.codeError).json({error:"Error de validación de datos"});
          } 
 
-        return res.status(400).json({error:"Error de validación de datos"});
+        return res.status(400).json({error: errors.errors[0].msg});
     }
     
     next();
