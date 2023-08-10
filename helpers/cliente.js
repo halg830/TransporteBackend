@@ -28,24 +28,12 @@ const helpersCliente = {
         }
     },
 
-    verificarCedula: () => {
-        return async (req, res, next) => {
-            const existe = await Cedula.findOne({ cedula: req.body.cedula });
-
-            if (!existe) {
-                return res.status(401).json({ msg: `La cedula no está registrada` });
-            }
-
-            next();
-        }
-    },
-
     existeEmail: async (email, req) => {
         if (email) {
-            const existe = await Holder.findOne({ email })
+            const existe = await Cliente.findOne({ email })
             if (existe) {
                 if (req.req.method === "PUT") {
-                    if (existe.email !== req.req.holder.email)
+                    if (existe.email !== req.req.cliente.email)
                         throw new Error(`Ya existe ese serial en la base de datos!!! ${email}`)
 
                 } else {
