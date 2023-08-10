@@ -2,12 +2,13 @@ import { Router } from "express";
 import httpBus from "../controllers/bus.js";
 import { check } from "express-validator";
 import { mongo } from "mongoose";
+import { validarCampos } from "../miderwars/validar.js";
 
 const router = new Router();
 
 router.get("/buses", httpBus.getAllBus);
 
-router.get("/buscarbus", httpBus.getBuscarBus);
+router.get("/buscarbus/:id", httpBus.getBusId);
 
 router.post(
   "/nuevobus",
@@ -19,6 +20,8 @@ router.post(
       max: 7
     }),
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
+    validarCampos
   ], httpBus.postNuevoBus);
 
+router.put("/editar/:id", httpBus.putBus)
 export default router 

@@ -11,22 +11,6 @@ const httpbus = {
         }
     },
 
-    getBuscarBus: async (req, res) => {
-        try {
-            const {cedula} = req.params
-            const bus = await Bus.find({ cedula });
-            // const bus = await bus.find({
-            //     $and:[
-            //         {cedula},
-            //         {stado:1}
-            //     ]
-            // })v
-            res.json({ bus });
-        } catch (error) {
-            res.status(400).json({ error });
-        }
-    },
-
     getBusId: async (req, res) => {
         try {
             const { id } = req.params
@@ -56,12 +40,8 @@ const httpbus = {
     putBus: async (req, res) => {
         try {
             const { id } = req.params
-            const { nombre, apellido, telefono, contrasena } = req.body
-
-            const salt = bcryptjs.genSaltSync()
-            const newContrasena = bcryptjs.hashSync(contrasena, salt)
-
-            const bus = await Bus.findByIdAndUpdate(id, { nombre, apellido, telefono, newContrasena }, { new: true });
+            const { empresa, asiento, placa} = req.body
+            const bus = await Bus.findByIdAndUpdate(id, { empresa, asiento, placa }, { new: true });
             res.json({ bus })
         } catch (error) {
             res.status(400).json({ error })
