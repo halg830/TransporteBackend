@@ -7,7 +7,7 @@ import { validarCampos } from "../miderwars/validar.js";
 
 const router = new Router();
 
-router.get("/buscar", httpConductor.getAllConductor)
+router.get("/cargar", httpConductor.getAllConductor)
 
 router.post("/agregar",
   [
