@@ -63,8 +63,8 @@ const httpCliente = {
   putCliente: async (req, res) => {
     try {
       const { id } = req.params
-      const { nombre, edad } = req.body
-      const cliente = await Cliente.findByIdAndUpdate(id, { nombre, edad }, { new: true });
+      const { nombre } = req.body
+      const cliente = await Cliente.findByIdAndUpdate(id, { nombre }, { new: true });
       res.json({ cliente })
     } catch (error) {
       res.status(400).json({ error })
