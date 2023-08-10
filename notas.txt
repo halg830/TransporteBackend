@@ -1,0 +1,37 @@
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NGQ1MjAzYmRlOWFjYWRhOGMwYTUyYjUiLCJpYXQiOjE2OTE2ODkwNTQsImV4cCI6MTY5MTcwMzQ1NH0.NNU4AKFoeBKZazhxwXR8kzKYif3rqNRMFiT-HPFna8A
+
+filtro tiquetes
+fecha a fecha
+tiquetes vendidos de vendedor
+cuantos tiquetes vendieron cierto
+rutas bus
+
+id vendedor 64d5203bde9acada8c0a52b5
+
+id conductor 64d535f166d3ebd381e6e0a7
+
+id
+
+
+postNuevoBus: async (req, res) => {
+        try {
+            const {empresa, asiento, placa, conductor} = req.body;
+            const bus = new Bus({empresa, asiento, placa, conductor});
+            await bus.save(); 
+            res.json({bus})
+        } catch (error) {
+            res.status(400).json({ error })
+        }
+    },
+
+Ciudad.findOne({})
+        .populate("ciudad_destino")
+        .exec((err, resultado) => {
+          if (err) {
+            res.json({err});
+          } else {
+            // Acceder a los datos de la ciudad destino
+            const ciudadDestino = resultado.ciudad_destino;
+            res.json({ ciudadDestino });
+          }
+        });

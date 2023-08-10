@@ -5,7 +5,7 @@ import { mongo } from "mongoose";
 
 const router = new Router();
 
-router.get("/buses", httpBus.getBuses);
+router.get("/buses", httpBus.getAllBus);
 
 router.get("/buscarbus", httpBus.getBuscarBus);
 

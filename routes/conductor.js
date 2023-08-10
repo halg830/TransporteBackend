@@ -19,5 +19,22 @@ router.post("/agregar",
   ], httpConductor.postConductor
 );
 
+router.get("/buscar/:cedula", httpConductor.getConductorCedula);
+
+router.get("/buscarId/:id",  httpConductor.getConductorId)
+
+router.delete("/eliminar/:cedula",  httpConductor.deleteConductor);
+
+router.put("/modificar/:id",[
+  check("nombre", "El nombre es obligatorio").notEmpty(),
+  check("nombre", "El nombre debe tener minimo 8 caracteres").isLength({min: 8}),
+  validarCampos
+],  httpConductor.putConductor)
+
+router.put("/desactivar/:id", httpConductor.putConductorInactivar)
+
+router.put("/activar/:id", httpConductor.putConductorActivar)
+
+
 
 export default router

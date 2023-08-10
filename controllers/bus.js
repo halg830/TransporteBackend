@@ -2,28 +2,44 @@ import Bus from "../models/bus.js";
 
 const httpbus = {
     //GET
-    getBuses: async (req, res) => {
+    getAllBus: async (req, res) => {
         try {
-            const buses = await Bus.find()
-            res.json(buses)
+            const bus = await Bus.find();
+            res.json({ bus });
         } catch (error) {
-            res.status(400).json({ error })
+            res.status(400).json({ error });
         }
     },
-
-
-    //POST
 
     getBuscarBus: async (req, res) => {
         try {
-            const {nombre}= req.params
-            const buses = await Bus.find(nombre)
-            res.json(buses)
+            const {cedula} = req.params
+            const bus = await Bus.find({ cedula });
+            // const bus = await bus.find({
+            //     $and:[
+            //         {cedula},
+            //         {stado:1}
+            //     ]
+            // })v
+            res.json({ bus });
         } catch (error) {
-            res.status(400).json({ error })
+            res.status(400).json({ error });
         }
     },
 
+    getBusId: async (req, res) => {
+        try {
+            const { id } = req.params
+            const bus = await Bus.findById(id)
+            
+            res.json({ bus });
+        } catch (error) {
+            res.status(400).json({ error })
+
+        }
+    },
+
+    //POST
     postNuevoBus: async (req, res) => {
         try {
             const {empresa, asiento, placa, conductor} = req.body;
@@ -35,39 +51,69 @@ const httpbus = {
         }
     },
 
-        geteliminarBus: async (req, res) => {
+
+    //PUT
+    putBus: async (req, res) => {
         try {
-            const {nombre}= req.params
-            const buses = await Bus.findOneAndDelete(nombre)
-            res.json(buses)
+            const { id } = req.params
+            const { nombre, apellido, telefono, contrasena } = req.body
+
+            const salt = bcryptjs.genSaltSync()
+            const newContrasena = bcryptjs.hashSync(contrasena, salt)
+
+            const bus = await Bus.findByIdAndUpdate(id, { nombre, apellido, telefono, newContrasena }, { new: true });
+            res.json({ bus })
         } catch (error) {
             res.status(400).json({ error })
+
+        }
+
+    },
+
+    putBusInactivar: async (req, res) => {
+        try {
+            const { id } = req.params
+            const bus = await Bus.findByIdAndUpdate(id, { estado: 0 }, { new: true })
+            res.json({ bus })
+        } catch (error) {
+            res.status(400).json({ error })
+
+        }
+    },
+    putBusActivar: async (req, res) => {
+        try {
+            const { id } = req.params
+            const bus = await Bus.findByIdAndUpdate(id, { estado: 1 }, { new: true })
+            res.json({ bus })
+        } catch (error) {
+            res.status(400).json({ error })
+
         }
     },
 
-    // putBusInactivar: async () => {
-    //     try {
-    //         const { id } = req.params
-    //         const bus = await Bus.findByIdAndUpdate(id, { estado: 0 }, { new: true })
-    //         res.json({ bus })
-    //     } catch (error) {
-    //         res.status(400).json({ error })
-
-    //     }
-    // },
-
-    // putBusActivar: async () => {
-    //     try {
-    //         const { id } = req.params
-    //         const bus = await Bus.findByIdAndUpdate(id, { estado: 1 }, { new: true })
-    //         res.json({ bus })
-    //     } catch (error) {
-    //         res.status(400).json({ error })
-
-    //     }
-    // },
 
 
+    //DELETE
+    deleteBus: async (req, res) => {
+        try {
+            const { cedula } = req.params
+            const bus = await Bus.findOneAndDelete({ cedula })
+            res.json({ bus })
+        } catch (error) {
+            res.status(400).json({ error })
+        }
+
+    },
+
+    deleteBusId: async () => {
+        try {
+            const { id } = req.params
+            const bus = await Bus.findByIdAndDelete(id)
+            res.json({ bus })
+        } catch (error) {
+
+        }
+    },
 } 
 
 export default httpbus;
