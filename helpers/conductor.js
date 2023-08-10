@@ -1,21 +1,21 @@
-import Cliente from "../models/cliente.js"
+import Conductor from "../models/conductor.js"
 
 
-const helpersCliente = {
-    existeClienteById: async (id, req) => {
-        const existe = await Cliente.findById(id)
+const helpersConductor = {
+    existeConductorById: async (id, req) => {
+        const existe = await Conductor.findById(id)
 
         if (!existe) {
             throw new Error(`El id no existe ${id}`)
         }
 
-        req.req.clienteUpdate = existe
+        req.req.conductorUpdate = existe
 
     },
 
     existeCedula: async (cedula, req) => {
         if (cedula) {
-            const existe = await Cliente.findOne({ cedula })
+            const existe = await Conductor.findOne({ cedula })
             if (existe) {
                 if (req.req.method === "PUT") {
                     if (existe.cedula !== req.req.holder.cedula)
@@ -58,4 +58,4 @@ const helpersCliente = {
 
 
 }
-export default helpersCliente
+export default helpersConductor
