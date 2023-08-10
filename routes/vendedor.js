@@ -37,7 +37,7 @@ router.post(
   httpVendedor.postVendedor
 );
 
-router.put("modificar/:id",[
+router.put("/modificar/:id",[
   check("nombre", "El nombre es obligatorio").notEmpty(),
   check("nombre", "El nombre debe tener minimo 8 caracteres").isLength({min: 8}),
   check("apellido", "El apellido es obligatorio").notEmpty(),
