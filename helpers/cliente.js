@@ -18,7 +18,7 @@ const helpersCliente = {
             const existe = await Cliente.findOne({ cedula })
             if (existe) {
                 if (req.req.method === "PUT") {
-                    if (existe.cedula !== req.req.holder.cedula)
+                    if (existe.cedula !== req.req.usuario.cedula)
                         throw new Error(`Ya existe ese serial en la base de datos!!! ${cedula}`)
 
                 } else {
