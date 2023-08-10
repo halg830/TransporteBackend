@@ -61,7 +61,7 @@ const httpVendedor = {
 
 
     //PUT
-    putVendedor: async () => {
+    putVendedor: async (req, res) => {
         try {
             const { id } = req.params
             const { nombre, edad } = req.body
@@ -74,7 +74,7 @@ const httpVendedor = {
 
     },
 
-    putVendedorInactivar: async () => {
+    putVendedorInactivar: async (req, res) => {
         try {
             const { id } = req.params
             const vendedor = await Vendedor.findByIdAndUpdate(id, { estado: 0 }, { new: true })
@@ -84,7 +84,7 @@ const httpVendedor = {
 
         }
     },
-    putVendedorActivar: async () => {
+    putVendedorActivar: async (req, res) => {
         try {
             const { id } = req.params
             const vendedor = await Vendedor.findByIdAndUpdate(id, { estado: 1 }, { new: true })
