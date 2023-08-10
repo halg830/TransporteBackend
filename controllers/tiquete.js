@@ -2,10 +2,25 @@ import Tiquete from "../models/tiquete.js"
 
 const httpTiquete = {
 
-    //GET
     getAllTiquete: async (req, res) => {
         try {
             const tiquete = await Tiquete.find();
+            res.json({ tiquete });
+        } catch (error) {
+            res.status(400).json({ error });
+        }
+    },
+
+    getTiqueteCedula: async (req, res) => {
+        try {
+            const {cedula} = req.params
+            const tiquete = await Tiquete.find({ cedula });
+            // const tiquete = await tiquete.find({
+            //     $and:[
+            //         {cedula},
+            //         {stado:1}
+            //     ]
+            // })v
             res.json({ tiquete });
         } catch (error) {
             res.status(400).json({ error });
@@ -16,7 +31,8 @@ const httpTiquete = {
         try {
             const { id } = req.params
             const tiquete = await Tiquete.findById(id)
-            res.json({tiquete})
+            
+            res.json({ tiquete });
         } catch (error) {
             res.status(400).json({ error })
 
@@ -26,12 +42,10 @@ const httpTiquete = {
     //POST
     postTiquete: async (req, res) => {
         try {
-            const { vendedor, cliente, ruta } = req.body;
-            const tiquete = new Tiquete({ vendedor, cliente, ruta });
-
-            const salt = ""
-
-            vendedor.save();
+            const { vendedor, ruta, cliente } = req.body;
+            const tiquete = new Tiquete({ vendedor, ruta, cliente });
+      
+            await tiquete.save();
 
             res.json({ tiquete });
         } catch (error) {
@@ -41,11 +55,15 @@ const httpTiquete = {
 
 
     //PUT
-    putTiquete: async () => {
+    putTiquete: async (req, res) => {
         try {
             const { id } = req.params
-            const { ruta, cliente, vendedor} = req.body
-            const tiquete = await Tiquete.findByIdAndUpdate(id, { ruta, cliente, vendedor}, { new: true });
+            const { nombre, apellido, telefono, contrasena } = req.body
+
+            const salt = bcryptjs.genSaltSync()
+            const newContrasena = bcryptjs.hashSync(contrasena, salt)
+
+            const tiquete = await Tiquete.findByIdAndUpdate(id, { nombre, apellido, telefono, newContrasena }, { new: true });
             res.json({ tiquete })
         } catch (error) {
             res.status(400).json({ error })
@@ -54,7 +72,7 @@ const httpTiquete = {
 
     },
 
-    putTiqueteInactivar: async () => {
+    putTiqueteInactivar: async (req, res) => {
         try {
             const { id } = req.params
             const tiquete = await Tiquete.findByIdAndUpdate(id, { estado: 0 }, { new: true })
@@ -64,13 +82,37 @@ const httpTiquete = {
 
         }
     },
-    putTiqueteActivar: async () => {
+    putTiqueteActivar: async (req, res) => {
         try {
             const { id } = req.params
             const tiquete = await Tiquete.findByIdAndUpdate(id, { estado: 1 }, { new: true })
             res.json({ tiquete })
         } catch (error) {
             res.status(400).json({ error })
+
+        }
+    },
+
+
+
+    //DELETE
+    deleteTiquete: async (req, res) => {
+        try {
+            const { cedula } = req.params
+            const tiquete = await Tiquete.findOneAndDelete({ cedula })
+            res.json({ tiquete })
+        } catch (error) {
+            res.status(400).json({ error })
+        }
+
+    },
+
+    deleteTiqueteId: async () => {
+        try {
+            const { id } = req.params
+            const tiquete = await Tiquete.findByIdAndDelete(id)
+            res.json({ tiquete })
+        } catch (error) {
 
         }
     },

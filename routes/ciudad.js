@@ -7,16 +7,14 @@ import { mongo } from "mongoose";
 const router = new Router();
 
 router.get("/cargar", httpCiudad.getCiudades);
-router.post("/buscar", httpCiudad.postCiudad);
 
 router.post(
   "/guardar",
   [
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
-    check("estado", "tiene que especificar el estado").not().isEmpty(),
     validarCampos,
   ],
-  httpCiudad.postCiudades
+  httpCiudad.postCiudad
 );
 
 export default router

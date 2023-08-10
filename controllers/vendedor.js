@@ -64,8 +64,12 @@ const httpVendedor = {
     putVendedor: async (req, res) => {
         try {
             const { id } = req.params
-            const { nombre, edad } = req.body
-            const vendedor = await Vendedor.findByIdAndUpdate(id, { nombre, edad }, { new: true });
+            const { nombre, apellido, telefono, contrasena } = req.body
+
+            const salt = bcryptjs.genSaltSync()
+            const newContrasena = bcryptjs.hashSync(contrasena, salt)
+
+            const vendedor = await Vendedor.findByIdAndUpdate(id, { nombre, apellido, telefono, newContrasena }, { new: true });
             res.json({ vendedor })
         } catch (error) {
             res.status(400).json({ error })
@@ -112,7 +116,7 @@ const httpVendedor = {
     deleteVendedorId: async () => {
         try {
             const { id } = req.params
-            const vendedor = await Vendedor.findOneAndDelete(id)
+            const vendedor = await Vendedor.findByIdAndDelete(id)
             res.json({ vendedor })
         } catch (error) {
 
