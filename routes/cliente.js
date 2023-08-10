@@ -4,6 +4,7 @@ import { check } from "express-validator";
 import { validarCampos } from "../miderwars/validar.js";
 import { mongo } from "mongoose";
 import { validarJWT } from "../miderwars/validar-jwt.js"
+import {helpersCliente} from "../helpers/cliente.js"
 
 const router = new Router();
 
@@ -21,6 +22,7 @@ router.post(
       min: 10,
       max: 10,
     }),
+    
     validarCampos 
   ],
   httpCliente.postCliente

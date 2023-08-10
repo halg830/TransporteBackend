@@ -13,7 +13,7 @@ const helpersCliente = {
 
     },
 
-    existeEmail: async (cedula, req) => {
+    existeCedula: async (cedula, req) => {
         if (cedula) {
             const existe = await Cliente.findOne({ cedula })
             if (existe) {
