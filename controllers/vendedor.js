@@ -116,7 +116,7 @@ const httpVendedor = {
     deleteVendedorId: async () => {
         try {
             const { id } = req.params
-            const vendedor = await Vendedor.findOneAndDelete(id)
+            const vendedor = await Vendedor.findByIdAndDelete(id)
             res.json({ vendedor })
         } catch (error) {
 
