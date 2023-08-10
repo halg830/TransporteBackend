@@ -107,7 +107,7 @@ const httpTiquete = {
 
     },
 
-    deleteTiqueteId: async () => {
+    deleteTiqueteId: async (req, res) => {
         try {
             const { id } = req.params
             const tiquete = await Tiquete.findByIdAndDelete(id)

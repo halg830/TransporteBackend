@@ -1,5 +1,12 @@
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NGQ1MjAzYmRlOWFjYWRhOGMwYTUyYjUiLCJpYXQiOjE2OTE2ODkwNTQsImV4cCI6MTY5MTcwMzQ1NH0.NNU4AKFoeBKZazhxwXR8kzKYif3rqNRMFiT-HPFna8A
 
+HACER VALIDACIONES
+
+if(ciudad_origen == ciudad_destino){
+          res.json({error: "No puede ser la misma ciudad"})
+        }
+
+
 filtro tiquetes
 fecha a fecha
 tiquetes vendidos de vendedor
@@ -10,8 +17,17 @@ id vendedor 64d5203bde9acada8c0a52b5
 
 id conductor 64d535f166d3ebd381e6e0a7
 
-id
+id ciudad1 64d53d23e38be965b8ea12c2
 
+id ciudad2 64d53344686a570f6322bc0f
+
+id bus 64cc2fe4e30672a1adb6b426
+
+id ruta 64d53fff243c5945360b902f
+
+
+2023-08-03T22:53:24.971Z
+2023-08-10T19:31:51.831Z
 
 postNuevoBus: async (req, res) => {
         try {

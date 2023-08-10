@@ -7,8 +7,10 @@ import { validarCampos } from "../miderwars/validar.js";
 
 const router = new Router();
 
+router.get("/cargar", httpRuta.getAllRuta);
+
 router.post(
-  "/ruta",
+  "/nuevo",
   [
     check("hora_salida", "La hora es obligatoria").notEmpty(),
     check("fecha_salida", "La fecha es obligatoria").notEmpty(),
