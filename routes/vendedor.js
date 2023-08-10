@@ -54,6 +54,6 @@ router.put("/modificar/:id",[
 
 router.put("/desactivar/:id", validarJWT, httpVendedor.putVendedorInactivar)
 
-router.put("/activar/:id", validarJWT, httpVendedor.putVendedorActivar)
+router.put("/activar/:id", httpVendedor.putVendedorActivar)
 
 export default router 
