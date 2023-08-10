@@ -38,7 +38,7 @@ router.put("/editar/:cedula",
   validarCampos */
 ],
 httpCliente.putCliente
-)
+);
 
 router.delete("eliminar/:cedula", httpCliente.deleteCliente)
 

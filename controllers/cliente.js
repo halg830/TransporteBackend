@@ -3,23 +3,21 @@ import bcryptjs from "bcrypt"
 import { generarJWT } from "../miderwars/validar-jwt.js";
 
 const httpCliente = {
-
-
   //GET
   getAllCliente: async (req, res) => {
     try {
-      const clientes = await Cliente.find();
-      res.json({ clientes });
+      const cliente = await Cliente.find();
+      res.json({ cliente });
     } catch (error) {
       res.status(400).json({ error });
     }
-  }, 
-  
+  },
+
   getClienteCedula: async (req, res) => {
     try {
-      const {cedula} = req.params
+      const { cedula } = req.params
       const cliente = await Cliente.find({ cedula });
-      // const cliente = await cliente.find({
+      // const vendedor = await vendedor.find({
       //     $and:[
       //         {cedula},
       //         {stado:1}
@@ -34,8 +32,11 @@ const httpCliente = {
   getClienteId: async (req, res) => {
     try {
       const { id } = req.params
-      const cliente = await cliente.findById(id)
+      const cliente = await Cliente.findById(id)
+
+      res.json({ cliente });
     } catch (error) {
+      res.status(400).json({ error })
 
     }
   },
@@ -43,8 +44,8 @@ const httpCliente = {
   //POST
   postCliente: async (req, res) => {
     try {
-      const {nombre, email, cedula, contrasena} = req.body;
-      const cliente = new Cliente({nombre, email, cedula, contrasena});
+      const { nombre, cedula, email, contrasena } = req.body;
+      const cliente = new Cliente({ nombre, cedula, email, contrasena });
 
       const salt = bcryptjs.genSaltSync()
       cliente.contrasena = bcryptjs.hashSync(contrasena, salt)
@@ -53,44 +54,41 @@ const httpCliente = {
 
       res.json({ cliente });
     } catch (error) {
-      res.json({ error });
+      res.status(400).json({ error });
     }
   },
 
 
   //PUT
-  putCliente: async (req, res) =>{
-    const {cedula}= req.params
-    const {nombre, email, contrasena} = req.body
-
-    const salt = bcryptjs.genSaltSync()
-    const contrasenaEncryp = bcryptjs.hashSync(contrasena, salt)
-
-    const cliente = await Cliente.findOneAndUpdate({cedula},{nombre,email, contrasena:contrasenaEncryp},{new:true})
-
-    if (!cliente) {
-      return res.status(404).json({ mensaje: 'Cliente no encontrado' });
-    }
-
-    res.json({cliente})
-  },
-
-  putclienteInactivar: async () => { 
+  putCliente: async (req, res) => {
     try {
-      const {id} =req.params
-      const cliente = await cliente.findByIdAndUpdate(id,{estado:0},{new:true})
-      res.json({cliente})
+      const { id } = req.params
+      const { nombre, edad } = req.body
+      const cliente = await Cliente.findByIdAndUpdate(id, { nombre, edad }, { new: true });
+      res.json({ cliente })
     } catch (error) {
-      
+      res.status(400).json({ error })
     }
   },
-  putclienteActivar: async () => { 
+
+  putClienteInactivar: async (req, res) => {
     try {
-      const {id} =req.params
-      const cliente = await cliente.findByIdAndUpdate(id,{estado:1})
-      res.json({cliente})
+      const { id } = req.params
+      const cliente = await Cliente.findByIdAndUpdate(id, { estado: 0 }, { new: true })
+      res.json({ cliente })
     } catch (error) {
-      
+      res.status(400).json({ error })
+
+    }
+  },
+  putClienteActivar: async (req, res) => {
+    try {
+      const { id } = req.params
+      const cliente = await Cliente.findByIdAndUpdate(id, { estado: 1 }, { new: true })
+      res.json({ cliente })
+    } catch (error) {
+      res.status(400).json({ error })
+
     }
   },
 
@@ -98,60 +96,24 @@ const httpCliente = {
 
   //DELETE
   deleteCliente: async (req, res) => {
-    const { cedula } = req.params
-    const cliente = await Cliente.findOneAndDelete({ cedula })
-    res.json({ cliente })
+    try {
+      const { cedula } = req.params
+      const cliente = await Cliente.findOneAndDelete({ cedula })
+      res.json({ cliente })
+    } catch (error) {
+      res.status(400).json({ error })
+    }
+
   },
 
   deleteClienteId: async () => {
     try {
       const { id } = req.params
-      const cliente = await cliente.findOneAndDelete(id)
+      const cliente = await Cliente.findOneAndDelete(id)
       res.json({ cliente })
     } catch (error) {
-      
+      res.status(400).json({ error })
     }
   },
-
-  /* login: async (req, res) => {
-    const { email, contrasena } = req.body;
-
-    try {
-        const cliente = await Cliente.findOne({ email })
-        
-
-        if (!cliente) {
-            return res.status(400).json({
-                msg: "Cliente / Password no son correctos"
-            })
-        }
-
-        if (cliente.estado === 0) {
-            return res.status(400).json({
-                msg: "Cliente Inactivo"
-            })
-        }
-
-        const validPassword = bcryptjs.compareSync(contrasena, cliente.contrasena);
-        if (!validPassword) {
-            return res.status(401).json({
-                msg: "Password no es correcta"
-            })
-        } 
-
-        const token = await generarJWT(cliente.id);
-
-        res.json({
-            cliente,
-            token
-        })
-
-    } catch (error) {
-        return res.status(500).json({
-            msg: "Hable con el WebMaster"
-        })
-    }
-} */
-  
 };
 export default httpCliente;

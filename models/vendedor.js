@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const Vendedor = new Schema({
-  nombre: { type: String, required: true, minlength: 8 },
+  nombre: { type: String, required: true},
   apellido: { type: String, required: true },
   cedula: { type: String, required: true, minlength: 10, maxlength: 10 },
   telefono: { type: String, required: true, minlength: 10, maxlength: 10 },

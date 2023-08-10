@@ -8,13 +8,15 @@ import { validarJWT } from "../miderwars/validar-jwt.js";
 
 const router = new Router();
 
-router.get("/allVendedor", validarJWT, httpVendedor.getAllVendedor);
+router.get("/allVendedor", httpVendedor.getAllVendedor);
 
 router.get("/buscar/:cedula",validarJWT, httpVendedor.getVendedorCedula);
 
 router.get("/buscarId/:id", validarJWT, httpVendedor.getVendedorId)
 
 router.delete("/eliminar/:cedula", validarJWT, httpVendedor.deleteVendedor);
+
+router.delete("/eliminar/:id", validarJWT, httpVendedor.deleteVendedor);
 
 router.post("/login", httpVendedor.login)
 
