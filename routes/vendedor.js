@@ -3,17 +3,21 @@ import httpVendedor from "../controllers/vendedor.js";
 import { check } from "express-validator";
 import {validarCampos} from "../miderwars/validar.js"
 import { mongo } from "mongoose";
+// import {helpers} from
+import { validarJWT } from "../miderwars/validar-jwt.js";
 
 const router = new Router();
 
-router.get("/allVendedor", httpVendedor.getAllVendedor);
+router.get("/allVendedor", validarJWT, httpVendedor.getAllVendedor);
 
-router.get("/vendedor/:cedula", httpVendedor.getVendedorCedula);
+router.get("/vendedor/:cedula",validarJWT, httpVendedor.getVendedorCedula);
 
-router.delete("/eliminar/:cedula",httpVendedor.deleteVendedor)
+router.delete("/eliminar/:cedula", validarJWT, httpVendedor.deleteVendedor);
+
+router.post("/login", httpVendedor.login)
 
 router.post(
-  "/vendedor",
+  "/agregar",
   [
     check("nombre", "El nombre es obligatorio").notEmpty(),
     check("nombre", "El nombre debe tener minimo 8 caracteres").isLength({min: 8}),

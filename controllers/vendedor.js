@@ -1,5 +1,6 @@
 import Vendedor from "../models/vendedor.js";
 import bcryptjs from "bcrypt"
+import { generarJWT } from "../miderwars/validar-jwt.js";
 
 const httpVendedor = {
 
@@ -97,7 +98,7 @@ const httpVendedor = {
 
 
     //DELETE
-    deleteVendedor: async () => {
+    deleteVendedor: async (req, res) => {
         try {
             const { cedula } = req.params
             const vendedor = await Vendedor.findOneAndDelete({ cedula })
@@ -115,6 +116,46 @@ const httpVendedor = {
             res.json({ vendedor })
         } catch (error) {
 
+        }
+    },
+
+    login: async (req, res) => {
+        const { usuario, contrasena } = req.body;
+    
+        try {
+            const vendedor = await Vendedor.findOne({ usuario })
+            
+    
+            if (!vendedor) {
+                return res.status(400).json({
+                    msg: "Vendedor / Password no son correctos"
+                })
+            }
+    
+            if (vendedor.estado === 0) {
+                return res.status(400).json({
+                    msg: "Vendedor Inactivo"
+                })
+            }
+    
+            const validPassword = bcryptjs.compareSync(contrasena, vendedor.contrasena);
+            if (!validPassword) {
+                return res.status(401).json({
+                    msg: "Password no es correcta"
+                })
+            } 
+    
+            const token = await generarJWT(vendedor.id);
+    
+            res.json({
+                vendedor,
+                token
+            })
+    
+        } catch (error) {
+            return res.status(500).json({
+                msg: "Hable con el WebMaster"
+            })
         }
     },
 };

@@ -5,7 +5,6 @@ import { validarCampos } from "../miderwars/validar.js";
 import { mongo } from "mongoose";
 import { validarJWT } from "../miderwars/validar-jwt.js"
 
-
 const router = new Router();
 
 router.get("/allClientes", httpCliente.getAllCliente);
