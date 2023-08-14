@@ -42,8 +42,5 @@ const helpersCliente = {
             }
         }
     },
-
-
-
 }
 export default helpersCliente

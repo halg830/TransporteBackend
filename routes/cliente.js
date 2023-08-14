@@ -8,7 +8,7 @@ import helpersCliente from "../helpers/cliente.js"
 
 const router = new Router();
 
-router.get("/allClientes", httpCliente.getAllCliente);
+router.get("/all", httpCliente.getAllCliente);
 
 router.get("/buscar/:cedula", httpCliente.getClienteCedula);
 
