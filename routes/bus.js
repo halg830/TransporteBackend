@@ -7,12 +7,12 @@ import helpersBus from "../helpers/bus.js"
 
 const router = new Router();
 
-router.get("/buses", httpBus.getAllBus);
+router.get("/all", httpBus.getAllBus);
 
 router.get("/buscarbus/:id", httpBus.getBusId);
 
 router.post(
-  "/nuevobus",
+  "/nuevo",
   [
     check("empresa", "debe especificar la empresa").not().isEmpty(),
     check("asiento", "debe especificar el asiento").not().isEmpty(),
@@ -22,6 +22,7 @@ router.post(
     check("placa", "la placa no puede tener mas de 7 caracteres").isLength({
       max: 7
     }),
+    check("placa", "La placa ya esta registrada").custom(helpersBus.existePlaca),
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
     validarCampos
   ], httpBus.postNuevoBus);

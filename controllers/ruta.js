@@ -1,5 +1,4 @@
 import Ruta from "../models/ruta.js";
-import Ciudad from "../models/ciudad.js";
 
 const httpRuta = {
   //GET

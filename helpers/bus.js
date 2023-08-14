@@ -7,6 +7,14 @@ const helpersBus = {
             throw new Error("El número de asientos debe ser igual o inferior a 40")
         }
 
+    },
+
+    existePlaca: async (placa)=>{
+        const existe = await Bus.findOne({placa})
+
+        if(existe){
+            throw new Error("La placa ya esta registrada en la base de datos.")
+        }
     }
 }
 
