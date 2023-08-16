@@ -4,6 +4,7 @@ import { check } from "express-validator";
 import {validationResult} from "express-validator"
 import { mongo } from "mongoose";
 import { validarCampos } from "../miderwars/validar.js";
+import helpersConductor from "../helpers/conductor.js";
 
 const router = new Router();
 
@@ -12,9 +13,10 @@ router.get("/cargar", httpConductor.getAllConductor)
 router.post("/agregar",
   [
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
-    check("nombre", "Minimo 8 caracteres").isLength({ min: 8 }),
+    check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
     check("cedula", "La cedula es obligatoria").notEmpty(),
     check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
+    check("cedula").custom(helpersConductor.existeCedula),
     validarCampos
   ], httpConductor.postConductor
 );
@@ -27,7 +29,7 @@ router.delete("/eliminar/:cedula",  httpConductor.deleteConductor);
 
 router.put("/modificar/:id",[
   check("nombre", "El nombre es obligatorio").notEmpty(),
-  check("nombre", "El nombre debe tener minimo 8 caracteres").isLength({min: 8}),
+  check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
   validarCampos
 ],  httpConductor.putConductor)
 
