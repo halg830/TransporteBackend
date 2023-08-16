@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const Ciudad = new Schema({
-  nombre: { type: String, required: true },
+  nombre: { type: String, required: true, unique:true },
   estado: { type: Number, default: 1 },
   createAd: { type: Date, default: Date.now },
 });
