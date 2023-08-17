@@ -47,7 +47,7 @@ const httpTiquete = {
 
             if(!tiquetes) res.json({msg: "El vendedor no ha realizado ninguna venta."})
 
-            res.json(tiquetes)
+            res.json({tiquetes})
             
         } catch (error) {
             
