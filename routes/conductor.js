@@ -25,8 +25,6 @@ router.get("/buscar/:cedula", httpConductor.getConductorCedula);
 
 router.get("/buscarId/:id",  httpConductor.getConductorId)
 
-router.delete("/eliminar/:cedula",  httpConductor.deleteConductor);
-
 router.put("/modificar/:id",[
   check("nombre", "El nombre es obligatorio").notEmpty(),
   check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
@@ -37,6 +35,9 @@ router.put("/desactivar/:id", httpConductor.putConductorInactivar)
 
 router.put("/activar/:id", httpConductor.putConductorActivar)
 
+router.delete("/eliminar/:cedula",  httpConductor.deleteConductor);
+
+router.delete("/eliminar/:id",  httpConductor.deleteConductor);
 
 
 export default router

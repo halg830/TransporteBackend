@@ -97,7 +97,7 @@ deleteConductor: async (req, res) => {
     try {
         const { cedula } = req.params
         const conductor = await Conductor.findOneAndDelete({ cedula })
-        res.json({ conductor })
+        res.json({ msg:"Eliminado el conductor" })
     } catch (error) {
         res.status(400).json({ error })
     }
@@ -108,9 +108,9 @@ deleteConductorId: async () => {
     try {
         const { id } = req.params
         const conductor = await Conductor.findByIdAndDelete(id)
-        res.json({ conductor })
+        res.json({ msg:"Eliminado el conductor" })
     } catch (error) {
-
+        res.status(400).json({ error })
     }
 },
 };
