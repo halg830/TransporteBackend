@@ -9,9 +9,9 @@ const router = new Router();
 router.get("/buscar", httpTiquete.getAllTiquete)
 
 router.post("/agregar", [
-    check("vendedor", "Debe ingresar el id del vendedor").isMongoId,
-    check("ruta", "Debe ingresar el id del ruta").isMongoId,
-    check("cliente", "Debe ingresar el id del cliente").isMongoId,
+    check("vendedor", "Debe ingresar el id del vendedor").isMongoId(),
+    check("ruta", "Debe ingresar el id del ruta").isMongoId(),
+    check("cliente", "Debe ingresar el id del cliente").isMongoId(),
 ], httpTiquete.postTiquete);
 
 router.get("/buscar/:cedula", httpTiquete.getTiqueteCedula);

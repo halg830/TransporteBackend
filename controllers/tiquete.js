@@ -1,3 +1,4 @@
+import tiquete from "../models/tiquete.js";
 import Tiquete from "../models/tiquete.js"
 
 const httpTiquete = {
@@ -36,6 +37,20 @@ const httpTiquete = {
         } catch (error) {
             res.status(400).json({ error })
 
+        }
+    },
+
+    getTiquetesVendidos: async(req,res)=>{
+        try {
+            const {vendedor} = req.query
+            const tiquetes = await Tiquete.findOne(vendedor)
+
+            if(!tiquetes) res.json({msg: "El vendedor no ha realizado ninguna venta."})
+
+            res.json(tiquetes)
+            
+        } catch (error) {
+            
         }
     },
 
