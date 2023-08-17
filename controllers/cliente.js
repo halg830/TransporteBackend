@@ -49,11 +49,8 @@ const httpCliente = {
   //POST
   postCliente: async (req, res) => {
     try {
-      const { nombre, cedula, email, contrasena } = req.body;
-      const cliente = new Cliente({ nombre, cedula, email, contrasena });
-
-      const salt = bcryptjs.genSaltSync()
-      cliente.contrasena = bcryptjs.hashSync(contrasena, salt)
+      const { nombre, cedula, email } = req.body;
+      const cliente = new Cliente({ nombre, cedula, email });
 
       await cliente.save();
 

@@ -8,6 +8,8 @@ const router = new Router();
 
 router.get("/buscar", httpTiquete.getAllTiquete)
 
+router.get("/buscar/")
+
 router.post("/agregar", [
     check("vendedor", "Debe ingresar el id del vendedor").isMongoId(),
     check("ruta", "Debe ingresar el id del ruta").isMongoId(),
