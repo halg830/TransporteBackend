@@ -25,7 +25,7 @@ router.post(
       max: 10,
     }),
     check("cedula", "La cedula esta duplicada").custom(helpersCliente.existeCedula),
-    check("email", "El email debe contener el símbolo @").custom(value => value.includes('@'));
+    check("email", "El email debe contener el símbolo @").custom(value => value.includes('@')),
     check("email", "El email ya existe").custom(helpersCliente.existeEmail),
     validarCampos 
   ],
