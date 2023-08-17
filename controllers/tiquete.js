@@ -42,15 +42,35 @@ const httpTiquete = {
 
     getTiquetesVendidos: async(req,res)=>{
         try {
-            const {vendedor} = req.query
-            const tiquetes = await Tiquete.findOne(vendedor)
+            const {id} = req.params
+            const vendedor = id
+            const tiquetes = await Tiquete.find({vendedor})
 
             if(!tiquetes) res.json({msg: "El vendedor no ha realizado ninguna venta."})
-
+ 
             res.json({tiquetes})
             
         } catch (error) {
+            console.log(error)
+            res.status(400).json({error})
+        }
+    },
+
+    getFiltroFechas: async(req,res)=>{
+        try {
+            const {fechaA, fechaB} = req.params
+
+            const fechas = await Tiquete.find({
+                    $or:[
+                        {createdAt:fechaA},
+                        {createdAt:fechaB}
+                    ]
+                })
+
+            res.json(fechas)
             
+        } catch (error) {
+            res.status(400).json({error})
         }
     },
 

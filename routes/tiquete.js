@@ -8,7 +8,9 @@ const router = new Router();
 
 router.get("/buscar", httpTiquete.getAllTiquete)
 
-router.get("/buscar/")
+router.get("/ventas/:id", httpTiquete.getTiquetesVendidos)
+
+router.get("/filtrarFechas/:fechaA/:fechaB", httpTiquete.getFiltroFechas)
 
 router.post("/agregar", [
     check("vendedor", "Debe ingresar el id del vendedor").isMongoId(),

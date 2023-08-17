@@ -1,3 +1,4 @@
+import bus from "../models/bus.js";
 import Ruta from "../models/ruta.js";
 
 const httpRuta = {
@@ -36,6 +37,22 @@ getRutaId: async (req, res) => {
     } catch (error) {
         res.status(400).json({ error })
 
+    }
+},
+
+getRutasBus: async(req,res)=>{
+    try {
+        const {id} = req.params
+        const bus = id
+        const rutas = await Ruta.find({bus})
+
+        if(!rutas) res.json({msg: "El vendedor no ha realizado ninguna venta."})
+
+        res.json({rutas})
+        
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({error})
     }
 },
 

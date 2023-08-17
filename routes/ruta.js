@@ -10,6 +10,8 @@ const router = new Router();
 
 router.get("/cargar", httpRuta.getAllRuta);
 
+router.get("/rutasBus/:id", httpRuta.getRutasBus)
+
 router.post(
   "/nuevo",
   [

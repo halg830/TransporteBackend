@@ -8,10 +8,10 @@ if(ciudad_origen == ciudad_destino){
 
 
 filtro tiquetes
-fecha a fecha
-tiquetes vendidos de vendedor
-cuantos tiquetes vendieron cierto
-rutas bus
+fecha a fecha 
+tiquetes vendidos de vendedor -listo
+cuantos tiquetes vendieron cierto -no entendi
+rutas bus -listo
 
 id vendedor 64d5203bde9acada8c0a52b5
 
