@@ -101,7 +101,7 @@ const httpCliente = {
     try {
       const { cedula } = req.params
       const cliente = await Cliente.findOneAndDelete({ cedula })
-      res.json({ cliente })
+      res.json({ msg: "cliente eliminado" })
     } catch (error) {
       res.status(400).json({ error })
     }
@@ -112,7 +112,7 @@ const httpCliente = {
     try {
       const { id } = req.params
       const cliente = await Cliente.findOneAndDelete(id)
-      res.json({ cliente })
+      res.json({ msg: "cliente eliminado" })
     } catch (error) {
       res.status(400).json({ error })
     }
