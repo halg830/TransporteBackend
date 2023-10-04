@@ -15,6 +15,7 @@ mongoose.connect(`${process.env.DB}`)
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(   "/api/cliente",  cliente)
 app.use(   "/api/bus",  bus)
 app.use(   "/api/ciudad",  ciudad)
