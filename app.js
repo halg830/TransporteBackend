@@ -1,7 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import mongoose from "mongoose";
-
+import cors from 'cors'
 import cliente  from "./routes/cliente.js";
 import bus  from "./routes/bus.js";
 import ciudad  from "./routes/ciudad.js";
