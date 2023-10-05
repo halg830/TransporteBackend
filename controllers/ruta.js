@@ -5,133 +5,158 @@ const httpRuta = {
   //GET
   getAllRuta: async (req, res) => {
     try {
-        const ruta = await Ruta.find();
-        res.json({ ruta });
-    } catch (error) {
-        res.status(400).json({ error });
-    }
-},
+      const rutas = await Ruta.find();
+      const rutasPopulatePromesas = rutas.map(async (e) => {
+        return await Ruta.findById(e._id)
+          .populate("ciudad_origen")
+          .populate("ciudad_destino")
+          .populate("bus");
+      });
 
-getRutacarRuta: async (req, res) => {
+      const rutasPopulate = await Promise.all(rutasPopulatePromesas);
+
+      res.json({ rutasPopulate });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ error });
+    }
+  },
+
+  getRutacarRuta: async (req, res) => {
     try {
-        const {cedula} = req.params
-        const ruta = await Ruta.find({ cedula });
-        // const ruta = await ruta.find({
-        //     $and:[
-        //         {cedula},
-        //         {stado:1}
-        //     ]
-        // })v
-        res.json({ ruta });
+      const { cedula } = req.params;
+      const ruta = await Ruta.find({ cedula });
+      // const ruta = await ruta.find({
+      //     $and:[
+      //         {cedula},
+      //         {stado:1}
+      //     ]
+      // })v
+      res.json({ ruta });
     } catch (error) {
-        res.status(400).json({ error });
+      res.status(400).json({ error });
     }
-},
+  },
 
-getRutaId: async (req, res) => {
+  getRutaId: async (req, res) => {
     try {
-        const { id } = req.params
-        const ruta = await Ruta.findById(id)
-        
-        res.json({ ruta });
+      const { id } = req.params;
+      const ruta = await Ruta.findById(id);
+
+      res.json({ ruta });
     } catch (error) {
-        res.status(400).json({ error })
-
+      res.status(400).json({ error });
     }
-},
+  },
 
-getRutasBus: async(req,res)=>{
+  getRutasBus: async (req, res) => {
     try {
-        const {id} = req.params
-        const bus = id
-        const rutas = await Ruta.find({bus})
+      const { id } = req.params;
+      const bus = id;
+      const rutas = await Ruta.find({ bus });
 
-        if(!rutas) res.json({msg: "El vendedor no ha realizado ninguna venta."})
+      if (!rutas)
+        res.json({ msg: "El vendedor no ha realizado ninguna venta." });
 
-        res.json({rutas})
-        
+      res.json({ rutas });
     } catch (error) {
-        console.log(error)
-        res.status(400).json({error})
+      console.log(error);
+      res.status(400).json({ error });
     }
-},
+  },
 
-//POST
-postRuta: async (req, res) => {
+  //POST
+  postRuta: async (req, res) => {
     try {
-        const {ciudad_origen, ciudad_destino, hora_salida, fecha_salida, valor, bus} = req.body;
+      const {
+        ciudad_origen,
+        ciudad_destino,
+        hora_salida,
+        fecha_salida,
+        valor,
+        bus,
+      } = req.body;
 
-        const ruta = new Ruta({ciudad_origen, ciudad_destino, hora_salida, fecha_salida, valor, bus});
-        await ruta.save(); 
-        res.json({ruta})
+      const ruta = new Ruta({
+        ciudad_origen,
+        ciudad_destino,
+        hora_salida,
+        fecha_salida,
+        valor,
+        bus,
+      });
+      await ruta.save();
+      res.json({ ruta });
     } catch (error) {
-        res.status(400).json({ error })
+      res.status(400).json({ error });
     }
-},
+  },
 
-
-//PUT
-putRuta: async (req, res) => {
+  //PUT
+  putRuta: async (req, res) => {
     try {
-        const { id } = req.params
-        const { nombre, apellido, telefono, contrasena } = req.body
+      const { id } = req.params;
+      const { nombre, apellido, telefono, contrasena } = req.body;
 
-        const salt = bcryptjs.genSaltSync()
-        const newContrasena = bcryptjs.hashSync(contrasena, salt)
+      const salt = bcryptjs.genSaltSync();
+      const newContrasena = bcryptjs.hashSync(contrasena, salt);
 
-        const ruta = await Ruta.findByIdAndUpdate(id, { nombre, apellido, telefono, newContrasena }, { new: true });
-        res.json({ ruta })
+      const ruta = await Ruta.findByIdAndUpdate(
+        id,
+        { nombre, apellido, telefono, newContrasena },
+        { new: true }
+      );
+      res.json({ ruta });
     } catch (error) {
-        res.status(400).json({ error })
-
+      res.status(400).json({ error });
     }
+  },
 
-},
-
-putRutaInactivar: async (req, res) => {
+  putRutaInactivar: async (req, res) => {
     try {
-        const { id } = req.params
-        const ruta = await Ruta.findByIdAndUpdate(id, { estado: 0 }, { new: true })
-        res.json({ ruta })
+      const { id } = req.params;
+      const ruta = await Ruta.findByIdAndUpdate(
+        id,
+        { estado: 0 },
+        { new: true }
+      );
+      res.json({ ruta });
     } catch (error) {
-        res.status(400).json({ error })
-
+      res.status(400).json({ error });
     }
-},
-putRutaActivar: async (req, res) => {
+  },
+  putRutaActivar: async (req, res) => {
     try {
-        const { id } = req.params
-        const ruta = await Ruta.findByIdAndUpdate(id, { estado: 1 }, { new: true })
-        res.json({ ruta })
+      const { id } = req.params;
+      const ruta = await Ruta.findByIdAndUpdate(
+        id,
+        { estado: 1 },
+        { new: true }
+      );
+      res.json({ ruta });
     } catch (error) {
-        res.status(400).json({ error })
-
+      res.status(400).json({ error });
     }
-},
+  },
 
-
-
-//DELETE
-deleteRuta: async (req, res) => {
+  //DELETE
+  deleteRuta: async (req, res) => {
     try {
-        const { cedula } = req.params
-        const ruta = await Ruta.findOneAndDelete({ cedula })
-        res.json({ ruta })
+      const { cedula } = req.params;
+      const ruta = await Ruta.findOneAndDelete({ cedula });
+      res.json({ ruta });
     } catch (error) {
-        res.status(400).json({ error })
+      res.status(400).json({ error });
     }
+  },
 
-},
-
-deleteRutaId: async () => {
+  deleteRutaId: async () => {
     try {
-        const { id } = req.params
-        const ruta = await Ruta.findByIdAndDelete(id)
-        res.json({ ruta })
-    } catch (error) {
-
-    }
-},
+      const { id } = req.params;
+      const ruta = await Ruta.findByIdAndDelete(id);
+      res.json({ ruta });
+    } catch (error) {}
+  },
 };
 
 export default httpRuta;
