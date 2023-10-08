@@ -36,13 +36,6 @@ router.put("/editar/", [
   check("id", "Es necesario ingresar un id").isMongoId(),
   check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("nombre", "Máximo 15 caracteres").isLength({ max: 15 }),
-    check("cedula", "La cedula es obligatoria").notEmpty(),
-    check("cedula", "Tiene que tener 10 digitos").isLength({
-      min: 8,
-      max: 10,
-    }),
-    check("cedula", "La cedula esta duplicada").custom(helpersCliente.existeCedula),
-    check("email", "El email ya existe").custom(helpersCliente.existeEmail),
     validarCampos
 ],httpCliente.putCliente);
 
