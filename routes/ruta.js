@@ -29,4 +29,6 @@ router.post(
   httpRuta.postRuta
 );
 
+router.put("/editar", httpRuta.putRuta)
+
 export default router

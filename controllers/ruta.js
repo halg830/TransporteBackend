@@ -95,19 +95,29 @@ const httpRuta = {
   //PUT
   putRuta: async (req, res) => {
     try {
-      const { id } = req.params;
-      const { nombre, apellido, telefono, contrasena } = req.body;
-
-      const salt = bcryptjs.genSaltSync();
-      const newContrasena = bcryptjs.hashSync(contrasena, salt);
+      const {
+        id,
+        ciudad_origen,
+        ciudad_destino,
+        hora_salida,
+        fecha_salida,
+        valor,
+        bus,
+      } = req.body;
 
       const ruta = await Ruta.findByIdAndUpdate(
         id,
-        { nombre, apellido, telefono, newContrasena },
+        { ciudad_origen,
+          ciudad_destino,
+          hora_salida,
+          fecha_salida,
+          valor,
+          bus, },
         { new: true }
       );
       res.json({ ruta });
     } catch (error) {
+      console.log(error);
       res.status(400).json({ error });
     }
   },
