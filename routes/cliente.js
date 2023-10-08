@@ -32,7 +32,8 @@ router.post(
   httpCliente.postCliente
   );  
 
-router.put("/editar/:id", [
+router.put("/editar/", [
+  check("id", "Es necesario ingresar un id").isMongoId(),
   check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("nombre", "Máximo 15 caracteres").isLength({ max: 15 }),
     check("cedula", "La cedula es obligatoria").notEmpty(),
