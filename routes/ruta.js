@@ -31,4 +31,8 @@ router.post(
 
 router.put("/editar", httpRuta.putRuta)
 
+router.put("/inactivar/:id", httpRuta.putRutaInactivar)
+
+router.put("/activar/:id", httpRuta.putRutaActivar)
+
 export default router
