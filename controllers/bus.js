@@ -6,7 +6,7 @@ const httpbus = {
     try {
       const bus = await Bus.find();
       const busPopulatePromesas = bus.map(async (e) => {
-        return await Bus.findById(e._id).populate("Conductor");
+        return await Bus.findById(e._id).populate("conductor");
       });
 
       const busPopulate = await Promise.all(busPopulatePromesas);
