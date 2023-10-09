@@ -143,7 +143,12 @@ const httpRuta = {
         { estado: 0 },
         { new: true }
       );
-      res.json({ ruta });
+      const rutasPopulate = await Ruta.findById(ruta._id)
+        .populate("ciudad_origen")
+        .populate("ciudad_destino")
+        .populate("bus");
+
+      res.json({ rutasPopulate });
     } catch (error) {
       res.status(400).json({ error });
     }
@@ -156,7 +161,12 @@ const httpRuta = {
         { estado: 1 },
         { new: true }
       );
-      res.json({ ruta });
+      const rutasPopulate = await Ruta.findById(ruta._id)
+        .populate("ciudad_origen")
+        .populate("ciudad_destino")
+        .populate("bus");
+
+      res.json({ rutasPopulate });
     } catch (error) {
       res.status(400).json({ error });
     }
