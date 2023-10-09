@@ -28,6 +28,7 @@ router.post(
   ], httpBus.postNuevoBus);
 
 router.put("/editar", httpBus.putBus)
-router.put("activar/:id", httpBus.putBusActivar)
-router.put("inactivar/:id", httpBus.putBusInactivar)
+router.put("/activar/:id", httpBus.putBusActivar)
+router.put("/inactivar/:id", httpBus.putBusInactivar)
+router.delete("/borrar/:id", httpBus.deleteBusId)
 export default router 
