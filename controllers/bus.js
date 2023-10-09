@@ -32,8 +32,8 @@ const httpbus = {
   //POST
   postNuevoBus: async (req, res) => {
     try {
-      const { empresa, asiento, placa, Conductor } = req.body;
-      const bus = new Bus({ empresa, asiento, placa, Conductor });
+      const { empresa, asiento, placa, conductor } = req.body;
+      const bus = new Bus({ empresa, asiento, placa, conductor });
       await bus.save();
       const busPopulate = await Bus.findById(bus._id).populate("Conductor");
 
