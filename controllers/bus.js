@@ -94,7 +94,7 @@ const httpbus = {
     }
   },
 
-  deleteBusId: async () => {
+  deleteBusId: async (req, res) => {
     try {
       const { id } = req.params;
       const bus = await Bus.findByIdAndDelete(id);
