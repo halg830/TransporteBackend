@@ -6,7 +6,7 @@ const httpbus = {
     try {
       const bus = await Bus.find();
       const busPopulatePromesas = bus.map(async (e) => {
-        return await Bus.findById(e._id).populate("conductor");
+        return await Bus.findById(e._id).populate("Conductor");
       });
 
       const busPopulate = await Promise.all(busPopulatePromesas);
@@ -32,10 +32,10 @@ const httpbus = {
   //POST
   postNuevoBus: async (req, res) => {
     try {
-      const { empresa, asiento, placa, conductor } = req.body;
-      const bus = new Bus({ empresa, asiento, placa, conductor });
+      const { empresa, asiento, placa, Conductor } = req.body;
+      const bus = new Bus({ empresa, asiento, placa, Conductor });
       await bus.save();
-      const busPopulate = await Ruta.findById(bus._id).populate("conductor");
+      const busPopulate = await Ruta.findById(bus._id).populate("Conductor");
 
       res.json({ busPopulate });
     } catch (error) {
@@ -52,7 +52,7 @@ const httpbus = {
         { empresa, asiento, placa },
         { new: true }
       );
-      const busPopulate = await Ruta.findById(bus._id).populate("conductor");
+      const busPopulate = await Ruta.findById(bus._id).populate("Conductor");
 
       res.json({ busPopulate });
     } catch (error) {
@@ -64,7 +64,7 @@ const httpbus = {
     try {
       const { id } = req.params;
       const bus = await Bus.findByIdAndUpdate(id, { estado: 0 }, { new: true });
-      const busPopulate = await Ruta.findById(bus._id).populate("conductor");
+      const busPopulate = await Ruta.findById(bus._id).populate("Conductor");
 
       res.json({ busPopulate });
     } catch (error) {
@@ -75,7 +75,7 @@ const httpbus = {
     try {
       const { id } = req.params;
       const bus = await Bus.findByIdAndUpdate(id, { estado: 1 }, { new: true });
-      const busPopulate = await Ruta.findById(bus._id).populate("conductor");
+      const busPopulate = await Ruta.findById(bus._id).populate("Conductor");
 
       res.json({ busPopulate });
     } catch (error) {
