@@ -86,7 +86,12 @@ const httpRuta = {
         bus,
       });
       await ruta.save();
-      res.json({ ruta });
+      const rutasPopulate = await Ruta.findById(ruta._id)
+        .populate("ciudad_origen")
+        .populate("ciudad_destino")
+        .populate("bus");
+
+      res.json({ rutasPopulate });
     } catch (error) {
       res.status(400).json({ error });
     }
