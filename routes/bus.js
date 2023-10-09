@@ -27,5 +27,7 @@ router.post(
     validarCampos
   ], httpBus.postNuevoBus);
 
-router.put("/editar/:id", httpBus.putBus)
+router.put("/editar", httpBus.putBus)
+router.put("activar/:id", httpBus.putBusActivar)
+router.put("inactivar/:id", httpBus.putBusInactivar)
 export default router 
