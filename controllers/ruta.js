@@ -107,15 +107,23 @@ const httpRuta = {
 
       const ruta = await Ruta.findByIdAndUpdate(
         id,
-        { ciudad_origen,
+        {
+          ciudad_origen,
           ciudad_destino,
           hora_salida,
           fecha_salida,
           valor,
-          bus, },
+          bus,
+        },
         { new: true }
       );
-      res.json({ ruta });
+
+      const rutasPopulate = await Ruta.findById(ruta._id)
+        .populate("ciudad_origen")
+        .populate("ciudad_destino")
+        .populate("bus");
+
+      res.json({ rutasPopulate });
     } catch (error) {
       console.log(error);
       res.status(400).json({ error });
