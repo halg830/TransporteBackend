@@ -104,7 +104,7 @@ deleteConductor: async (req, res) => {
 
 },
 
-deleteConductorId: async () => {
+deleteConductorId: async (req, res) => {
     try {
         const { id } = req.params
         const conductor = await Conductor.findByIdAndDelete(id)
