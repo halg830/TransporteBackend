@@ -108,7 +108,7 @@ deleteConductorId: async (req, res) => {
     try {
         const { id } = req.params
         const conductor = await Conductor.findByIdAndDelete(id)
-        res.json({ msg:"Eliminado el conductor" })
+        res.json({ conductor })
     } catch (error) {
         res.status(400).json({ error })
     }
