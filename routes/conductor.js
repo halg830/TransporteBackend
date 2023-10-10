@@ -35,7 +35,7 @@ router.put("/desactivar/:id", httpConductor.putConductorInactivar)
 
 router.put("/activar/:id", httpConductor.putConductorActivar)
 
-router.delete("/eliminar/:cedula",  httpConductor.deleteConductor);
+// router.delete("/eliminar/:cedula",  httpConductor.deleteConductor);
 
 router.delete("/eliminar/:id",  httpConductor.deleteConductorId);
 
