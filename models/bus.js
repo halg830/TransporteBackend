@@ -6,7 +6,7 @@ const Bus = new Schema({
   empresa: { type: String, require: true },
   asiento: { type: Number, require: true },
   placa: { type: String, unique:true, maxlength: 7 },
-  conductor: { type: mongoose.Schema.Types.ObjectId, ref: "conductor", require:true },
+  conductor: { type: mongoose.Schema.Types.ObjectId, ref: "Conductor" },
   createdAt: { type: Date, default: Date.now },
   estado: { type: Number, default: 1 },
 });
