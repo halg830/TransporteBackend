@@ -10,7 +10,7 @@ const httpRuta = {
         return await Ruta.findById(e._id)
           .populate("ciudad_origen")
           .populate("ciudad_destino")
-          .populate("bu"); 
+          .populate("bus"); 
       });
 
       const rutasPopulate = await Promise.all(rutasPopulatePromesas);
