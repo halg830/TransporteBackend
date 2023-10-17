@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const Tiquete = new Schema({
-  vendedor: { type: mongoose.Schema.Types.ObjectId, ref: "vendedor" },
-  ruta: { type: mongoose.Schema.Types.ObjectId, ref: "ruta" },
-  cliente: { type: mongoose.Schema.Types.ObjectId, ref: "cliente" },
+  vendedor: { type: mongoose.Schema.Types.ObjectId, ref: "Vendedor" },
+  ruta: { type: mongoose.Schema.Types.ObjectId, ref: "Ruta" },
+  cliente: { type: mongoose.Schema.Types.ObjectId, ref: "Cliente" },
   createdAt: { type: Date, default: Date.now },
   estado: { type: Number, default: 1 },
 });

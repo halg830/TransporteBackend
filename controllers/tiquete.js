@@ -6,8 +6,18 @@ const httpTiquete = {
     getAllTiquete: async (req, res) => {
         try {
             const tiquete = await Tiquete.find();
-            res.json({ tiquete });
+            const tiquetePopulatePromesas = tiquete.map(async (e) => {
+                return await Tiquete.findById(e._id)
+                  .populate("cliente")
+                  .populate("ruta")
+                  .populate("vendedor"); 
+              });
+        
+              const tiquetePopulate = await Promise.all(tiquetePopulatePromesas);
+        
+              res.json({ tiquetePopulate });
         } catch (error) {
+            console.log(error);
             res.status(400).json({ error });
         }
     },
