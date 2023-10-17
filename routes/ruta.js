@@ -35,4 +35,6 @@ router.put("/inactivar/:id", httpRuta.putRutaInactivar)
 
 router.put("/activar/:id", httpRuta.putRutaActivar)
 
+router.delete("/eliminar/:id", httpRuta.deleteRutaId)
+
 export default router

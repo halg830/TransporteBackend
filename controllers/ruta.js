@@ -183,7 +183,7 @@ const httpRuta = {
     }
   },
 
-  deleteRutaId: async () => {
+  deleteRutaId: async (req, res) => {
     try {
       const { id } = req.params;
       const ruta = await Ruta.findByIdAndDelete(id);
