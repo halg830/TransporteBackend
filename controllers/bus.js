@@ -23,7 +23,9 @@ const httpbus = {
       const { id } = req.params;
       const bus = await Bus.findById(id);
 
-      res.json({ bus });
+      const busPopulate = await Bus.findById(bus._id).populate("Conductor");
+
+      res.json({ busPopulate });
     } catch (error) {
       res.status(400).json({ error });
     }

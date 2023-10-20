@@ -10,6 +10,16 @@ const httpCiudad = {
             res.status(400).json({ error })
         }
     },
+    getCiudadId: async (req, res) => {
+      try {
+        const { id } = req.params;
+        const ciudad = await Ciudad.findById(id);
+  
+        res.json({ ciudad });
+      } catch (error) {
+        res.status(400).json({ error });
+      }
+    },
 
     postCiudad: async (req, res) => {
         try {
