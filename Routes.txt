@@ -1,0 +1,13 @@
+GET
+/all
+/buscar/:id
+
+POST
+/guardar
+
+PUT
+/editar/:id
+/activar/:id
+/inactivar/:id
+
+/borrar/:id

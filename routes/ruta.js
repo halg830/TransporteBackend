@@ -8,12 +8,12 @@ import helpersRuta from "../helpers/ruta.js"
 
 const router = new Router();
 
-router.get("/cargar", httpRuta.getAllRuta);
+router.get("/all", httpRuta.getAllRuta);
 
-router.get("/rutasBus/:id", httpRuta.getRutasBus)
+router.get("/buscar/:id", httpRuta.getRutasBus)
 
 router.post(
-  "/nuevo",
+  "/guardar",
   [
     check("ciudad_origen", "ciudad duplicada").custom(helpersRuta.ciudadRepetida),
     check("ciudad_origen", "Debe indicar el id de la ciudad de origen.").isMongoId(),
@@ -29,12 +29,12 @@ router.post(
   httpRuta.postRuta
 );
 
-router.put("/editar", httpRuta.putRuta)
+router.put("/editar/:id", httpRuta.putRuta)
 
 router.put("/inactivar/:id", httpRuta.putRutaInactivar)
 
 router.put("/activar/:id", httpRuta.putRutaActivar)
 
-router.delete("/eliminar/:id", httpRuta.deleteRutaId)
+router.delete("/borrar/:id", httpRuta.deleteRutaId)
 
 export default router

@@ -8,15 +8,15 @@ import { validarJWT } from "../miderwars/validar-jwt.js";
 
 const router = new Router();
 
-router.get("/allVendedor", httpVendedor.getAllVendedor);
+router.get("/all", httpVendedor.getAllVendedor);
 
-router.get("/buscar/:cedula",validarJWT, httpVendedor.getVendedorCedula);
+// router.get("/buscar/:cedula",validarJWT, httpVendedor.getVendedorCedula);
 
-router.get("/buscarId/:id", validarJWT, httpVendedor.getVendedorId)
+router.get("/buscar/:id", validarJWT, httpVendedor.getVendedorId)
 
-router.delete("/eliminar/:cedula", validarJWT, httpVendedor.deleteVendedor);
+// router.delete("/eliminar/:cedula", validarJWT, httpVendedor.deleteVendedor);
 
-router.delete("/eliminar/:id", validarJWT, httpVendedor.deleteVendedor);
+router.delete("/borrar/:id", validarJWT, httpVendedor.deleteVendedor);
 
 router.post("/login", httpVendedor.login)
 
@@ -41,7 +41,7 @@ router.post(
   httpVendedor.postVendedor
 );
 
-router.put("/modificar/:id",[
+router.put("/editar/:id",[
   check("nombre", "El nombre es obligatorio").notEmpty(),
   check("nombre", "El nombre debe tener minimo 8 caracteres").isLength({min: 8}),
   check("apellido", "El apellido es obligatorio").notEmpty(),

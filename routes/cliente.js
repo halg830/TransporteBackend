@@ -10,9 +10,9 @@ const router = new Router();
 
 router.get("/all", httpCliente.getAllCliente);
 
-router.get("/buscar/:cedula", httpCliente.getClienteCedula);
+// router.get("/buscar/:cedula", httpCliente.getClienteCedula);
 
-router.get("/cliente/:id", httpCliente.getClienteId)
+router.get("/buscar/:id", httpCliente.getClienteId)
  
 router.post(
   "/guardar",
@@ -32,7 +32,7 @@ router.post(
   httpCliente.postCliente
   );  
 
-router.put("/editar/", [
+router.put("/editar/:id", [
   check("id", "Es necesario ingresar un id").isMongoId(),
   check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("nombre", "Máximo 15 caracteres").isLength({ max: 15 }),
@@ -45,6 +45,6 @@ router.put("/activar/:id", httpCliente.putClienteActivar)
 
 router.delete("/eliminar/:cedula", httpCliente.deleteCliente)
 
-router.delete("/eliminar/:id", httpCliente.deleteClienteId)
+router.delete("/borrar/:id", httpCliente.deleteClienteId)
 
 export default router;

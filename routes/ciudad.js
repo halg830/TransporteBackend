@@ -7,7 +7,7 @@ import helpersCiudad from "../helpers/ciudad.js";
 
 const router = new Router();
 
-router.get("/cargar", httpCiudad.getCiudades);
+router.get("/all", httpCiudad.getCiudades);
 
 router.post(
   "/guardar",
@@ -18,5 +18,8 @@ router.post(
   ],
   httpCiudad.postCiudad
 );
+
+router.put("/activar/:id", httpCiudad.putCiudadActivar)
+router.put("/inactivar/:id", httpCiudad.putCiudadInactivar)
 
 export default router

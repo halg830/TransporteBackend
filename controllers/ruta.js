@@ -100,8 +100,8 @@ const httpRuta = {
   //PUT
   putRuta: async (req, res) => {
     try {
+      const {id} = req.params
       const {
-        id,
         ciudad_origen,
         ciudad_destino,
         hora_salida,

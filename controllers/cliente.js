@@ -64,7 +64,8 @@ const httpCliente = {
   //PUT
   putCliente: async (req, res) => {
     try {
-      const {id, nombre } = req.body
+      const {id} = req.params
+      const {nombre } = req.body
       const cliente = await Cliente.findByIdAndUpdate(id, { nombre }, { new: true });
       res.json({ cliente })
     } catch (error) {

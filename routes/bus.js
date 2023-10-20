@@ -9,10 +9,10 @@ const router = new Router();
 
 router.get("/all", httpBus.getAllBus);
 
-router.get("/buscarbus/:id", httpBus.getBusId);
+router.get("/buscar/:id", httpBus.getBusId);
 
 router.post(
-  "/nuevo",
+  "/guardar",
   [
     check("empresa", "debe especificar la empresa").not().isEmpty(),
     check("asiento", "debe especificar el asiento").not().isEmpty(),
@@ -27,7 +27,7 @@ router.post(
     validarCampos
   ], httpBus.postNuevoBus);
 
-router.put("/editar", httpBus.putBus)
+router.put("/editar/:id", httpBus.putBus)
 router.put("/activar/:id", httpBus.putBusActivar)
 router.put("/inactivar/:id", httpBus.putBusInactivar)
 router.delete("/borrar/:id", httpBus.deleteBusId)

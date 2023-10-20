@@ -23,6 +23,25 @@ const httpCiudad = {
             res.status(400).json({ error })
         }
     },
+
+    putCiudadInactivar: async (req, res) => {
+        try {
+          const { id } = req.params;
+          const ciudad = await Ciudad.findByIdAndUpdate(id, { estado: 0 }, { new: true });
+          res.json({ciudad})
+        } catch (error) {
+          res.status(400).json({ error });
+        }
+      },
+      putCiudadActivar: async (req, res) => {
+        try {
+          const { id } = req.params;
+          const ciudad = await Ciudad.findByIdAndUpdate(id, { estado: 1 }, { new: true });
+          res.json({ciudad})
+        } catch (error) {
+          res.status(400).json({ error });
+        }
+      },
 } 
 
 export default httpCiudad;

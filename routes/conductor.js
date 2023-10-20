@@ -8,9 +8,9 @@ import helpersConductor from "../helpers/conductor.js";
 
 const router = new Router();
 
-router.get("/cargar", httpConductor.getAllConductor)
+router.get("/all", httpConductor.getAllConductor)
 
-router.post("/agregar",
+router.post("/guardar",
   [
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
@@ -21,11 +21,11 @@ router.post("/agregar",
   ], httpConductor.postConductor
 );
 
-router.get("/buscar/:cedula", httpConductor.getConductorCedula);
+// router.get("/buscar/:cedula", httpConductor.getConductorCedula);
 
-router.get("/buscarId/:id",  httpConductor.getConductorId)
+router.get("/buscar/:id",  httpConductor.getConductorId)
 
-router.put("/modificar/:id",[
+router.put("/editar/:id",[
   check("nombre", "El nombre es obligatorio").notEmpty(),
   check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
   validarCampos
@@ -37,7 +37,7 @@ router.put("/activar/:id", httpConductor.putConductorActivar)
 
 // router.delete("/eliminar/:cedula",  httpConductor.deleteConductor);
 
-router.delete("/eliminar/:id",  httpConductor.deleteConductorId);
+router.delete("/borrar/:id",  httpConductor.deleteConductorId);
 
 
 export default router

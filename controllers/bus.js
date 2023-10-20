@@ -46,7 +46,8 @@ const httpbus = {
   //PUT
   putBus: async (req, res) => {
     try {
-      const {id, empresa, asiento, placa } = req.body;
+      const {id} = req.params
+      const {empresa, asiento, placa } = req.body;
       const bus = await Bus.findByIdAndUpdate(
         id,
         { empresa, asiento, placa },
