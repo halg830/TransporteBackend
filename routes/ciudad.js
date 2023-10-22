@@ -21,7 +21,7 @@ router.post(
   httpCiudad.postCiudad
 );
 
-router.put("editar/:id", httpCiudad)
+router.put("editar/:id", httpCiudad.putCiudad)
 router.put("/activar/:id", httpCiudad.putCiudadActivar)
 router.put("/inactivar/:id", httpCiudad.putCiudadInactivar)
 
