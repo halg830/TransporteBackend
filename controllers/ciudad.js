@@ -15,7 +15,7 @@ const httpCiudad = {
         const { id } = req.params;
         const ciudad = await Ciudad.findById(id);
   
-        res.json({ ciudad });
+        res.json(ciudad);
       } catch (error) {
         res.status(400).json({ error });
       }
@@ -28,17 +28,33 @@ const httpCiudad = {
 
             await ciudad.save()
 
-            res.json({ciudad})
+            res.json(ciudad)
         } catch (error) {
             res.status(400).json({ error })
         }
+    },
+
+    putCiudad: async (req, res) => {
+      try {
+        const {id} = req.params
+        const {nombre } = req.body;
+        const ciudad = await Ciudad.findByIdAndUpdate(
+          id,
+          { nombre },
+          { new: true }
+        );
+  
+        res.json(ciudad);
+      } catch (error) {
+        res.status(400).json({ error });
+      }
     },
 
     putCiudadInactivar: async (req, res) => {
         try {
           const { id } = req.params;
           const ciudad = await Ciudad.findByIdAndUpdate(id, { estado: 0 }, { new: true });
-          res.json({ciudad})
+          res.json(ciudad)
         } catch (error) {
           res.status(400).json({ error });
         }
@@ -47,7 +63,7 @@ const httpCiudad = {
         try {
           const { id } = req.params;
           const ciudad = await Ciudad.findByIdAndUpdate(id, { estado: 1 }, { new: true });
-          res.json({ciudad})
+          res.json(ciudad)
         } catch (error) {
           res.status(400).json({ error });
         }
