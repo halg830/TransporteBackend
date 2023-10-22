@@ -20,7 +20,7 @@ router.post(
     check("ciudad_destino", "Debe indicar el id de la ciudad de destino.").isMongoId(),
     check("hora_salida", "La hora es obligatoria").notEmpty(),
     // check("hora_salida", "Debe escribir el formato correcto").isDate(),
-    check("fecha_salida", "La fecha es obligatoria").notEmpty(),
+    
     // check("fecha_salida", "Debe escribir el formato correcto").isDate(),
     check("valor", "El valor es obligatoria").notEmpty(),
     check("bus", "Debe indicar el id del bus").isMongoId(),
