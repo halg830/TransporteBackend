@@ -31,7 +31,7 @@ router.put("/editar/:id",[
   validarCampos
 ],  httpConductor.putConductor)
 
-router.put("/desactivar/:id", httpConductor.putConductorInactivar)
+router.put("/inactivar/:id", httpConductor.putConductorInactivar)
 
 router.put("/activar/:id", httpConductor.putConductorActivar)
 
