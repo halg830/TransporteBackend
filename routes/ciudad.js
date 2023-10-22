@@ -9,6 +9,8 @@ const router = new Router();
 
 router.get("/all", httpCiudad.getCiudades);
 
+router.get("/buscar/:id", httpCiudad.getCiudadId)
+
 router.post(
   "/guardar",
   [
