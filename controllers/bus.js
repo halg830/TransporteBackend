@@ -35,7 +35,7 @@ const httpbus = {
       const { empresa, asiento, placa, conductor } = req.body;
       const bus = new Bus({ empresa, asiento, placa, conductor });
       await bus.save();
-      const busPopulate = await Bus.findById(bus._id).populate("Conductor");
+      const busPopulate = await Bus.findById(bus._id).populate("conductor");
 
       res.json({ busPopulate });
     } catch (error) {
@@ -53,7 +53,7 @@ const httpbus = {
         { empresa, asiento, placa },
         { new: true }
       );
-      const busPopulate = await Bus.findById(bus._id).populate("Conductor");
+      const busPopulate = await Bus.findById(bus._id).populate("conductor");
 
       res.json({ busPopulate });
     } catch (error) {
@@ -65,7 +65,7 @@ const httpbus = {
     try {
       const { id } = req.params;
       const bus = await Bus.findByIdAndUpdate(id, { estado: 0 }, { new: true });
-      const busPopulate = await Bus.findById(bus._id).populate("Conductor");
+      const busPopulate = await Bus.findById(bus._id).populate("conductor");
 
       res.json({ busPopulate });
     } catch (error) {
@@ -76,7 +76,7 @@ const httpbus = {
     try {
       const { id } = req.params;
       const bus = await Bus.findByIdAndUpdate(id, { estado: 1 }, { new: true });
-      const busPopulate = await Bus.findById(bus._id).populate("Conductor");
+      const busPopulate = await Bus.findById(bus._id).populate("conductor");
 
       res.json({ busPopulate });
     } catch (error) {

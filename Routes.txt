@@ -10,4 +10,5 @@ PUT
 /activar/:id
 /inactivar/:id
 
+DELETE
 /borrar/:id
