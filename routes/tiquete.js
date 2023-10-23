@@ -17,7 +17,8 @@ router.post("/guardar", [
     check("ruta", "Debe ingresar el id del ruta").isMongoId(),
     check("cliente", "Debe ingresar el id del cliente").isMongoId(),
     check("fecha_salida", "La fecha es obligatoria").notEmpty(),
-], httpTiquete.postTiquete);
+    validarCampos
+], httpTiquete.postTiquete); 
 
 // router.get("/buscar/:cedula", httpTiquete.getTiqueteCedula);
 

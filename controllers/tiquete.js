@@ -91,8 +91,8 @@ const httpTiquete = {
   //POST
   postTiquete: async (req, res) => {
     try {
-      const { vendedor, ruta, cliente } = req.body;
-      const tiquete = new Tiquete({ vendedor, ruta, cliente });
+      const { vendedor, ruta, cliente, fecha_salida } = req.body;
+      const tiquete = new Tiquete({ vendedor, ruta, cliente, fecha_salida });
 
       await tiquete.save();
 
@@ -102,7 +102,7 @@ const httpTiquete = {
         .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_origen", path: "ciudad_destino"} });
 
       res.json({ tiquetePopulate });
-    } catch (error) {
+    } catch (error) { 
         console.log(error);
       res.status(400).json({ error });
     }
@@ -112,7 +112,7 @@ const httpTiquete = {
   putTiquete: async (req, res) => {
     try {
       const { id } = req.params;
-      const { nombre, apellido, telefono, contrasena } = req.body;
+      const { nombre, apellido, telefono, contrasena, fecha_salida } = req.body;
 
       const salt = bcryptjs.genSaltSync();
       const newContrasena = bcryptjs.hashSync(contrasena, salt);
