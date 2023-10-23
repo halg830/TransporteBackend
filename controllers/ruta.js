@@ -72,7 +72,6 @@ const httpRuta = {
         ciudad_origen,
         ciudad_destino,
         hora_salida,
-        fecha_salida,
         valor,
         bus,
       } = req.body;
@@ -81,7 +80,6 @@ const httpRuta = {
         ciudad_origen,
         ciudad_destino,
         hora_salida,
-        fecha_salida,
         valor,
         bus,
       });
@@ -105,7 +103,6 @@ const httpRuta = {
         ciudad_origen,
         ciudad_destino,
         hora_salida,
-        fecha_salida,
         valor,
         bus,
       } = req.body;
@@ -116,7 +113,6 @@ const httpRuta = {
           ciudad_origen,
           ciudad_destino,
           hora_salida,
-          fecha_salida,
           valor,
           bus,
         },

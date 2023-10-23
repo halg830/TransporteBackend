@@ -24,7 +24,6 @@ router.post(
   "/agregar",
   [
     check("nombre", "El nombre es obligatorio").notEmpty(),
-    check("nombre", "El nombre debe tener minimo 8 caracteres").isLength({min: 8}),
     check("apellido", "El apellido es obligatorio").notEmpty(),
     check("cedula", "La cedula es obligatorio").notEmpty(),
     check("cedula", "La cedula debe tener 10 digitos").isLength({max: 10,min: 10}),
