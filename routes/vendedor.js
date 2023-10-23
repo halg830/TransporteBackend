@@ -48,9 +48,9 @@ router.put("/editar/:id",[
   check("contrasena", "La contraseña es obligatoria").notEmpty(),
   check("contrasena","La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
   validarCampos
-], validarJWT, httpVendedor.putVendedor)
+], httpVendedor.putVendedor)
 
-router.put("/inactivar/:id", validarJWT, httpVendedor.putVendedorInactivar)
+router.put("/inactivar/:id", httpVendedor.putVendedorInactivar)
 
 router.put("/activar/:id", httpVendedor.putVendedorActivar)
 
