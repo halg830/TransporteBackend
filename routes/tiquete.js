@@ -23,11 +23,11 @@ router.post("/guardar", [
 
 // router.get("/buscar/:id",  httpTiquete.getTiqueteId)
 
-router.delete("/eliminar/:cedula",  httpTiquete.deleteTiquete);
+router.delete("/borrar/:id",  httpTiquete.deleteTiqueteId);
 
 router.put("/editar/:id",  httpTiquete.putTiquete)
 
-router.put("/desactivar/:id", httpTiquete.putTiqueteInactivar)
+router.put("/inactivar/:id", httpTiquete.putTiqueteInactivar)
 
 router.put("/activar/:id", httpTiquete.putTiqueteActivar)
 
