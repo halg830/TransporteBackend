@@ -1,4 +1,3 @@
-import tiquete from "../models/tiquete.js";
 import Tiquete from "../models/tiquete.js";
 
 const httpTiquete = {
@@ -8,7 +7,7 @@ const httpTiquete = {
       const tiquetePopulatePromesas = tiquete.map(async (e) => {
         return await Tiquete.findById(e._id)
           .populate("cliente")
-          .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_origen", path: "ciudad_destino" } })
+          .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_destino" } })
           .populate("vendedor");
       });
 
@@ -34,7 +33,7 @@ const httpTiquete = {
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_origen", path: "ciudad_destino" } });
+        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_destino" } });
 
       res.json({ tiquetePopulate });
     } catch (error) {
@@ -50,7 +49,7 @@ const httpTiquete = {
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_origen", path: "ciudad_destino" } });
+        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_destino" } });
 
       res.json({ tiquetePopulate });
     } catch (error) {
@@ -99,7 +98,7 @@ const httpTiquete = {
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_origen", path: "ciudad_destino"} });
+        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_destino"} });
 
       res.json({ tiquetePopulate });
     } catch (error) { 
@@ -112,20 +111,17 @@ const httpTiquete = {
   putTiquete: async (req, res) => {
     try {
       const { id } = req.params;
-      const { nombre, apellido, telefono, contrasena, fecha_salida } = req.body;
-
-      const salt = bcryptjs.genSaltSync();
-      const newContrasena = bcryptjs.hashSync(contrasena, salt);
+      const { vendedor, ruta, cliente, fecha_salida } = req.body;
 
       const tiquete = await Tiquete.findByIdAndUpdate(
         id,
-        { nombre, apellido, telefono, newContrasena },
+        { vendedor, ruta, cliente, fecha_salida },
         { new: true }
       );
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_origen", path: "ciudad_destino" } });
+        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_destino" } });
 
       res.json({ tiquetePopulate });
     } catch (error) {
@@ -144,7 +140,7 @@ const httpTiquete = {
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_origen", path: "ciudad_destino" } });
+        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_destino" } });
 
       res.json({ tiquetePopulate });
     } catch (error) {
@@ -162,7 +158,7 @@ const httpTiquete = {
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_origen", path: "ciudad_destino" } });
+        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_destino" } });
 
       res.json({ tiquetePopulate });
     } catch (error) {
