@@ -21,7 +21,7 @@ router.delete("/borrar/:id", validarJWT, httpVendedor.deleteVendedor);
 router.post("/login", httpVendedor.login)
 
 router.post(
-  "/agregar",
+  "/guardar",
   [
     check("nombre", "El nombre es obligatorio").notEmpty(),
     check("apellido", "El apellido es obligatorio").notEmpty(),
@@ -51,7 +51,7 @@ router.put("/editar/:id",[
   validarCampos
 ], validarJWT, httpVendedor.putVendedor)
 
-router.put("/desactivar/:id", validarJWT, httpVendedor.putVendedorInactivar)
+router.put("/inactivar/:id", validarJWT, httpVendedor.putVendedorInactivar)
 
 router.put("/activar/:id", httpVendedor.putVendedorActivar)
 
