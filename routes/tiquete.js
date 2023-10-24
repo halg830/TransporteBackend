@@ -3,6 +3,7 @@ import httpTiquete from "../controllers/tiquete.js";
 import { check } from "express-validator";
 import { mongo } from "mongoose";
 import { validarCampos } from "../miderwars/validar.js";
+import helpersTiquete from "../helpers/tiquete.js";
 
 const router = new Router();
 
@@ -13,6 +14,8 @@ router.get("/buscar/:id", httpTiquete.getTiqueteId)
 router.get("/filtrarFechas/:fechaA/:fechaB", httpTiquete.getFiltroFechas)
 
 router.post("/guardar", [
+    check("num_asiento", "Debe ingresar un asiento").notEmpty(),
+    check("num_asiento", "Debe ingresar un asiento").custom(helpersTiquete.validarAsiento),
     check("vendedor", "Debe ingresar el id del vendedor").isMongoId(),
     check("ruta", "Debe ingresar el id del ruta").isMongoId(),
     check("cliente", "Debe ingresar el id del cliente").isMongoId(),

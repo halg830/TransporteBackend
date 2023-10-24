@@ -7,6 +7,7 @@ const Tiquete = new Schema({
   ruta: { type: mongoose.Schema.Types.ObjectId, ref: "Ruta" },
   cliente: { type: mongoose.Schema.Types.ObjectId, ref: "Cliente" },
   fecha_salida: { type: Date, required: true },
+  num_asiento: {type:String, required: true},
   createdAt: { type: Date, default: Date.now },
   estado: { type: Number, default: 1 },
 });

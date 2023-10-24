@@ -90,15 +90,15 @@ const httpTiquete = {
   //POST
   postTiquete: async (req, res) => {
     try {
-      const { vendedor, ruta, cliente, fecha_salida } = req.body;
-      const tiquete = new Tiquete({ vendedor, ruta, cliente, fecha_salida });
+      const { vendedor, ruta, cliente, fecha_salida, num_asiento } = req.body;
+      const tiquete = new Tiquete({ vendedor, ruta, cliente, fecha_salida, num_asiento });
 
       await tiquete.save();
 
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: { path: "bus", path: "ciudad_destino"} });
+        .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}] });
 
       res.json({ tiquetePopulate });
     } catch (error) { 
