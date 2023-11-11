@@ -111,11 +111,11 @@ const httpTiquete = {
   putTiquete: async (req, res) => {
     try {
       const { id } = req.params;
-      const { vendedor, ruta, cliente, fecha_salida } = req.body;
+      const { vendedor, ruta, cliente, fecha_salida, asiento } = req.body;
 
       const tiquete = await Tiquete.findByIdAndUpdate(
         id,
-        { vendedor, ruta, cliente, fecha_salida },
+        { vendedor, ruta, cliente, fecha_salida, asiento },
         { new: true }
       );
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
