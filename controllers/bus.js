@@ -49,10 +49,10 @@ const httpbus = {
   putBus: async (req, res) => {
     try {
       const {id} = req.params
-      const {empresa, asiento, placa } = req.body;
+      const {empresa, conductor, asiento } = req.body;
       const bus = await Bus.findByIdAndUpdate(
         id,
-        { empresa, asiento, placa },
+        { empresa, asiento, conductor },
         { new: true }
       );
       const busPopulate = await Bus.findById(bus._id).populate("conductor");
