@@ -10,7 +10,7 @@ const router = new Router();
 
 router.get("/all", httpCliente.getAllCliente);
 
-// router.get("/buscar/:cedula", httpCliente.getClienteCedula);
+router.get("/buscarCC/:cedula", httpCliente.getClienteCedula);
 
 router.get("/buscar/:id", httpCliente.getClienteId)
  
