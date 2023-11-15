@@ -64,12 +64,12 @@ const httpVendedor = {
     putVendedor: async (req, res) => {
         try {
             const { id } = req.params
-            const { nombre, apellido, telefono, contrasena } = req.body
+            const { nombre, apellido, telefono, contrasena, cedula } = req.body
 
             const salt = bcryptjs.genSaltSync()
             const newContrasena = bcryptjs.hashSync(contrasena, salt)
 
-            const vendedor = await Vendedor.findByIdAndUpdate(id, { nombre, apellido, telefono, newContrasena }, { new: true });
+            const vendedor = await Vendedor.findByIdAndUpdate(id, { nombre, apellido, telefono, newContrasena, cedula }, { new: true });
             res.json({ vendedor })
         } catch (error) {
             res.status(400).json({ error })
