@@ -13,6 +13,8 @@ router.get("/buscar/:id", httpTiquete.getTiqueteId)
 
 router.get("/filtrarFechas/:fechaA/:fechaB", httpTiquete.getFiltroFechas)
 
+router.get("/asientosOcupados/:id/:fecha_salida", httpTiquete.getAsientosOcupados)
+
 router.post("/guardar", [
     check("num_asiento", "Debe ingresar un asiento").notEmpty(),
     check("num_asiento", "Debe ingresar un asiento").custom(helpersTiquete.validarAsiento),

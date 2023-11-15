@@ -87,6 +87,18 @@ const httpTiquete = {
     }
   },
 
+  getAsientosOcupados: async(req, res)=>{
+    try {
+      const {id, fecha_salida} = req.params //Id de la ruta
+
+      const asientos = await Tiquete.find({ $and: [{ruta:id}, {fecha_salida}]})
+
+      res.json(asientos)
+    } catch (error) {
+      res.status(400).json({error})
+    }
+  },
+
   //POST
   postTiquete: async (req, res) => {
     try {
