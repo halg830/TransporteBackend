@@ -99,6 +99,24 @@ const httpTiquete = {
     }
   },
 
+  getContinuarVenta: async(req, res)=>{
+    try {
+      const ticketsBd = await Tiquete.find()
+
+      const tiquetePopulatePromesas = ticketsBd.map(async (e) => {
+        return await Tiquete.findById(e._id)
+          .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}] })
+      });
+
+      const tiquetePopulate = await Promise.all(tiquetePopulatePromesas);
+
+      const rutas = tiquetePopulate.map(t=>t.ruta)
+      res.json(rutas)
+    } catch (error) {
+      res.status(400).json({error})
+    }
+  },
+
   //POST
   postTiquete: async (req, res) => {
     try {
