@@ -110,7 +110,7 @@ const httpTiquete = {
 
       const tiquetePopulate = await Promise.all(tiquetePopulatePromesas);
 
-      const rutas = tiquetePopulate.map(t=>t.ruta)
+      const rutas = tiquetePopulate.map(t=>{return{ruta: t.ruta, fecha_salida:t.fecha_salida}})
       res.json(rutas)
     } catch (error) {
       res.status(400).json({error})
