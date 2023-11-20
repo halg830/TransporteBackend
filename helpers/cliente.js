@@ -12,6 +12,7 @@ const helpersCliente = {
   },
 
   existeCedula: async (cedula, req) => {
+    console.log("x", cedula)
     if (cedula) {
       const existe = await Cliente.findOne({ cedula });
       if (existe) {
