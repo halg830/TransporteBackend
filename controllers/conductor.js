@@ -58,7 +58,7 @@ postConductor: async (req, res) => {
 putConductor: async (req, res) => {
     try {
         const { id } = req.params
-        console.log(req.body)
+        console.log("c", req.body)
         const { nombre, cedula } = req.body
 
         const conductor = await Conductor.findByIdAndUpdate(id, { nombre, cedula }, { new: true });
