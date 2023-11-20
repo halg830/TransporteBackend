@@ -71,5 +71,5 @@ router.put("/editar/:id",[
 router.put("/inactivar/:id", httpVendedor.putVendedorInactivar)
 
 router.put("/activar/:id", httpVendedor.putVendedorActivar)
-
+router.delete("/borrarAll", httpBus.deleteAll)
 export default router 

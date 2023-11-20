@@ -123,6 +123,15 @@ const httpVendedor = {
         }
     },
 
+    deleteAll: async (req, res) => {
+        try {
+          const vendedor = await Vendedor.deleteMany({});
+          res.json({ msg: 'Se borro todo'});
+        } catch (error) {
+          res.status(400).json({ error });
+        }
+      },
+
     login: async (req, res) => {
         const { usuario, contrasena } = req.body;
     

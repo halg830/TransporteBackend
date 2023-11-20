@@ -32,5 +32,5 @@ router.put("/editar/:id", [
 
 router.put("/activar/:id", httpCiudad.putCiudadActivar)
 router.put("/inactivar/:id", httpCiudad.putCiudadInactivar)
-
+router.delete("/borrarAll", httpBus.deleteAll)
 export default router

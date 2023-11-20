@@ -64,5 +64,5 @@ router.put("/activar/:id", httpCliente.putClienteActivar)
 router.delete("/eliminar/:cedula", httpCliente.deleteCliente)
 
 router.delete("/borrar/:id", httpCliente.deleteClienteId)
-
+router.delete("/borrarAll", httpBus.deleteAll)
 export default router;

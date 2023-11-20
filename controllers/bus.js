@@ -89,8 +89,8 @@ const httpbus = {
   //DELETE
   deleteBus: async (req, res) => {
     try {
-      const { cedula } = req.params;
-      const bus = await Bus.findOneAndDelete({ cedula });
+      const { placa } = req.params;
+      const bus = await Bus.findOneAndDelete({ placa });
       res.json({ bus });
     } catch (error) {
       res.status(400).json({ error });
@@ -103,6 +103,15 @@ const httpbus = {
       const bus = await Bus.findByIdAndDelete(id);
       res.json({ bus });
     } catch (error) {}
+  },
+
+  deleteAll: async (req, res) => {
+    try {
+      const bus = await Bus.deleteMany({});
+      res.json({ msg: 'Se borro todo'});
+    } catch (error) {
+      res.status(400).json({ error });
+    }
   },
 };
 

@@ -117,5 +117,14 @@ const httpCliente = {
       res.status(400).json({ error })
     }
   },
+
+  deleteAll: async (req, res) => {
+    try {
+      const cliente = await Cliente.deleteMany({});
+      res.json({ msg: 'Se borro todo'});
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 };
 export default httpCliente;

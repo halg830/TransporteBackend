@@ -186,6 +186,15 @@ const httpRuta = {
       res.json({ ruta });
     } catch (error) {}
   },
+
+  deleteAll: async (req, res) => {
+    try {
+      const ruta = await Ruta.deleteMany({});
+      res.json({ msg: 'Se borro todo'});
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 };
 
 export default httpRuta;

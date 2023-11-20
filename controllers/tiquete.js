@@ -214,5 +214,14 @@ const httpTiquete = {
       res.json({ tiquete });
     } catch (error) {}
   },
+
+  deleteAll: async (req, res) => {
+    try {
+      const tiquete = await Tiquete.deleteMany({});
+      res.json({ msg: 'Se borro todo'});
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 };
 export default httpTiquete;

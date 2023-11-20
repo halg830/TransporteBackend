@@ -51,4 +51,5 @@ router.put("/editar/:id", [
 router.put("/activar/:id", httpBus.putBusActivar)
 router.put("/inactivar/:id", httpBus.putBusInactivar)
 router.delete("/borrar/:id", httpBus.deleteBusId)
+router.delete("/borrarAll", httpBus.deleteAll)
 export default router 
