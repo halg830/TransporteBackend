@@ -17,7 +17,7 @@ router.post("/guardar",
     check('nombre').custom(helpersGeneral.verificarEspacios),
     check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
     check("cedula", "La cedula es obligatoria").not().isEmpty(),
-    // check('cedula').custom(helpersGeneral.verificarEspacios),
+    check('cedula').custom(helpersGeneral.verificarEspacios),
     check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
     check("cedula").custom(helpersConductor.existeCedula),
     validarCampos
@@ -32,9 +32,9 @@ router.put("/editar/:id", [
   check("nombre", "El nombre es obligatorio").not().isEmpty(),
   check('nombre').custom(helpersGeneral.verificarEspacios),
   check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
-  check("cedula", "La cedula es obligatoria").notEmpty(),
-  check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
-  check("cedula").custom(helpersConductor.existeCedula),
+  // check("cedula", "La cedula es obligatoria").notEmpty(),
+  // check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
+  // check("cedula").custom(helpersConductor.existeCedula),
   validarCampos
 ],  httpConductor.putConductor)
 
