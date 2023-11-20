@@ -49,5 +49,5 @@ router.put("/inactivar/:id", httpRuta.putRutaInactivar)
 router.put("/activar/:id", httpRuta.putRutaActivar)
 
 router.delete("/borrar/:id", httpRuta.deleteRutaId)
-router.delete("/borrarAll", httpBus.deleteAll)
+router.delete("/borrarAll", httpRuta.deleteAll)
 export default router

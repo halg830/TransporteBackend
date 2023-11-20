@@ -47,5 +47,5 @@ router.put("/activar/:id", httpConductor.putConductorActivar)
 
 router.delete("/borrar/:id",  httpConductor.deleteConductorId);
 
-router.delete("/borrarAll", httpBus.deleteAll)
+router.delete("/borrarAll", httpConductor.deleteAll)
 export default router

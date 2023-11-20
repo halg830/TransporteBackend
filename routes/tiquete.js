@@ -61,5 +61,5 @@ router.put(
 router.put("/inactivar/:id", httpTiquete.putTiqueteInactivar);
 
 router.put("/activar/:id", httpTiquete.putTiqueteActivar);
-router.delete("/borrarAll", httpBus.deleteAll)
+router.delete("/borrarAll", httpTiquete.deleteAll)
 export default router;
