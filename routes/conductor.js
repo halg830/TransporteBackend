@@ -33,7 +33,6 @@ router.put("/editar/:id", [
   check('nombre').custom(helpersGeneral.verificarEspacios),
   check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
   check("cedula", "La cedula es obligatoria").notEmpty(),
-  check('cedula').custom(helpersGeneral.verificarEspacios),
   check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
   check("cedula").custom(helpersConductor.existeCedula),
   validarCampos

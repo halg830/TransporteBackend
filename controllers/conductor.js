@@ -58,13 +58,13 @@ postConductor: async (req, res) => {
 putConductor: async (req, res) => {
     try {
         const { id } = req.params
+        console.log(req.body)
         const { nombre, cedula } = req.body
 
         const conductor = await Conductor.findByIdAndUpdate(id, { nombre, cedula }, { new: true });
         res.json({ conductor })
     } catch (error) {
         res.status(400).json({ error })
-
     }
 
 },
