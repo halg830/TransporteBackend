@@ -5,6 +5,7 @@ import {validarCampos} from "../miderwars/validar.js"
 import { mongo } from "mongoose";
 import helpersVendedor from "../helpers/vendedor.js";
 import { validarJWT } from "../miderwars/validar-jwt.js";
+import { helpersGeneral } from "../helpers/general.js";
 
 const router = new Router();
 
