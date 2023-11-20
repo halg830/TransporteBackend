@@ -64,6 +64,7 @@ putConductor: async (req, res) => {
         const conductor = await Conductor.findByIdAndUpdate(id, { nombre, cedula }, { new: true });
         res.json({ conductor })
     } catch (error) {
+        console.log(error)
         res.status(400).json({ error })
     }
 
