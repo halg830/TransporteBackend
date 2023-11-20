@@ -50,7 +50,7 @@ const helpersCliente = {
   validarEmail: async (email) => {
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (regexEmail.test(email)) {
+    if (!regexEmail.test(email)) {
       throw new Error('Email no válido. Ejemplo: usuario@example.com')
     } 
   },
