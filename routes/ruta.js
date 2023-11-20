@@ -4,7 +4,7 @@ import { check } from "express-validator";
 import { mongo } from "mongoose";
 import { validarCampos } from "../miderwars/validar.js";
 import helpersRuta from "../helpers/ruta.js"
-import { helpersGeneral } from "../helpers/general.js";
+import helpersGeneral from "../helpers/general.js";
 
 const router = new Router();
 

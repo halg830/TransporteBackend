@@ -5,7 +5,7 @@ import {validationResult} from "express-validator"
 import { mongo } from "mongoose";
 import { validarCampos } from "../miderwars/validar.js";
 import helpersConductor from "../helpers/conductor.js";
-import { helpersGeneral } from "../helpers/general.js";
+import helpersGeneral  from "../helpers/general.js";
 
 const router = new Router();
 

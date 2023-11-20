@@ -1,4 +1,4 @@
-export const helpersGeneral = {
+const helpersGeneral = {
     verificarEspacios: async(val, req)=>{
         console.log(req.req.body);
         if(typeof val === 'string'){
@@ -6,3 +6,5 @@ export const helpersGeneral = {
         }
     }
 }
+
+export default helpersGeneral
