@@ -15,6 +15,8 @@ const helpersCliente = {
     console.log("x", cedula)
     if (cedula) {
       const existe = await Cliente.findOne({ cedula });
+
+      console.log("e", existe)
       if (existe) {
         if (req.req.method === "PUT") {
           if (existe.cedula !== req.req.usuario.cedula)
