@@ -5,6 +5,7 @@ import {validationResult} from "express-validator"
 import { mongo } from "mongoose";
 import { validarCampos } from "../miderwars/validar.js";
 import helpersConductor from "../helpers/conductor.js";
+import { helpersGeneral } from "../helpers/general.js";
 
 const router = new Router();
 
@@ -13,8 +14,10 @@ router.get("/all", httpConductor.getAllConductor)
 router.post("/guardar",
   [
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
+    check('nombre').custom(helpersGeneral.verificarEspacios),
     check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
     check("cedula", "La cedula es obligatoria").notEmpty(),
+    check('cedula').custom(helpersGeneral.verificarEspacios),
     check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
     check("cedula").custom(helpersConductor.existeCedula),
     validarCampos
@@ -25,9 +28,14 @@ router.post("/guardar",
 
 router.get("/buscar/:id",  httpConductor.getConductorId)
 
-router.put("/editar/:id",[
-  check("nombre", "El nombre es obligatorio").notEmpty(),
+router.put("/editar/:id"[
+  check("nombre", "El nombre es obligatorio").not().isEmpty(),
+  check('nombre').custom(helpersGeneral.verificarEspacios),
   check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
+  check("cedula", "La cedula es obligatoria").notEmpty(),
+  check('cedula').custom(helpersGeneral.verificarEspacios),
+  check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
+  check("cedula").custom(helpersConductor.existeCedula),
   validarCampos
 ],  httpConductor.putConductor)
 

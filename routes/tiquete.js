@@ -7,37 +7,59 @@ import helpersTiquete from "../helpers/tiquete.js";
 
 const router = new Router();
 
-router.get("/all", httpTiquete.getAllTiquete)
+router.get("/all", httpTiquete.getAllTiquete);
 
-router.get("/buscar/:id", httpTiquete.getTiqueteId)
+router.get("/buscar/:id", httpTiquete.getTiqueteId);
 
-router.get("/filtrarFechas/:fechaA/:fechaB", httpTiquete.getFiltroFechas)
+router.get("/filtrarFechas/:fechaA/:fechaB", httpTiquete.getFiltroFechas);
 
-router.get("/asientosOcupados/:id/:fecha_salida", httpTiquete.getAsientosOcupados)
+router.get(
+  "/asientosOcupados/:id/:fecha_salida",
+  httpTiquete.getAsientosOcupados
+);
 
-router.get('/continuarVenta', httpTiquete.getContinuarVenta)
+router.get("/continuarVenta", httpTiquete.getContinuarVenta);
 
-router.post("/guardar", [
+router.post(
+  "/guardar",
+  [
     check("num_asiento", "Debe ingresar un asiento").notEmpty(),
-    check("num_asiento", "Debe ingresar un asiento").custom(helpersTiquete.validarAsiento),
+    check("num_asiento", "Debe ingresar un asiento").custom(
+      helpersTiquete.validarAsiento
+    ),
     check("vendedor", "Debe ingresar el id del vendedor").isMongoId(),
     check("ruta", "Debe ingresar el id del ruta").isMongoId(),
     check("cliente", "Debe ingresar el id del cliente").isMongoId(),
     check("fecha_salida", "La fecha es obligatoria").notEmpty(),
-    validarCampos
-], httpTiquete.postTiquete); 
+    validarCampos,
+  ],
+  httpTiquete.postTiquete
+);
 
 // router.get("/buscar/:cedula", httpTiquete.getTiqueteCedula);
 
 // router.get("/buscar/:id",  httpTiquete.getTiqueteId)
 
-router.delete("/borrar/:id",  httpTiquete.deleteTiqueteId);
+router.delete("/borrar/:id", httpTiquete.deleteTiqueteId);
 
-router.put("/editar/:id",  httpTiquete.putTiquete)
+router.put(
+  "/editar/:id",
+  [
+    check("num_asiento", "Debe ingresar un asiento").notEmpty(),
+    check("num_asiento", "Debe ingresar un asiento").custom(
+      helpersTiquete.validarAsiento
+    ),
+    check("vendedor", "Debe ingresar el id del vendedor").isMongoId(),
+    check("ruta", "Debe ingresar el id del ruta").isMongoId(),
+    check("cliente", "Debe ingresar el id del cliente").isMongoId(),
+    check("fecha_salida", "La fecha es obligatoria").notEmpty(),
+    validarCampos,
+  ],
+  httpTiquete.putTiquete
+);
 
-router.put("/inactivar/:id", httpTiquete.putTiqueteInactivar)
+router.put("/inactivar/:id", httpTiquete.putTiqueteInactivar);
 
-router.put("/activar/:id", httpTiquete.putTiqueteActivar)
+router.put("/activar/:id", httpTiquete.putTiqueteActivar);
 
-
-export default router
+export default router;

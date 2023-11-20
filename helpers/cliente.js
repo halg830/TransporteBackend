@@ -1,46 +1,58 @@
-import Cliente from "../models/cliente.js"
-
+import Cliente from "../models/cliente.js";
 
 const helpersCliente = {
-    existeClienteById: async (id, req) => {
-        const existe = await Cliente.findById(id)
+  existeClienteById: async (id, req) => {
+    const existe = await Cliente.findById(id);
 
-        if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+    if (!existe) {
+      throw new Error(`El id no existe ${id}`);
+    }
+
+    req.req.clienteUpdate = existe;
+  },
+
+  existeCedula: async (cedula, req) => {
+    if (cedula) {
+      const existe = await Cliente.findOne({ cedula });
+      if (existe) {
+        if (req.req.method === "PUT") {
+          if (existe.cedula !== req.req.usuario.cedula)
+            throw new Error(
+              `Ya existe ese serial en la base de datos!!! ${cedula}`
+            );
+        } else {
+          throw new Error(
+            `Ya existe esa cedula en la base de datos!!! ${cedula}`
+          );
         }
+      }
+    }
+  },
 
-        req.req.clienteUpdate = existe
-
-    },
-
-    existeCedula: async (cedula, req) => {
-        if (cedula) {
-            const existe = await Cliente.findOne({ cedula })
-            if (existe) {
-                if (req.req.method === "PUT") {
-                    if (existe.cedula !== req.req.usuario.cedula)
-                        throw new Error(`Ya existe ese serial en la base de datos!!! ${cedula}`)
-
-                } else {
-                    throw new Error(`Ya existe esa cedula en la base de datos!!! ${cedula}`)
-                }
-            }
+  existeEmail: async (email, req) => {
+    if (email) {
+      const existe = await Cliente.findOne({ email });
+      if (existe) {
+        if (req.req.method === "PUT") {
+          if (existe.email !== req.req.cliente.email)
+            throw new Error(
+              `Ya existe ese serial en la base de datos!!! ${email}`
+            );
+        } else {
+          throw new Error(
+            `Ya existe ese email en la base de datos!!! ${email}`
+          );
         }
-    },
+      }
+    }
+  },
 
-    existeEmail: async (email, req) => {
-        if (email) {
-            const existe = await Cliente.findOne({ email })
-            if (existe) {
-                if (req.req.method === "PUT") {
-                    if (existe.email !== req.req.cliente.email)
-                        throw new Error(`Ya existe ese serial en la base de datos!!! ${email}`)
+  validarEmail: async (email) => {
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-                } else {
-                    throw new Error(`Ya existe ese email en la base de datos!!! ${email}`)
-                }
-            }
-        }
-    },
-}
-export default helpersCliente
+    if (regexEmail.test(email)) {
+      throw new Error('Email no válido. Ejemplo: usuario@example.com')
+    } 
+  },
+};
+export default helpersCliente;
