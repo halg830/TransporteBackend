@@ -28,7 +28,7 @@ router.post("/guardar",
 
 router.get("/buscar/:id",  httpConductor.getConductorId)
 
-router.put("/editar/:id"[
+router.put("/editar/:id", [
   check("nombre", "El nombre es obligatorio").not().isEmpty(),
   check('nombre').custom(helpersGeneral.verificarEspacios),
   check("nombre", "El nombre debe solo puede tener 15 caracteres").isLength({max: 15}),
