@@ -5,12 +5,13 @@ import { mongo } from "mongoose";
 import { validarCampos } from "../miderwars/validar.js";
 import helpersBus from "../helpers/bus.js"
 import helpersGeneral from '../helpers/general.js'
+import { validarJWT } from "../miderwars/validar-jwt.js";
 
 const router = new Router();
 
-router.get("/all", httpBus.getAllBus);
+router.get("/all", validarJWT, httpBus.getAllBus);
 
-router.get("/buscar/:id", httpBus.getBusId);
+router.get("/buscar/:id",validarJWT, httpBus.getBusId);
 
 router.post(
   "/guardar",
@@ -28,7 +29,8 @@ router.post(
     check("placa", "La placa ya esta registrada").custom(helpersBus.existePlaca),
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
     check('conductor').custom(helpersGeneral.verificarEspacios),
-    validarCampos
+    validarCampos,
+    validarJWT,
   ], httpBus.postNuevoBus);
 
 router.put("/editar/:id", [
@@ -45,11 +47,12 @@ router.put("/editar/:id", [
     check("placa", "La placa ya esta registrada").custom(helpersBus.existePlaca),
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
     check('conductor').custom(helpersGeneral.verificarEspacios),
-    validarCampos
+    validarCampos,
+    validarJWT,
 ], httpBus.putBus)
 
-router.put("/activar/:id", httpBus.putBusActivar)
-router.put("/inactivar/:id", httpBus.putBusInactivar)
-router.delete("/borrar/:id", httpBus.deleteBusId)
-router.delete("/borrarAll", httpBus.deleteAll)
+router.put("/activar/:id", validarJWT, httpBus.putBusActivar)
+router.put("/inactivar/:id", validarJWT, httpBus.putBusInactivar)
+router.delete("/borrar/:id", validarJWT, httpBus.deleteBusId)
+router.delete("/borrarAll", validarJWT, httpBus.deleteAll)
 export default router 
