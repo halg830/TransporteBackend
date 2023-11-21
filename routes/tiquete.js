@@ -4,21 +4,22 @@ import { check } from "express-validator";
 import { mongo } from "mongoose";
 import { validarCampos } from "../miderwars/validar.js";
 import helpersTiquete from "../helpers/tiquete.js";
+import { validarJWT } from "../miderwars/validar-jwt.js";
 
 const router = new Router();
 
-router.get("/all", httpTiquete.getAllTiquete);
+router.get("/all", validarJWT, httpTiquete.getAllTiquete);
 
-router.get("/buscar/:id", httpTiquete.getTiqueteId);
+router.get("/buscar/:id", validarJWT, httpTiquete.getTiqueteId);
 
-router.get("/filtrarFechas/:fechaA/:fechaB", httpTiquete.getFiltroFechas);
+router.get("/filtrarFechas/:fechaA/:fechaB", validarJWT, httpTiquete.getFiltroFechas);
 
 router.get(
-  "/asientosOcupados/:id/:fecha_salida",
+  "/asientosOcupados/:id/:fecha_salida", validarJWT,
   httpTiquete.getAsientosOcupados
 );
 
-router.get("/continuarVenta", httpTiquete.getContinuarVenta);
+router.get("/continuarVenta", validarJWT, httpTiquete.getContinuarVenta);
 
 router.post(
   "/guardar",
@@ -31,7 +32,7 @@ router.post(
     check("ruta", "Debe ingresar el id del ruta").isMongoId(),
     check("cliente", "Debe ingresar el id del cliente").isMongoId(),
     check("fecha_salida", "La fecha es obligatoria").notEmpty(),
-    validarCampos,
+    validarCampos, validarJWT,
   ],
   httpTiquete.postTiquete
 );
@@ -40,7 +41,7 @@ router.post(
 
 // router.get("/buscar/:id",  httpTiquete.getTiqueteId)
 
-router.delete("/borrar/:id", httpTiquete.deleteTiqueteId);
+router.delete("/borrar/:id", validarJWT, httpTiquete.deleteTiqueteId);
 
 router.put(
   "/editar/:id",
@@ -53,13 +54,13 @@ router.put(
     check("ruta", "Debe ingresar el id del ruta").isMongoId(),
     check("cliente", "Debe ingresar el id del cliente").isMongoId(),
     check("fecha_salida", "La fecha es obligatoria").notEmpty(),
-    validarCampos,
+    validarCampos, validarJWT,
   ],
   httpTiquete.putTiquete
 );
 
-router.put("/inactivar/:id", httpTiquete.putTiqueteInactivar);
+router.put("/inactivar/:id", validarJWT, httpTiquete.putTiqueteInactivar);
 
-router.put("/activar/:id", httpTiquete.putTiqueteActivar);
-router.delete("/borrarAll", httpTiquete.deleteAll)
+router.put("/activar/:id", validarJWT, httpTiquete.putTiqueteActivar);
+router.delete("/borrarAll", validarJWT, httpTiquete.deleteAll)
 export default router;

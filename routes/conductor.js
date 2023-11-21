@@ -6,10 +6,11 @@ import { mongo } from "mongoose";
 import { validarCampos } from "../miderwars/validar.js";
 import helpersConductor from "../helpers/conductor.js";
 import helpersGeneral  from "../helpers/general.js";
+import { validarJWT } from "../miderwars/validar-jwt.js";
 
 const router = new Router();
 
-router.get("/all", httpConductor.getAllConductor)
+router.get("/all", validarJWT, httpConductor.getAllConductor)
 
 router.post("/guardar",
   [
@@ -20,7 +21,7 @@ router.post("/guardar",
     check('cedula').custom(helpersGeneral.verificarEspacios),
     check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
     check("cedula").custom(helpersConductor.existeCedula),
-    validarCampos
+    validarCampos, validarJWT,
   ], httpConductor.postConductor
 );
 
@@ -35,16 +36,16 @@ router.put("/editar/:id", [
   // check("cedula", "La cedula es obligatoria").notEmpty(),
   // check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
   // check("cedula").custom(helpersConductor.existeCedula),
-  validarCampos
+  validarCampos, validarJWT,
 ],  httpConductor.putConductor)
 
-router.put("/inactivar/:id", httpConductor.putConductorInactivar)
+router.put("/inactivar/:id", validarJWT, httpConductor.putConductorInactivar)
 
 router.put("/activar/:id", httpConductor.putConductorActivar)
 
 // router.delete("/eliminar/:cedula",  httpConductor.deleteConductor);
 
-router.delete("/borrar/:id",  httpConductor.deleteConductorId);
+router.delete("/borrar/:id", validarJWT,  httpConductor.deleteConductorId);
 
-router.delete("/borrarAll", httpConductor.deleteAll)
+router.delete("/borrarAll", validarJWT, httpConductor.deleteAll)
 export default router

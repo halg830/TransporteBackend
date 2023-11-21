@@ -9,7 +9,7 @@ import helpersGeneral from "../helpers/general.js";
 
 const router = new Router();
 
-router.get("/all", httpVendedor.getAllVendedor);
+router.get("/all", validarJWT, httpVendedor.getAllVendedor);
 
 // router.get("/buscar/:cedula",validarJWT, httpVendedor.getVendedorCedula);
 
@@ -42,7 +42,7 @@ router.post(
     check("contrasena", "La contraseña es obligatoria").notEmpty(),
     check('contrasena').custom(helpersGeneral.verificarEspacios),
     check("contrasena","La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
-    validarCampos
+    validarCampos, validarJWT,
   ],
   httpVendedor.postVendedor
 );
@@ -66,11 +66,11 @@ router.put("/editar/:id",[
   check("contrasena", "La contraseña es obligatoria").notEmpty(),
   check('contrasena').custom(helpersGeneral.verificarEspacios),
   check("contrasena","La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
-  validarCampos
+  validarCampos,  validarJWT,
 ], httpVendedor.putVendedor)
 
-router.put("/inactivar/:id", httpVendedor.putVendedorInactivar)
+router.put("/inactivar/:id", validarJWT, httpVendedor.putVendedorInactivar)
 
-router.put("/activar/:id", httpVendedor.putVendedorActivar)
-router.delete("/borrarAll", httpVendedor.deleteAll)
+router.put("/activar/:id", validarJWT, httpVendedor.putVendedorActivar)
+router.delete("/borrarAll", validarJWT, httpVendedor.deleteAll)
 export default router 

@@ -5,14 +5,15 @@ import { validarCampos } from "../miderwars/validar.js";
 import { mongo } from "mongoose";
 import helpersCliente from "../helpers/cliente.js"
 import helpersGeneral  from "../helpers/general.js";
+import { validarJWT } from "../miderwars/validar-jwt.js";
 
 const router = new Router();
 
-router.get("/all", httpCliente.getAllCliente);
+router.get("/all", validarJWT, httpCliente.getAllCliente);
 
-router.get("/buscarCC/:cedula", httpCliente.getClienteCedula);
+router.get("/buscarCC/:cedula", validarJWT, httpCliente.getClienteCedula);
 
-router.get("/buscar/:id", httpCliente.getClienteId)
+router.get("/buscar/:id", validarJWT, httpCliente.getClienteId)
  
 router.post(
   "/guardar",
@@ -31,19 +32,19 @@ router.post(
     check('email').custom(helpersGeneral.verificarEspacios),
     check("email", "El email debe contener el símbolo @").custom(helpersCliente.validarEmail),
     check("email", "El email ya existe").custom(helpersCliente.existeEmail),
-    validarCampos 
+    validarCampos,  validarJWT,
   ],
   httpCliente.postCliente
   );  
 
-router.put("/editar/:id",httpCliente.putCliente);
+router.put("/editar/:id", validarJWT,httpCliente.putCliente);
 
-router.put("/inactivar/:id", httpCliente.putClienteInactivar)
+router.put("/inactivar/:id", validarJWT, httpCliente.putClienteInactivar)
 
-router.put("/activar/:id", httpCliente.putClienteActivar)
+router.put("/activar/:id", validarJWT, httpCliente.putClienteActivar)
 
-router.delete("/eliminar/:cedula", httpCliente.deleteCliente)
+router.delete("/eliminar/:cedula", validarJWT, httpCliente.deleteCliente)
 
-router.delete("/borrar/:id", httpCliente.deleteClienteId)
-router.delete("/borrarAll", httpCliente.deleteAll)
+router.delete("/borrar/:id", validarJWT, httpCliente.deleteClienteId)
+router.delete("/borrarAll", validarJWT, httpCliente.deleteAll)
 export default router;

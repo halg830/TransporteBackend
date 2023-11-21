@@ -5,12 +5,13 @@ import { mongo } from "mongoose";
 import { validarCampos } from "../miderwars/validar.js";
 import helpersRuta from "../helpers/ruta.js"
 import helpersGeneral from "../helpers/general.js";
+import { validarJWT } from "../miderwars/validar-jwt.js";
 
 const router = new Router();
 
-router.get("/all", httpRuta.getAllRuta);
+router.get("/all", validarJWT, httpRuta.getAllRuta);
 
-router.get("/buscar/:id", httpRuta.getRutasBus)
+router.get("/buscar/:id", validarJWT, httpRuta.getRutasBus)
 
 router.post(
   "/guardar",
@@ -25,7 +26,7 @@ router.post(
     check("valor", "El valor es obligatorio").notEmpty(),
     check('valor', 'El tipo de dato debe ser númerico').isNumeric(),
     check("bus", "Debe indicar el id del bus").isMongoId(),
-    validarCampos
+    validarCampos, validarJWT,
   ],
   httpRuta.postRuta
 );
@@ -41,13 +42,13 @@ router.put("/editar/:id",[
   check("valor", "El valor es obligatorio").notEmpty(),
   check('valor', 'El tipo de dato debe ser númerico').isNumeric(),
   check("bus", "Debe indicar el id del bus").isMongoId(),
-  validarCampos
+  validarCampos, validarJWT,
 ], httpRuta.putRuta)
 
-router.put("/inactivar/:id", httpRuta.putRutaInactivar)
+router.put("/inactivar/:id", validarJWT, httpRuta.putRutaInactivar)
 
-router.put("/activar/:id", httpRuta.putRutaActivar)
+router.put("/activar/:id", validarJWT, httpRuta.putRutaActivar)
 
-router.delete("/borrar/:id", httpRuta.deleteRutaId)
-router.delete("/borrarAll", httpRuta.deleteAll)
+router.delete("/borrar/:id", validarJWT, httpRuta.deleteRutaId)
+router.delete("/borrarAll", validarJWT, httpRuta.deleteAll)
 export default router
