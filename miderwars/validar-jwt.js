@@ -21,7 +21,7 @@ const validarJWT = async (req, res, next) => {
     const token = req.header("x-token");
     if (!token) {
         return res.status(401).json({
-            msg: "No hay token en la peticion"
+            error: "No hay token en la peticion"
         })
     }
 
@@ -32,15 +32,14 @@ const validarJWT = async (req, res, next) => {
 
         if (!usuario) {
             return res.status(401).json({
-                error: uid,
-                msg: "Token no válido, no existe usuario"//- usuario no existe DB
+                error: "Token no válido, no existe usuario"//- usuario no existe DB
             })
         }
 
 
         if (usuario.estado == 0) {
             return res.status(401).json({
-                msg: "Token no válido, usuario inactivo" //- usuario con estado: false
+                error: "Token no válido, usuario inactivo" //- usuario con estado: false
             })
         }
         req.Vendedor=usuario
@@ -49,7 +48,7 @@ const validarJWT = async (req, res, next) => {
 
     } catch (error) {
         res.status(401).json({
-            msg: "Token no valido"
+            error: "Token no valido"
         })
     }
 }
