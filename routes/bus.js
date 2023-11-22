@@ -28,6 +28,7 @@ router.post(
     }),
     check("placa", "La placa ya esta registrada").custom(helpersBus.existePlaca),
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
+    check('conductor', 'Id de vendedor no válida').isMongoId(),
     check('conductor').custom(helpersGeneral.verificarEspacios),
     validarCampos,
     validarJWT,
@@ -39,13 +40,8 @@ router.put("/editar/:id", [
     check("asiento", "debe especificar el asiento").not().isEmpty(),
     check("asiento", "El asiento debe ser un número").isNumeric(),
     // check("asiento", "El número de asiento no puede ser mayor a 40").custom(helpersBus.comprobarCantAsientos),
-    check("placa", "debe especificar el asiento").not().isEmpty(),
-    check('placa').custom(helpersGeneral.verificarEspacios),
-    check("placa", "la placa no puede tener mas de 7 caracteres").isLength({
-      max: 7
-    }),
-    check("placa", "La placa ya esta registrada").custom(helpersBus.existePlaca),
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
+    check('conductor', 'Id de vendedor no válida').isMongoId(),
     check('conductor').custom(helpersGeneral.verificarEspacios),
     validarCampos,
     validarJWT,
