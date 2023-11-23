@@ -17,21 +17,14 @@ const helpersCliente = {
       const existe = await Cliente.findOne({ cedula });
 
       console.log("e", existe)
-      console.log(req.req.usuario.cedula)
+      console.log(req.req)
       if (existe) {
         if (req.req.method === "PUT") {
-          if (existe.cedula !== req.req.usuario.cedula)
-            throw new Error(
-              `Ya existe ese serial en la base de datos!!! ${cedula}`
-            );
-        } else {
           throw new Error(
             `Ya existe esa cedula en la base de datos!!! ${cedula}`
           );
         }
       }
-
-      return
     }
   },
 
