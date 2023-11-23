@@ -37,7 +37,7 @@ const helpersVendedor = {
         }
     },
 
-    existeCedula: async (telefono, req) => {
+    existeTelefono: async (telefono, req) => {
         if (telefono) {
             const existe = await Vendedor.findOne({ telefono })
             if (existe) {

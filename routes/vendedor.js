@@ -59,6 +59,7 @@ router.put("/editar/:id",[
   check("telefono", "El numero es obligatorio").notEmpty(),
   check('telefono').custom(helpersGeneral.verificarEspacios),
   check("telefono", "El numero debe tener 10 digitos").isLength({max: 10,min: 10}),
+  check('telefono', 'e').custom(helpersVendedor.existeTelefono),
   check("usuario", "El usuario es obligatorio").notEmpty(),
   check('usuario').custom(helpersGeneral.verificarEspacios),
   check("usuario", "El usuario debe tener 6 digitos o más").isLength({min: 6}),
