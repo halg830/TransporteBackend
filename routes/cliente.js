@@ -22,8 +22,8 @@ router.post(
     check('nombre').custom(helpersGeneral.verificarEspacios),
     check("nombre", "Máximo 15 caracteres").isLength({ max: 15 }),
     check("cedula", "La cedula es obligatoria").notEmpty(),
-    check('cedula').custom(helpersGeneral.verificarEspacios),
-    check("cedula", "Tiene que tener 10 digitos").isLength({
+    check('cedula', '').custom(helpersGeneral.verificarEspacios),
+    check("cedula", "Tiene que tener entre 8 y 10 digitos").isLength({
       min: 8,
       max: 10,
     }),
