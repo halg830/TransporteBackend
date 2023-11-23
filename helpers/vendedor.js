@@ -17,7 +17,7 @@ const helpersVendedor = {
         if (cedula) {
             const existe = await Vendedor.findOne({ cedula })
             if (existe) {
-                if (req.req.method === "PUT") {
+                if (req.req.method === "PUT" && req.req.body._id!=existe._id) {
                    
                     throw new Error(`Ya existe esa cedula en la base de datos!!! ${cedula}`)
                 }
@@ -29,9 +29,21 @@ const helpersVendedor = {
         if (usuario) {
             const existe = await Vendedor.findOne({ usuario })
             if (existe) {
-                if (req.req.method === "PUT") {
+                if (req.req.method === "PUT" && req.req.body._id!=existe._id) {
                 
                     throw new Error(`Ya existe ese usuario en la base de datos!!! ${usuario}`)
+                }
+            }
+        }
+    },
+
+    existeCedula: async (telefono, req) => {
+        if (telefono) {
+            const existe = await Vendedor.findOne({ telefono })
+            if (existe) {
+                if (req.req.method === "PUT" && req.req.body._id!=existe._id) {
+                   
+                    throw new Error(`Ya existe esa telefono en la base de datos!!! ${telefono}`)
                 }
             }
         }

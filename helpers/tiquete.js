@@ -19,8 +19,6 @@ const helpersTiquete = {
             if(asiento_bus<num_asiento || num_asiento<0 ) throw new Error(`Asiento erróneo`)
 
         }
-
-
     },
 }
 
