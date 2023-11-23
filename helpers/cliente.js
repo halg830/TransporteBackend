@@ -19,7 +19,7 @@ const helpersCliente = {
       console.log("e", existe)
       console.log(req.req)
       if (existe) {
-        if (req.req.method === "PUT" && req.req.body._id!=existe.cedula) {
+        if (req.req.method === "PUT" && req.req.body._id!=existe._id) {
           throw new Error(
             `Ya existe esa cedula en la base de datos!!! ${cedula}`
           );
@@ -32,7 +32,7 @@ const helpersCliente = {
     if (email) {
       const existe = await Cliente.findOne({ email });
       if (existe) {
-        if (req.req.method === "PUT") {
+        if (req.req.method === "PUT" && req.req.body._id!=existe._id) {
           throw new Error(
             `Ya existe ese email en la base de datos!!! ${email}`
           );
