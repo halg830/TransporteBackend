@@ -24,6 +24,9 @@ const helpersCliente = {
             `Ya existe esa cedula en la base de datos!!! ${cedula}`
           );
         }
+        throw new Error(
+          `Ya existe ese cedula en la base de datos!!! ${email}`
+        );
       }
     }
   },
@@ -37,6 +40,10 @@ const helpersCliente = {
             `Ya existe ese email en la base de datos!!! ${email}`
           );
         }
+
+        throw new Error(
+          `Ya existe ese email en la base de datos!!! ${email}`
+        );
       }
     }
   },

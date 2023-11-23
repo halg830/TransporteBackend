@@ -10,6 +10,9 @@ const helpersConductor = {
                 if (req.req.method === "PUT") {
                     throw new Error(`Ya existe esa cedula en la base de datos!!! ${cedula}`)
                 }
+                throw new Error(
+                    `Ya existe ese cedula en la base de datos!!! ${email}`
+                  );
             }
         }
     }
