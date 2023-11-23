@@ -33,11 +33,6 @@ const helpersCliente = {
       const existe = await Cliente.findOne({ email });
       if (existe) {
         if (req.req.method === "PUT") {
-          if (existe.email !== req.req.cliente.email)
-            throw new Error(
-              `Ya existe ese serial en la base de datos!!! ${email}`
-            );
-        } else {
           throw new Error(
             `Ya existe ese email en la base de datos!!! ${email}`
           );

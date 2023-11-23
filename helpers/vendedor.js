@@ -18,10 +18,7 @@ const helpersVendedor = {
             const existe = await Vendedor.findOne({ cedula })
             if (existe) {
                 if (req.req.method === "PUT") {
-                    if (existe.cedula !== req.req.usuario.cedula)
-                        throw new Error(`Ya existe ese serial en la base de datos!!! ${cedula}`)
-
-                } else {
+                   
                     throw new Error(`Ya existe esa cedula en la base de datos!!! ${cedula}`)
                 }
             }
@@ -33,10 +30,7 @@ const helpersVendedor = {
             const existe = await Vendedor.findOne({ usuario })
             if (existe) {
                 if (req.req.method === "PUT") {
-                    if (existe.usuario !== req.req.vendedor.usuario)
-                        throw new Error(`Ya existe ese serial en la base de datos!!! ${usuario}`)
-
-                } else {
+                
                     throw new Error(`Ya existe ese usuario en la base de datos!!! ${usuario}`)
                 }
             }
