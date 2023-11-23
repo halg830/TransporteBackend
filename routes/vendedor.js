@@ -42,7 +42,7 @@ router.post(
     check("contrasena", "La contraseña es obligatoria").notEmpty(),
     check('contrasena').custom(helpersGeneral.verificarEspacios),
     check("contrasena","La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
-    validarCampos, validarJWT,
+    validarCampos,
   ],
   httpVendedor.postVendedor
 );
@@ -63,9 +63,6 @@ router.put("/editar/:id",[
   check('usuario').custom(helpersGeneral.verificarEspacios),
   check("usuario", "El usuario debe tener 6 digitos o más").isLength({min: 6}),
   check("usuario", "El nombre de usuario no esta disponible").custom(helpersVendedor.existeUsuario),
-  check("contrasena", "La contraseña es obligatoria").notEmpty(),
-  check('contrasena').custom(helpersGeneral.verificarEspacios),
-  check("contrasena","La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
   validarCampos,  validarJWT,
 ], httpVendedor.putVendedor)
 
