@@ -19,7 +19,7 @@ const helpersCliente = {
       console.log("e", existe)
       console.log(req.req)
       if (existe) {
-        if (req.req.method === "PUT") {
+        if (req.req.method === "PUT" && req.req.body._id!=existe.cedula) {
           throw new Error(
             `Ya existe esa cedula en la base de datos!!! ${cedula}`
           );
