@@ -22,7 +22,6 @@ router.post(
     check('nombre').custom(helpersGeneral.verificarEspacios),
     check("nombre", "Máximo 15 caracteres").isLength({ max: 15 }),
     check("cedula", "La cedula es obligatoria").notEmpty(),
-    check('cedula', '').custom(helpersGeneral.verificarEspacios),
     check("cedula", "Tiene que tener entre 8 y 10 digitos").isLength({
       min: 8,
       max: 10,
@@ -37,7 +36,22 @@ router.post(
   httpCliente.postCliente
   );  
 
-router.put("/editar/:id", validarJWT,httpCliente.putCliente);
+router.put("/editar/:id", [
+  check("nombre", "El nombre es obligatorio").not().isEmpty(),
+  check('nombre').custom(helpersGeneral.verificarEspacios),
+  check("nombre", "Máximo 15 caracteres").isLength({ max: 15 }),
+  check("cedula", "La cedula es obligatoria").notEmpty(),
+  check("cedula", "Tiene que tener entre 8 y 10 digitos").isLength({
+    min: 8,
+    max: 10,
+  }),
+  check("cedula", "La cedula esta duplicada").custom(helpersCliente.existeCedula),
+  check('email', "El email es requerido").notEmpty(),
+  check('email').custom(helpersGeneral.verificarEspacios),
+  check("email", "El email debe contener el símbolo @").custom(helpersCliente.validarEmail),
+  check("email", "El email ya existe").custom(helpersCliente.existeEmail),
+  validarCampos,  validarJWT,
+],httpCliente.putCliente);
 
 router.put("/inactivar/:id", validarJWT, httpCliente.putClienteInactivar)
 
