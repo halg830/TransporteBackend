@@ -49,6 +49,7 @@ const httpCliente = {
   //POST
   postCliente: async (req, res) => {
     try {
+      console.log(req.body)
       const { nombre, cedula, email } = req.body;
       const cliente = new Cliente({ nombre, cedula, email });
 
@@ -56,6 +57,7 @@ const httpCliente = {
 
       res.json({ cliente });
     } catch (error) {
+      console.log(error)
       res.status(400).json({ error });
     }
   },
