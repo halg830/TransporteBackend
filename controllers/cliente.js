@@ -49,7 +49,7 @@ const httpCliente = {
   //POST
   postCliente: async (req, res) => {
     try {
-      console.log(req.body)
+      console.log("cc",req.body)
       const { nombre, cedula, email } = req.body;
       const cliente = new Cliente({ nombre, cedula, email });
 
