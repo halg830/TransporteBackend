@@ -30,6 +30,7 @@ router.post(
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
     check('conductor', 'Id de vendedor no válida').isMongoId(),
     check('conductor').custom(helpersGeneral.verificarEspacios),
+    check('conductor').custom(helpersBus.conductorActivo),
     validarCampos,
     validarJWT,
   ], httpBus.postNuevoBus);
@@ -43,6 +44,7 @@ router.put("/editar/:id", [
     check("conductor", "debe especificar el nombre del conductor").not().isEmpty(),
     check('conductor', 'Id de vendedor no válida').isMongoId(),
     check('conductor').custom(helpersGeneral.verificarEspacios),
+    check('conductor').custom(helpersBus.conductorActivo),
     validarCampos,
     validarJWT,
 ], httpBus.putBus)
