@@ -19,7 +19,7 @@ const helpersBus = {
     },
 
     conductorActivo: async(id)=>{
-        const conductor = await Conductor.findOne({id})
+        const conductor = await Conductor.findOne({_id: id})
 
         console.log(conductor);
         if(conductor.estado===0){
