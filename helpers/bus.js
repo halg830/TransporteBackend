@@ -21,7 +21,8 @@ const helpersBus = {
     conductorActivo: async(id)=>{
         const conductor = await Conductor.findOne({id})
 
-        if(conductor && conductor?.estado===0){
+        console.log(conductor);
+        if(conductor.estado===0){
          throw new Error('El conductor esta inactivo.')
         }
     }
