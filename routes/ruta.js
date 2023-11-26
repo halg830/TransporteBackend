@@ -34,7 +34,9 @@ router.post(
 router.put("/editar/:id",[
   check("ciudad_origen", "ciudad duplicada").custom(helpersRuta.ciudadRepetida),
   check("ciudad_origen", "Debe indicar el id de la ciudad de origen.").isMongoId(),
+  check('ciudad_origen').custom(helpersRuta.ciudadActiva),
   check("ciudad_destino", "Debe indicar el id de la ciudad de destino.").isMongoId(),
+  check('ciudad_destino').custom(helpersRuta.ciudadActiva),
   check("hora_salida", "La hora es obligatoria").notEmpty(),
   // check("hora_salida", "Debe escribir el formato correcto").isDate(),
   
@@ -42,6 +44,7 @@ router.put("/editar/:id",[
   check("valor", "El valor es obligatorio").notEmpty(),
   check('valor', 'El tipo de dato debe ser númerico').isNumeric(),
   check("bus", "Debe indicar el id del bus").isMongoId(),
+  check('bus').custom(helpersRuta.busActivo),
   validarCampos, validarJWT,
 ], httpRuta.putRuta)
 

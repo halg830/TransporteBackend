@@ -29,8 +29,11 @@ router.post(
       helpersTiquete.validarAsiento
     ),
     check("vendedor", "Debe ingresar el id del vendedor").isMongoId(),
+    check('vendedor').custom(helpersTiquete.vendedorActivo),
     check("ruta", "Debe ingresar el id del ruta").isMongoId(),
+    check('ruta').custom(helpersTiquete.rutaActiva),
     check("cliente", "Debe ingresar el id del cliente").isMongoId(),
+    check('cliente').custom(helpersTiquete.clienteActivo),
     check("fecha_salida", "La fecha es obligatoria").notEmpty(),
     validarCampos, validarJWT,
   ],

@@ -57,5 +57,11 @@ const helpersVendedor = {
             }
         }
     },
+    
+    noInactivarAdmin: async(id)=>{
+        const idAdmin = "655bac195bb4d4c3c0171460"
+
+        if(id===idAdmin) throw new Error('El admin no puede ser desactivado.')
+    }
 }
 export default helpersVendedor
