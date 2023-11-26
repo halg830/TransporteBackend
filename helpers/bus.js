@@ -18,14 +18,12 @@ const helpersBus = {
         }
     },
 
-    conductorActivo: async(conductor)=>{
-        const conductor = await Conductor.findOne({id: conductor})
+    conductorActivo: async(id)=>{
+        const conductor = await Conductor.findOne({id})
 
         if(conductor && conductor?.estado===0){
          throw new Error('El conductor esta inactivo.')
         }
-
-        throw new Error('El conductor no existe en la base de datos.')
     }
 }
 
