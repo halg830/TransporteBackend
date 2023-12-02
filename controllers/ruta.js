@@ -10,7 +10,6 @@ const httpRuta = {
         return await Ruta.findById(e._id)
           .populate("ciudad_origen")
           .populate("ciudad_destino")
-          .populate("bus"); 
       });
 
       const rutasPopulate = await Promise.all(rutasPopulatePromesas);
@@ -49,7 +48,7 @@ const httpRuta = {
     }
   },
 
-  getRutasBus: async (req, res) => {
+  /* getRutasBus: async (req, res) => {
     try {
       const { id } = req.params;
       const bus = id;
@@ -63,7 +62,7 @@ const httpRuta = {
       console.log(error);
       res.status(400).json({ error });
     }
-  },
+  }, */
 
   //POST
   postRuta: async (req, res) => {
@@ -72,22 +71,17 @@ const httpRuta = {
         ciudad_origen,
         ciudad_destino,
         hora_salida,
-        valor,
-        bus,
       } = req.body;
 
       const ruta = new Ruta({
         ciudad_origen,
         ciudad_destino,
         hora_salida,
-        valor,
-        bus,
       });
       await ruta.save();
       const rutasPopulate = await Ruta.findById(ruta._id)
         .populate("ciudad_origen")
         .populate("ciudad_destino")
-        .populate("bus");
 
       res.json({ rutasPopulate });
     } catch (error) {
@@ -103,8 +97,6 @@ const httpRuta = {
         ciudad_origen,
         ciudad_destino,
         hora_salida,
-        valor,
-        bus,
       } = req.body;
 
       const ruta = await Ruta.findByIdAndUpdate(
@@ -113,8 +105,6 @@ const httpRuta = {
           ciudad_origen,
           ciudad_destino,
           hora_salida,
-          valor,
-          bus,
         },
         { new: true }
       );
@@ -122,7 +112,6 @@ const httpRuta = {
       const rutasPopulate = await Ruta.findById(ruta._id)
         .populate("ciudad_origen")
         .populate("ciudad_destino")
-        .populate("bus");
 
       res.json({ rutasPopulate });
     } catch (error) {
@@ -142,7 +131,6 @@ const httpRuta = {
       const rutasPopulate = await Ruta.findById(ruta._id)
         .populate("ciudad_origen")
         .populate("ciudad_destino")
-        .populate("bus");
 
       res.json({ rutasPopulate });
     } catch (error) {
@@ -160,7 +148,6 @@ const httpRuta = {
       const rutasPopulate = await Ruta.findById(ruta._id)
         .populate("ciudad_origen")
         .populate("ciudad_destino")
-        .populate("bus");
 
       res.json({ rutasPopulate });
     } catch (error) {

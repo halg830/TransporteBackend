@@ -7,8 +7,9 @@ const httpTiquete = {
       const tiquetePopulatePromesas = tiquete.map(async (e) => {
         return await Tiquete.findById(e._id)
           .populate("cliente")
-          .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}] })
-          .populate("vendedor");
+          .populate({ path: "ruta", populate: [{ path: "ciudad_origen"}, { path: "ciudad_destino"}] })
+          .populate("vendedor")
+          .populate('bus');
       });
 
       const tiquetePopulate = await Promise.all(tiquetePopulatePromesas);
@@ -33,7 +34,8 @@ const httpTiquete = {
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}]});
+        .populate({ path: "ruta", populate: [{ path: "ciudad_origen"}, { path: "ciudad_destino"}]})
+        .populate('bus');
 
       res.json({ tiquetePopulate });
     } catch (error) {
@@ -49,8 +51,8 @@ const httpTiquete = {
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}]});
-
+        .populate({ path: "ruta", populate: [ { path: "ciudad_origen"}, { path: "ciudad_destino"}]})
+        .populate('bus');
       res.json({ tiquetePopulate });
     } catch (error) {
       res.status(400).json({ error });
@@ -105,12 +107,13 @@ const httpTiquete = {
 
       const tiquetePopulatePromesas = ticketsBd.map(async (e) => {
         return await Tiquete.findById(e._id)
-          .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}] })
+          .populate({ path: "ruta", populate: [{ path: "ciudad_origen"}, { path: "ciudad_destino"}] })
+          .populate('bus');
       });
 
       const tiquetePopulate = await Promise.all(tiquetePopulatePromesas);
 
-      const rutas = tiquetePopulate.map(t=>{return{ruta: t.ruta, fecha_salida:t.fecha_salida}})
+      const rutas = tiquetePopulate.map(t=>{return{ruta: t.ruta, fecha_salida:t.fecha_salida, bus: t.bus}})
       res.json(rutas)
     } catch (error) {
       res.status(400).json({error})
@@ -120,16 +123,16 @@ const httpTiquete = {
   //POST
   postTiquete: async (req, res) => {
     try {
-      const { vendedor, ruta, cliente, fecha_salida, num_asiento } = req.body;
-      const tiquete = new Tiquete({ vendedor, ruta, cliente, fecha_salida, num_asiento });
+      const { vendedor, ruta, cliente, fecha_salida, num_asiento, bus, valor } = req.body;
+      const tiquete = new Tiquete({ vendedor, ruta, cliente, fecha_salida, num_asiento, bus, valor });
 
       await tiquete.save();
 
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}] });
-
+        .populate({ path: "ruta", populate: [{ path: "ciudad_origen"}, { path: "ciudad_destino"}] })
+        .populate('bus');
       res.json({ tiquetePopulate });
     } catch (error) { 
         console.log(error);
@@ -141,18 +144,18 @@ const httpTiquete = {
   putTiquete: async (req, res) => {
     try {
       const { id } = req.params;
-      const { vendedor, ruta, cliente, fecha_salida, asiento } = req.body;
+      const { vendedor, ruta, cliente, fecha_salida, asiento, bus, valor } = req.body;
 
       const tiquete = await Tiquete.findByIdAndUpdate(
         id,
-        { vendedor, ruta, cliente, fecha_salida, asiento },
+        { vendedor, ruta, cliente, fecha_salida, asiento, bus, valor },
         { new: true }
       );
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}]});
-
+        .populate({ path: "ruta", populate: [{ path: "ciudad_origen"}, { path: "ciudad_destino"}]})
+        .populate('bus');
       res.json({ tiquetePopulate });
     } catch (error) {
       res.status(400).json({ error });
@@ -170,7 +173,8 @@ const httpTiquete = {
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}]});
+        .populate({ path: "ruta", populate: [{ path: "ciudad_origen"}, { path: "ciudad_destino"}]})
+        .populate('bus');
 
       res.json({ tiquetePopulate });
     } catch (error) {
@@ -188,7 +192,8 @@ const httpTiquete = {
       const tiquetePopulate = await Tiquete.findById(tiquete._id)
         .populate("cliente")
         .populate("vendedor")
-        .populate({ path: "ruta", populate: [{ path: "bus"}, { path: "ciudad_origen"}, { path: "ciudad_destino"}]});
+        .populate({ path: "ruta", populate: [{ path: "ciudad_origen"}, { path: "ciudad_destino"}]})
+        .populate('bus');
 
       res.json({ tiquetePopulate });
     } catch (error) {

@@ -16,8 +16,10 @@ router.get("/buscar/:id",validarJWT, httpBus.getBusId);
 router.post(
   "/guardar",
   [
+    check('numero', 'Por favor ingrese el número de bus').not().isEmpty(),
     check("empresa", "debe especificar la empresa").not().isEmpty(),
     check('empresa').custom(helpersGeneral.verificarEspacios),
+    check('empresa').custom(helpersBus.numeroEmpresa),
     check("asiento", "debe especificar el asiento").not().isEmpty(),
     check("asiento", "El asiento debe ser un número").isNumeric(),
     // check("asiento", "El número de asiento no puede ser mayor a 40").custom(helpersBus.comprobarCantAsientos),

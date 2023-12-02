@@ -21,6 +21,22 @@ router.post("/guardar",
     check('cedula').custom(helpersGeneral.verificarEspacios),
     check("cedula", "Tiene que tener 10 digitos ").isLength({ min: 10, max: 10 }),
     check("cedula").custom(helpersConductor.existeCedula),
+    check("telefono", "El telefono es obligatorio").notEmpty(),
+    check("telefono").custom(helpersGeneral.verificarEspacios),
+    check("telefono", "El telefono debe tener 10 digitos").isLength({
+      max: 10,
+      min: 10,
+    }),
+    check('telefono').custom(helpersConductor.existeTelefono),
+    check("email", "El email es requerido").notEmpty(),
+    check("email").custom(helpersGeneral.verificarEspacios),
+    check("email", "El email debe contener el símbolo @").custom(
+      helpersConductor.validarEmail
+    ),
+    check("email", "El email ya existe").custom(helpersConductor.existeEmail),
+    check("num_licencia", "El número de licencia es requerido").notEmpty(),
+    check("num_licencia").custom(helpersGeneral.verificarEspacios),
+    check("num_licencia", "El número de licencia ya existe").custom(helpersConductor.existeLicencia),
     validarCampos, validarJWT,
   ], httpConductor.postConductor
 );

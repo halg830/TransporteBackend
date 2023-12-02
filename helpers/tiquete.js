@@ -52,6 +52,14 @@ const helpersTiquete = {
       throw new Error("El cliente esta inactivo.");
     }
   },
+  busActivo: async (id) => {
+    const bus = await Bus.findOne({ _id: id });
+
+    console.log(bus);
+    if (bus.estado === 0) {
+      throw new Error("El bus esta inactivo.");
+    }
+  },
 };
 
 export default helpersTiquete;

@@ -46,6 +46,18 @@ const helpersCliente = {
       }
     }
   },
+  existeTelefono: async (telefono, req) => {
+    console.log("a", telefono);
+
+    const existe = await Cliente.findOne({ telefono });
+    if (existe) {
+      if (req.req.method === "PUT" && req.req.body._id != existe._id) {
+        throw new Error(`Ya existe ese telefono en la base de datos!!! `);
+      } else if (req.req.method === "POST") {
+        throw new Error(`Ya existe ese telefono en la base de datos!!! `);
+      }
+    }
+  },
 
   validarEmail: async (email) => {
     console.log("z");

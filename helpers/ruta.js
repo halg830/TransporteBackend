@@ -18,14 +18,7 @@ const helpersRuta = {
       throw new Error("La ciudad esta inactiva.");
     }
   },
-  busActivo: async (id) => {
-    const bus = await Bus.findOne({ _id: id });
-
-    console.log(bus);
-    if (bus.estado === 0) {
-      throw new Error("El bus esta inactivo.");
-    }
-  },
+  
 };
 
 export default helpersRuta;

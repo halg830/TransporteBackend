@@ -25,6 +25,19 @@ const helpersBus = {
         if(conductor.estado===0){
          throw new Error('El conductor esta inactivo.')
         }
+    },
+
+    numeroEmpresa: async(empresa,req)=>{
+        const bus = await Bus.find({empresa})
+
+        console.log(bus);
+        if(bus){
+            if(bus.numero===req.req.body.numero && req.req.method === "PUT"){
+                throw new Error('La empresa ya cuenta con ese número de bus')
+            }else if(req.req.method==='POST'){
+                throw new Error('La empresa ya cuenta con ese número de bus')
+            }
+        }
     }
 }
 

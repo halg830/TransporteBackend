@@ -59,6 +59,19 @@ const helpersVendedor = {
     }
   },
 
+  existeTelefono: async (telefono, req) => {
+    console.log("a", telefono);
+
+    const existe = await Vendedor.findOne({ telefono });
+    if (existe) {
+      if (req.req.method === "PUT" && req.req.body._id != existe._id) {
+        throw new Error(`Ya existe ese telefono en la base de datos!!! `);
+      } else if (req.req.method === "POST") {
+        throw new Error(`Ya existe ese telefono en la base de datos!!! `);
+      }
+    }
+  },
+
   noInactivarAdmin: async (id) => {
     const idAdmin = process.env.ADMIN;
 
