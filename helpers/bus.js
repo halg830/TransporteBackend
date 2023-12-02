@@ -28,9 +28,9 @@ const helpersBus = {
     },
 
     numeroEmpresa: async(empresa,req)=>{
-        const bus = await Bus.find({empresa})
+        const bus = await Bus.findOne({empresa})
 
-        console.log(bus);
+        console.log("a",bus);
         if(bus){
             if(bus.numero===req.req.body.numero && req.req.method === "PUT"){
                 throw new Error('La empresa ya cuenta con ese número de bus')
