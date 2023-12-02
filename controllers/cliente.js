@@ -52,8 +52,8 @@ const httpCliente = {
     try {
       helpersGeneral.eliminarEspacios(req.body)
       console.log("cc",req.body)
-      const { nombre, cedula, email } = req.body;
-      const cliente = new Cliente({ nombre, cedula, email });
+      const { nombre, cedula, email, telefono } = req.body;
+      const cliente = new Cliente({ nombre, cedula, email, telefono });
 
       await cliente.save();
 
@@ -70,8 +70,8 @@ const httpCliente = {
     try {
       helpersGeneral.eliminarEspacios(req.body)
       const {id} = req.params
-      const {nombre,cedula, email } = req.body
-      const cliente = await Cliente.findByIdAndUpdate(id, { nombre,cedula, email }, { new: true });
+      const {nombre,cedula, email, telefono } = req.body
+      const cliente = await Cliente.findByIdAndUpdate(id, { nombre,cedula, email, telefono }, { new: true });
       res.json({ cliente })
     } catch (error) {
       res.status(400).json({ error })
