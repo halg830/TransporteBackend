@@ -35,9 +35,9 @@ const httpbus = {
   //POST
   postNuevoBus: async (req, res) => {
     try {
-      const { empresa, asiento, placa, conductor } = await helpersGeneral.eliminarEspacios(req.body)
+      const { empresa, asiento, placa, conductor, numero } = await helpersGeneral.eliminarEspacios(req.body)
 
-      const bus = new Bus({ empresa, asiento, placa, conductor });
+      const bus = new Bus({ empresa, asiento, placa, conductor, numero });
       await bus.save();
       const busPopulate = await Bus.findById(bus._id).populate("conductor");
 
