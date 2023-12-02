@@ -45,7 +45,6 @@ getConductorId: async (req, res) => {
 postConductor: async (req, res) => {
     try {
         helpersGeneral.eliminarEspacios(req.body)
-        eliminarEspacios(req.body)
         const { nombre, cedula, telefono, num_licencia, email} = req.body;
         
 
@@ -63,7 +62,6 @@ postConductor: async (req, res) => {
 putConductor: async (req, res) => {
     try {
         helpersGeneral.eliminarEspacios(req.body)
-        eliminarEspacios(req.body)
         const { id } = req.params
         console.log("c", req.body)
         const { nombre, cedula, telefono, num_licencia, email } = req.body
