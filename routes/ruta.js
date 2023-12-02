@@ -11,7 +11,7 @@ const router = new Router();
 
 router.get("/all", validarJWT, httpRuta.getAllRuta);
 
-router.get("/buscar/:id", validarJWT, httpRuta.getRutasBus)
+// router.get("/buscar/:id", validarJWT, httpRuta.getRutasBus)
 
 router.post(
   "/guardar",
