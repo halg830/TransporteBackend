@@ -1,3 +1,4 @@
+import helpersGeneral from "../helpers/general.js";
 import Conductor from "../models/conductor.js";
 
 const httpConductor = {
@@ -43,7 +44,11 @@ getConductorId: async (req, res) => {
 //POST
 postConductor: async (req, res) => {
     try {
+        helpersGeneral.eliminarEspacios(req.body)
+        eliminarEspacios(req.body)
         const { nombre, cedula} = req.body;
+        
+
         const conductor = new Conductor({ nombre, cedula});
         await conductor.save();
 
@@ -57,6 +62,8 @@ postConductor: async (req, res) => {
 //PUT
 putConductor: async (req, res) => {
     try {
+        helpersGeneral.eliminarEspacios(req.body)
+        eliminarEspacios(req.body)
         const { id } = req.params
         console.log("c", req.body)
         const { nombre, cedula } = req.body

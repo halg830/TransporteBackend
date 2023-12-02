@@ -1,3 +1,4 @@
+import helpersGeneral from "../helpers/general.js";
 import Cliente from "../models/cliente.js"
 import bcryptjs from "bcrypt"
 
@@ -49,6 +50,7 @@ const httpCliente = {
   //POST
   postCliente: async (req, res) => {
     try {
+      helpersGeneral.eliminarEspacios(req.body)
       console.log("cc",req.body)
       const { nombre, cedula, email } = req.body;
       const cliente = new Cliente({ nombre, cedula, email });
@@ -66,6 +68,7 @@ const httpCliente = {
   //PUT
   putCliente: async (req, res) => {
     try {
+      helpersGeneral.eliminarEspacios(req.body)
       const {id} = req.params
       const {nombre,cedula, email } = req.body
       const cliente = await Cliente.findByIdAndUpdate(id, { nombre,cedula, email }, { new: true });

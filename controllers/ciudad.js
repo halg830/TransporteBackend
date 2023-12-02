@@ -1,3 +1,4 @@
+import helpersGeneral from "../helpers/general.js";
 import Ciudad from "../models/ciudad.js";
 
 const httpCiudad = {
@@ -23,6 +24,7 @@ const httpCiudad = {
 
     postCiudad: async (req, res) => {
         try {
+          helpersGeneral.eliminarEspacios(req.body)
             const {nombre}= req.body
             const ciudad = new Ciudad({nombre}) 
 
@@ -36,6 +38,7 @@ const httpCiudad = {
 
     putCiudad: async (req, res) => {
       try {
+        helpersGeneral.eliminarEspacios(req.body)
         const {id} = req.params
         const {nombre } = req.body;
         const ciudad = await Ciudad.findByIdAndUpdate(

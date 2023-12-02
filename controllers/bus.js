@@ -1,3 +1,4 @@
+import helpersGeneral from "../helpers/general.js";
 import Bus from "../models/bus.js";
 
 const httpbus = {
@@ -34,6 +35,7 @@ const httpbus = {
   //POST
   postNuevoBus: async (req, res) => {
     try {
+      helpersGeneral.eliminarEspacios(req.body)
       const { empresa, asiento, placa, conductor } = req.body;
       const bus = new Bus({ empresa, asiento, placa, conductor });
       await bus.save();
@@ -48,6 +50,8 @@ const httpbus = {
   //PUT
   putBus: async (req, res) => {
     try {
+      helpersGeneral.eliminarEspacios(req.body)
+
       const {id} = req.params
       const {empresa, conductor, asiento, placa, numero } = req.body;
       const bus = await Bus.findByIdAndUpdate(

@@ -1,3 +1,4 @@
+import helpersGeneral from "../helpers/general.js";
 import bus from "../models/bus.js";
 import Ruta from "../models/ruta.js";
 
@@ -67,6 +68,7 @@ const httpRuta = {
   //POST
   postRuta: async (req, res) => {
     try {
+      helpersGeneral.eliminarEspacios(req.body)
       const {
         ciudad_origen,
         ciudad_destino,
@@ -92,6 +94,7 @@ const httpRuta = {
   //PUT
   putRuta: async (req, res) => {
     try {
+      helpersGeneral.eliminarEspacios(req.body)
       const {id} = req.params
       const {
         ciudad_origen,

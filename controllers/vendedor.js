@@ -1,6 +1,7 @@
 import Vendedor from "../models/vendedor.js";
 import bcryptjs from "bcrypt"
 import { generarJWT } from "../miderwars/validar-jwt.js";
+import helpersGeneral from "../helpers/general.js";
 
 const httpVendedor = {
 
@@ -45,6 +46,7 @@ const httpVendedor = {
     //POST
     postVendedor: async (req, res) => {
         try {
+            helpersGeneral.eliminarEspacios(req.body)
             const { nombre, apellido, cedula, telefono, usuario, contrasena } = req.body;
             const vendedor = new Vendedor({ nombre, apellido, cedula, telefono, usuario, contrasena });
 
@@ -63,6 +65,7 @@ const httpVendedor = {
     //PUT
     putVendedor: async (req, res) => {
         try {
+            helpersGeneral.eliminarEspacios(req.body)
             const { id } = req.params
             const { nombre, apellido, telefono, cedula, usuario } = req.body
 
