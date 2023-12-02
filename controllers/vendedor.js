@@ -46,8 +46,7 @@ const httpVendedor = {
     //POST
     postVendedor: async (req, res) => {
         try {
-            helpersGeneral.eliminarEspacios(req.body)
-            const { nombre, apellido, cedula, telefono, usuario, contrasena } = req.body;
+            const { nombre, apellido, cedula, telefono, usuario, contrasena } = await helpersGeneral.eliminarEspacios(req.body)
             const vendedor = new Vendedor({ nombre, apellido, cedula, telefono, usuario, contrasena });
 
             const salt = bcryptjs.genSaltSync()
@@ -65,9 +64,8 @@ const httpVendedor = {
     //PUT
     putVendedor: async (req, res) => {
         try {
-            helpersGeneral.eliminarEspacios(req.body)
             const { id } = req.params
-            const { nombre, apellido, telefono, cedula, usuario } = req.body
+            const { nombre, apellido, telefono, cedula, usuario } = await helpersGeneral.eliminarEspacios(req.body)
 
             const vendedor = await Vendedor.findByIdAndUpdate(id, { nombre, apellido, telefono, cedula, usuario }, { new: true });
             res.json({ vendedor })

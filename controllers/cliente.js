@@ -50,9 +50,8 @@ const httpCliente = {
   //POST
   postCliente: async (req, res) => {
     try {
-      helpersGeneral.eliminarEspacios(req.body)
       console.log("cc",req.body)
-      const { nombre, cedula, email, telefono } = req.body;
+      const { nombre, cedula, email, telefono } = await helpersGeneral.eliminarEspacios(req.body)
       const cliente = new Cliente({ nombre, cedula, email, telefono });
 
       await cliente.save();
@@ -68,9 +67,9 @@ const httpCliente = {
   //PUT
   putCliente: async (req, res) => {
     try {
-      helpersGeneral.eliminarEspacios(req.body)
+
       const {id} = req.params
-      const {nombre,cedula, email, telefono } = req.body
+      const {nombre,cedula, email, telefono } = await helpersGeneral.eliminarEspacios(req.body)
       const cliente = await Cliente.findByIdAndUpdate(id, { nombre,cedula, email, telefono }, { new: true });
       res.json({ cliente })
     } catch (error) {

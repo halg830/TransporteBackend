@@ -44,10 +44,8 @@ getConductorId: async (req, res) => {
 //POST
 postConductor: async (req, res) => {
     try {
-        helpersGeneral.eliminarEspacios(req.body)
-        const { nombre, cedula, telefono, num_licencia, email} = req.body;
+        const { nombre, cedula, telefono, num_licencia, email} = await helpersGeneral.eliminarEspacios(req.body)
         
-
         const conductor = new Conductor({ nombre, cedula, telefono, num_licencia, email});
         await conductor.save();
 
@@ -61,10 +59,9 @@ postConductor: async (req, res) => {
 //PUT
 putConductor: async (req, res) => {
     try {
-        helpersGeneral.eliminarEspacios(req.body)
         const { id } = req.params
         console.log("c", req.body)
-        const { nombre, cedula, telefono, num_licencia, email } = req.body
+        const { nombre, cedula, telefono, num_licencia, email } = await helpersGeneral.eliminarEspacios(req.body)
 
         const conductor = await Conductor.findByIdAndUpdate(id, { nombre, cedula, telefono, num_licencia, email }, { new: true });
         res.json({ conductor })

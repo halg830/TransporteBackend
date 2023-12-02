@@ -68,12 +68,11 @@ const httpRuta = {
   //POST
   postRuta: async (req, res) => {
     try {
-      helpersGeneral.eliminarEspacios(req.body)
       const {
         ciudad_origen,
         ciudad_destino,
         hora_salida,
-      } = req.body;
+      } = await helpersGeneral.eliminarEspacios(req.body)
 
       const ruta = new Ruta({
         ciudad_origen,
@@ -94,13 +93,12 @@ const httpRuta = {
   //PUT
   putRuta: async (req, res) => {
     try {
-      helpersGeneral.eliminarEspacios(req.body)
       const {id} = req.params
       const {
         ciudad_origen,
         ciudad_destino,
         hora_salida,
-      } = req.body;
+      } = await helpersGeneral.eliminarEspacios(req.body)
 
       const ruta = await Ruta.findByIdAndUpdate(
         id,

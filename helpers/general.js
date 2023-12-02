@@ -8,11 +8,17 @@ const helpersGeneral = {
     }
   },
   eliminarEspacios: async (body) => {
-    Object.values(body).forEach((e) => {
-      if (typeof e === "string") {
-        e.trim();
+    const nuevoObjeto = {};
+
+    Object.entries(body).forEach(([clave, valor]) => {
+      if (typeof valor === "string") {
+        nuevoObjeto[clave] = valor.trim();
+      } else {
+        nuevoObjeto[clave] = valor;
       }
     });
+
+    return nuevoObjeto;
   },
 };
 

@@ -35,8 +35,8 @@ const httpbus = {
   //POST
   postNuevoBus: async (req, res) => {
     try {
-      helpersGeneral.eliminarEspacios(req.body)
-      const { empresa, asiento, placa, conductor } = req.body;
+      const { empresa, asiento, placa, conductor } = await helpersGeneral.eliminarEspacios(req.body)
+
       const bus = new Bus({ empresa, asiento, placa, conductor });
       await bus.save();
       const busPopulate = await Bus.findById(bus._id).populate("conductor");
@@ -50,10 +50,9 @@ const httpbus = {
   //PUT
   putBus: async (req, res) => {
     try {
-      helpersGeneral.eliminarEspacios(req.body)
 
       const {id} = req.params
-      const {empresa, conductor, asiento, placa, numero } = req.body;
+      const {empresa, conductor, asiento, placa, numero } = await helpersGeneral.eliminarEspacios(req.body)
       const bus = await Bus.findByIdAndUpdate(
         id,
         { empresa, asiento, conductor, placa, numero },

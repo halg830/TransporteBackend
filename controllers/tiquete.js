@@ -124,8 +124,7 @@ const httpTiquete = {
   //POST
   postTiquete: async (req, res) => {
     try {
-      helpersGeneral.eliminarEspacios(req.body)
-      const { vendedor, ruta, cliente, fecha_salida, num_asiento, bus, valor } = req.body;
+      const { vendedor, ruta, cliente, fecha_salida, num_asiento, bus, valor } = await helpersGeneral.eliminarEspacios(req.body)
       const tiquete = new Tiquete({ vendedor, ruta, cliente, fecha_salida, num_asiento, bus, valor });
 
       await tiquete.save();
@@ -145,9 +144,8 @@ const httpTiquete = {
   //PUT
   putTiquete: async (req, res) => {
     try {
-      helpersGeneral.eliminarEspacios(req.body)
       const { id } = req.params;
-      const { vendedor, ruta, cliente, fecha_salida, asiento, bus, valor } = req.body;
+      const { vendedor, ruta, cliente, fecha_salida, asiento, bus, valor } = await helpersGeneral.eliminarEspacios(req.body)
 
       const tiquete = await Tiquete.findByIdAndUpdate(
         id,
