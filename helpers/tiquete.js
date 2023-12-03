@@ -2,7 +2,7 @@ import Tiquete from "../models/tiquete.js";
 import Ruta from "../models/ruta.js";
 import Vendedor from "../models/vendedor.js";
 import Cliente from "../models/cliente.js";
-import Bus from '../models/bus.js'
+import Bus from "../models/bus.js";
 
 const helpersTiquete = {
   validarAsiento: async (num_asiento, req) => {
@@ -10,10 +10,7 @@ const helpersTiquete = {
 
     console.log("r", ruta);
 
-    const buscar = await Tiquete.findOne({ ruta }).populate({
-      path: "ruta",
-      populate: { path: "bus" },
-    });
+    const buscar = await Tiquete.findOne({ ruta }).populate('ruta').populate('bus');
 
     console.log("b", buscar);
 
@@ -21,7 +18,7 @@ const helpersTiquete = {
 
     if (buscar) {
       const num_asiento_buscar = buscar.num_asiento;
-      const asiento_bus = buscar.ruta.bus.asiento;
+      const asiento_bus = buscar.bus.asiento;
       if (num_asiento_buscar === num_asiento)
         throw new Error(`Asiento ${num_asiento} ya está ocupado`);
       if (asiento_bus < num_asiento || num_asiento < 0)
