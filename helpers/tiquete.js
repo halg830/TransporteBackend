@@ -6,11 +6,22 @@ import Bus from "../models/bus.js";
 
 const helpersTiquete = {
   validarAsiento: async (num_asiento, req) => {
-    const ruta = req.req.body.ruta;
+    const { ruta, bus, fecha_salida } = req.req.body;
 
     console.log("r", ruta);
+    const divFecha = fecha_salida.split("T");
+    console.log(divFecha);
 
-    const buscar = await Tiquete.findOne({ ruta }).populate('ruta').populate('bus');
+    const f1 = new Date(divFecha[0] + "T00:00:00.000Z");
+    const f2 = new Date(divFecha[0] + "T23:59:59.000Z");
+
+    const buscar = await Tiquete.findOne({
+      ruta,
+      bus,
+      fecha_salida: { $gte: f1, $lte: f2 },
+    })
+      .populate("ruta")
+      .populate("bus");
 
     console.log("b", buscar);
 
