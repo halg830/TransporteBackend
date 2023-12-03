@@ -2,6 +2,7 @@ import Tiquete from "../models/tiquete.js";
 import Ruta from "../models/ruta.js";
 import Vendedor from "../models/vendedor.js";
 import Cliente from "../models/cliente.js";
+import Bus from '../models/bus.js'
 
 const helpersTiquete = {
   validarAsiento: async (num_asiento, req) => {
