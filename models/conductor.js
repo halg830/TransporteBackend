@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const Conductor = new Schema({
-  nombre: { type: String, require: true, maxlength: 15 },
+  nombre: { type: String, require: true },
   cedula: { type: String, unique:true, require: true, minlength: 7, maxlength: 10 },
   telefono: { type: String, unique:true, require: true, minlength: 10, maxlength: 10 },
   num_licencia: { type: String, unique:true, require: true },
