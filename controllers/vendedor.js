@@ -1,173 +1,188 @@
 import Vendedor from "../models/vendedor.js";
-import bcryptjs from "bcrypt"
+import bcryptjs from "bcrypt";
 import { generarJWT } from "../miderwars/validar-jwt.js";
 import helpersGeneral from "../helpers/general.js";
 
 const httpVendedor = {
+  //GET
+  getAllVendedor: async (req, res) => {
+    try {
+      const vendedor = await Vendedor.find();
+      res.json({ vendedor });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 
-    //GET
-    getAllVendedor: async (req, res) => {
-        try {
-            const vendedor = await Vendedor.find();
-            res.json({ vendedor });
-        } catch (error) {
-            res.status(400).json({ error });
-        }
-    },
+  getVendedorCedula: async (req, res) => {
+    try {
+      const { cedula } = req.params;
+      const vendedor = await Vendedor.find({ cedula });
+      // const vendedor = await vendedor.find({
+      //     $and:[
+      //         {cedula},
+      //         {stado:1}
+      //     ]
+      // })v
+      res.json({ vendedor });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 
-    getVendedorCedula: async (req, res) => {
-        try {
-            const {cedula} = req.params
-            const vendedor = await Vendedor.find({ cedula });
-            // const vendedor = await vendedor.find({
-            //     $and:[
-            //         {cedula},
-            //         {stado:1}
-            //     ]
-            // })v
-            res.json({ vendedor });
-        } catch (error) {
-            res.status(400).json({ error });
-        }
-    },
+  getVendedorId: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const vendedor = await Vendedor.findById(id);
 
-    getVendedorId: async (req, res) => {
-        try {
-            const { id } = req.params
-            const vendedor = await Vendedor.findById(id)
-            
-            res.json({ vendedor });
-        } catch (error) {
-            res.status(400).json({ error })
+      res.json({ vendedor });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 
-        }
-    },
+  //POST
+  postVendedor: async (req, res) => {
+    try {
+      const { nombre, apellido, cedula, telefono, usuario, contrasena } =
+        await helpersGeneral.eliminarEspacios(req.body);
+      const mayus = await helpersGeneral.primeraMayuscula(nombre);
+      const mayusApellido = await helpersGeneral.primeraMayuscula(apellido);
 
-    //POST
-    postVendedor: async (req, res) => {
-        try {
-            const { nombre, apellido, cedula, telefono, usuario, contrasena } = await helpersGeneral.eliminarEspacios(req.body)
-            const vendedor = new Vendedor({ nombre, apellido, cedula, telefono, usuario, contrasena });
+      const vendedor = new Vendedor({
+        nombre: mayus,
+        apellido: mayusApellido,
+        cedula,
+        telefono,
+        usuario,
+        contrasena,
+      });
 
-            const salt = bcryptjs.genSaltSync()
-            vendedor.contrasena = bcryptjs.hashSync(contrasena, salt)
-      
-            await vendedor.save();
+      const salt = bcryptjs.genSaltSync();
+      vendedor.contrasena = bcryptjs.hashSync(contrasena, salt);
 
-            res.json({ vendedor });
-        } catch (error) {
-            res.status(400).json({ error });
-        }
-    },
+      await vendedor.save();
 
+      res.json({ vendedor });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 
-    //PUT
-    putVendedor: async (req, res) => {
-        try {
-            const { id } = req.params
-            const { nombre, apellido, telefono, cedula, usuario } = await helpersGeneral.eliminarEspacios(req.body)
+  //PUT
+  putVendedor: async (req, res) => {
+    try {
+      const { id } = req.params;
 
-            const vendedor = await Vendedor.findByIdAndUpdate(id, { nombre, apellido, telefono, cedula, usuario }, { new: true });
-            res.json({ vendedor })
-        } catch (error) {
-            res.status(400).json({ error })
+      const { nombre, apellido, telefono, cedula, usuario } =
+        await helpersGeneral.eliminarEspacios(req.body);
+      const mayus = await helpersGeneral.primeraMayuscula(nombre);
+      const mayusApellido = await helpersGeneral.primeraMayuscula(apellido);
+      const vendedor = await Vendedor.findByIdAndUpdate(
+        id,
+        { nombre: mayus, apellido: mayusApellido, telefono, cedula, usuario },
+        { new: true }
+      );
+      res.json({ vendedor });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 
-        }
+  putVendedorInactivar: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const vendedor = await Vendedor.findByIdAndUpdate(
+        id,
+        { estado: 0 },
+        { new: true }
+      );
+      res.json({ vendedor });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
+  putVendedorActivar: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const vendedor = await Vendedor.findByIdAndUpdate(
+        id,
+        { estado: 1 },
+        { new: true }
+      );
+      res.json({ vendedor });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 
-    },
+  //DELETE
+  deleteVendedor: async (req, res) => {
+    try {
+      const { cedula } = req.params;
+      const vendedor = await Vendedor.findOneAndDelete({ cedula });
+      res.json({ vendedor });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 
-    putVendedorInactivar: async (req, res) => {
-        try {
-            const { id } = req.params
-            const vendedor = await Vendedor.findByIdAndUpdate(id, { estado: 0 }, { new: true })
-            res.json({ vendedor })
-        } catch (error) {
-            res.status(400).json({ error })
+  deleteVendedorId: async () => {
+    try {
+      const { id } = req.params;
+      const vendedor = await Vendedor.findByIdAndDelete(id);
+      res.json({ vendedor });
+    } catch (error) {}
+  },
 
-        }
-    },
-    putVendedorActivar: async (req, res) => {
-        try {
-            const { id } = req.params
-            const vendedor = await Vendedor.findByIdAndUpdate(id, { estado: 1 }, { new: true })
-            res.json({ vendedor })
-        } catch (error) {
-            res.status(400).json({ error })
+  deleteAll: async (req, res) => {
+    try {
+      const vendedor = await Vendedor.deleteMany({});
+      res.json({ msg: "Se borro todo" });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  },
 
-        }
-    },
+  login: async (req, res) => {
+    const { usuario, contrasena } = req.body;
 
+    try {
+      const vendedor = await Vendedor.findOne({ usuario });
 
+      if (!vendedor) {
+        return res.status(400).json({
+          msg: "Vendedor / Password no son correctos",
+        });
+      }
 
-    //DELETE
-    deleteVendedor: async (req, res) => {
-        try {
-            const { cedula } = req.params
-            const vendedor = await Vendedor.findOneAndDelete({ cedula })
-            res.json({ vendedor })
-        } catch (error) {
-            res.status(400).json({ error })
-        }
+      if (vendedor.estado === 0) {
+        return res.status(400).json({
+          msg: "Vendedor Inactivo",
+        });
+      }
 
-    },
+      const validPassword = bcryptjs.compareSync(
+        contrasena,
+        vendedor.contrasena
+      );
+      if (!validPassword) {
+        return res.status(401).json({
+          msg: "Vendedor / Password no son correctos",
+        });
+      }
 
-    deleteVendedorId: async () => {
-        try {
-            const { id } = req.params
-            const vendedor = await Vendedor.findByIdAndDelete(id)
-            res.json({ vendedor })
-        } catch (error) {
+      const token = await generarJWT(vendedor.id);
 
-        }
-    },
-
-    deleteAll: async (req, res) => {
-        try {
-          const vendedor = await Vendedor.deleteMany({});
-          res.json({ msg: 'Se borro todo'});
-        } catch (error) {
-          res.status(400).json({ error });
-        }
-      },
-
-    login: async (req, res) => {
-        const { usuario, contrasena } = req.body;
-    
-        try {
-            const vendedor = await Vendedor.findOne({ usuario })
-            
-    
-            if (!vendedor) {
-                return res.status(400).json({
-                    msg: "Vendedor / Password no son correctos"
-                })
-            }
-    
-            if (vendedor.estado === 0) {
-                return res.status(400).json({
-                    msg: "Vendedor Inactivo"
-                })
-            }
-    
-            const validPassword = bcryptjs.compareSync(contrasena, vendedor.contrasena);
-            if (!validPassword) {
-                return res.status(401).json({
-                    msg: "Vendedor / Password no son correctos"
-                })
-            } 
-    
-            const token = await generarJWT(vendedor.id);
-    
-            res.json({
-                vendedor,
-                token
-            })
-    
-        } catch (error) {
-            return res.status(500).json({
-                msg: "Hable con el WebMaster"
-            })
-        }
-    },
+      res.json({
+        vendedor,
+        token,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        msg: "Hable con el WebMaster",
+      });
+    }
+  },
 };
 export default httpVendedor;

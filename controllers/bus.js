@@ -36,8 +36,9 @@ const httpbus = {
   postNuevoBus: async (req, res) => {
     try {
       const { empresa, asiento, placa, conductor, numero } = await helpersGeneral.eliminarEspacios(req.body)
-
-      const bus = new Bus({ empresa, asiento, placa, conductor, numero });
+      const mayus = await helpersGeneral.quitarTildes(placa)
+      const mayusEmpresa = await helpersGeneral.primeraMayuscula(empresa)
+      const bus = new Bus({ empresa:mayusEmpresa, asiento, placa:mayus.toUpperCase(), conductor, numero });
       await bus.save();
       const busPopulate = await Bus.findById(bus._id).populate("conductor");
 
@@ -53,9 +54,11 @@ const httpbus = {
 
       const {id} = req.params
       const {empresa, conductor, asiento, placa, numero } = await helpersGeneral.eliminarEspacios(req.body)
+      const mayus = await helpersGeneral.quitarTildes(placa)
+      const mayusEmpresa = await helpersGeneral.primeraMayuscula(empresa)
       const bus = await Bus.findByIdAndUpdate(
         id,
-        { empresa, asiento, conductor, placa, numero },
+        { empresa:mayusEmpresa, asiento, conductor, placa:mayus.toUpperCase(), numero },
         { new: true }
       );
       const busPopulate = await Bus.findById(bus._id).populate("conductor");

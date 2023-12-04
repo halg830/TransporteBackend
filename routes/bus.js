@@ -47,6 +47,12 @@ router.put("/editar/:id", [
     check('conductor', 'Id de vendedor no válida').isMongoId(),
     check('conductor').custom(helpersGeneral.verificarEspacios),
     check('conductor').custom(helpersBus.conductorActivo),
+    check("placa", "debe especificar el asiento").not().isEmpty(),
+    check('placa').custom(helpersGeneral.verificarEspacios),
+    check("placa", "la placa no puede tener mas de 7 caracteres").isLength({
+      max: 7
+    }),
+    check("placa", "La placa ya esta registrada").custom(helpersBus.existePlaca),
     validarCampos,
     validarJWT,
 ], httpBus.putBus)

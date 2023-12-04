@@ -29,7 +29,9 @@ const helpersVendedor = {
 
   existeUsuario: async (usuario, req) => {
     if (usuario) {
-      const existe = await Vendedor.findOne({ usuario });
+      const usuarioRegExp = new RegExp(`^${await helpersGeneral.quitarTildes(usuario)}$`, 'i');
+
+      const existe = await Vendedor.findOne({ usuario: { $regex: usuarioRegExp } });
       if (existe) {
         if (req.req.method === "PUT" && req.req.body._id != existe._id) {
           throw new Error(

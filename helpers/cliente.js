@@ -1,5 +1,6 @@
 import { parse } from "dotenv";
 import Cliente from "../models/cliente.js";
+import helpersGeneral from "./general.js";
 
 const helpersCliente = {
   existeClienteById: async (id, req) => {
@@ -31,8 +32,8 @@ const helpersCliente = {
 
   existeEmail: async (email, req) => {
     console.log("a", email);
-
-    const existe = await Cliente.findOne({ email });
+    const emailRegExp = new RegExp(`^${await helpersGeneral.quitarTildes(email)}$`, 'i');
+    const existe = await Cliente.findOne({ email: { $regex: emailRegExp } });
     if (existe) {
       
 

@@ -1,5 +1,6 @@
 import Bus from "../models/bus.js"
 import Conductor from '../models/conductor.js'
+import helpersGeneral from "./general.js";
 
 const helpersBus = {
     comprobarCantAsientos: async (asiento)=>{
@@ -10,10 +11,15 @@ const helpersBus = {
 
     },
 
-    existePlaca: async (placa)=>{
-        const existe = await Bus.findOne({placa})
-
+    existePlaca: async (placa,req)=>{
+        const placaRegExp = new RegExp(`^${await helpersGeneral.quitarTildes(placa)}$`, 'i');
+        const existe = await Bus.findOne({ placa: { $regex: placaRegExp } })
+        console.log("e",existe);
+        const {_id} = req.req.body
         if(existe){
+            if(existe._id!=_id && req.req.method === "PUT")
+            throw new Error("La placa ya esta registrada en la base de datos.")
+            else if(req.req.method === "POST")
             throw new Error("La placa ya esta registrada en la base de datos.")
         }
     },
@@ -32,7 +38,7 @@ const helpersBus = {
 
         console.log("a",bus);
         if(bus){
-            if(bus.numero===req.req.body.numero && req.req.method === "PUT"){
+            if(bus._id!=req.req.body._id && req.req.method === "PUT"){
                 throw new Error('La empresa ya cuenta con ese número de bus')
             }else if(req.req.method==='POST'){
                 throw new Error('La empresa ya cuenta con ese número de bus')

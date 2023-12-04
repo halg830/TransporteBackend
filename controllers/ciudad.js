@@ -25,7 +25,8 @@ const httpCiudad = {
   postCiudad: async (req, res) => {
     try {
       const { nombre } = await helpersGeneral.eliminarEspacios(req.body);
-      const ciudad = new Ciudad({ nombre });
+      const mayus = await helpersGeneral.primeraMayuscula(nombre)
+      const ciudad = new Ciudad({ nombre:mayus });
 
       await ciudad.save();
 
@@ -39,9 +40,10 @@ const httpCiudad = {
     try {
       const { id } = req.params;
       const { nombre } = await helpersGeneral.eliminarEspacios(req.body);
+      const mayus = await helpersGeneral.primeraMayuscula(nombre)
       const ciudad = await Ciudad.findByIdAndUpdate(
         id,
-        { nombre },
+        { nombre:mayus },
         { new: true }
       );
 

@@ -1,4 +1,5 @@
 import Conductor from "../models/conductor.js";
+import helpersGeneral from "./general.js";
 
 const helpersConductor = {
   existeCedula: async (cedula, req) => {
@@ -42,10 +43,19 @@ const helpersConductor = {
     }
   },
 
+  licenciaCedula: async(num_licencia,req)=>{
+    const {cedula} = req.req.body
+
+    if(num_licencia!=cedula){
+      throw new Error(`La licencia debe ser igual a la cedula!!! `);
+    }
+  },
+
   existeEmail: async (email, req) => {
     console.log("a", email);
+    const emailRegExp = new RegExp(`^${await helpersGeneral.quitarTildes(email)}$`, 'i');
 
-    const existe = await Conductor.findOne({ email });
+    const existe = await Conductor.findOne({ email: { $regex: emailRegExp } });
     if (existe) {
       if (req.req.method === "PUT" && req.req.body._id != existe._id) {
         console.log("h");
