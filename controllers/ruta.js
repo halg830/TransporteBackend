@@ -10,7 +10,7 @@ const httpRuta = {
       const rutasPopulatePromesas = rutas.map(async (e) => {
         return await Ruta.findById(e._id)
           .populate("ciudad_origen")
-          .populate("ciudad_destino")
+          .populate("ciudad_destino");
       });
 
       const rutasPopulate = await Promise.all(rutasPopulatePromesas);
@@ -68,21 +68,22 @@ const httpRuta = {
   //POST
   postRuta: async (req, res) => {
     try {
-      const {
-        ciudad_origen,
-        ciudad_destino,
-        hora_salida,
-      } = await helpersGeneral.eliminarEspacios(req.body)
+      const { ciudad_origen, ciudad_destino, hora_salida } =
+        await helpersGeneral.eliminarEspacios(req.body);
+
+      const divFecha = hora_salida.split("T");
+      console.log(divFecha);
+      const defaultFecha = "1969-12-31T" + divFecha[1];
 
       const ruta = new Ruta({
         ciudad_origen,
         ciudad_destino,
-        hora_salida,
+        defaultFecha,
       });
       await ruta.save();
       const rutasPopulate = await Ruta.findById(ruta._id)
         .populate("ciudad_origen")
-        .populate("ciudad_destino")
+        .populate("ciudad_destino");
 
       res.json({ rutasPopulate });
     } catch (error) {
@@ -93,26 +94,27 @@ const httpRuta = {
   //PUT
   putRuta: async (req, res) => {
     try {
-      const {id} = req.params
-      const {
-        ciudad_origen,
-        ciudad_destino,
-        hora_salida,
-      } = await helpersGeneral.eliminarEspacios(req.body)
+      const { id } = req.params;
+      const { ciudad_origen, ciudad_destino, hora_salida } =
+        await helpersGeneral.eliminarEspacios(req.body);
+
+      const divFecha = hora_salida.split("T");
+      console.log(divFecha);
+      const defaultFecha = "1969-12-31T" + divFecha[1];
 
       const ruta = await Ruta.findByIdAndUpdate(
         id,
         {
           ciudad_origen,
           ciudad_destino,
-          hora_salida,
+          hora_salida:defaultFecha,
         },
         { new: true }
       );
 
       const rutasPopulate = await Ruta.findById(ruta._id)
         .populate("ciudad_origen")
-        .populate("ciudad_destino")
+        .populate("ciudad_destino");
 
       res.json({ rutasPopulate });
     } catch (error) {
@@ -131,7 +133,7 @@ const httpRuta = {
       );
       const rutasPopulate = await Ruta.findById(ruta._id)
         .populate("ciudad_origen")
-        .populate("ciudad_destino")
+        .populate("ciudad_destino");
 
       res.json({ rutasPopulate });
     } catch (error) {
@@ -148,7 +150,7 @@ const httpRuta = {
       );
       const rutasPopulate = await Ruta.findById(ruta._id)
         .populate("ciudad_origen")
-        .populate("ciudad_destino")
+        .populate("ciudad_destino");
 
       res.json({ rutasPopulate });
     } catch (error) {
@@ -178,7 +180,7 @@ const httpRuta = {
   deleteAll: async (req, res) => {
     try {
       const ruta = await Ruta.deleteMany({});
-      res.json({ msg: 'Se borro todo'});
+      res.json({ msg: "Se borro todo" });
     } catch (error) {
       res.status(400).json({ error });
     }

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const Bus = new Schema({
-  empresa: { type: String, require: true },
+  empresa: { type: String, index: "text", require: true },
   asiento: { type: Number, require: true },
   placa: { type: String, index: "text", unique:true, maxlength: 7, require: true },
   numero: {type: String, require:true},

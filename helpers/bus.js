@@ -34,14 +34,22 @@ const helpersBus = {
     },
 
     numeroEmpresa: async(empresa,req)=>{
-        const bus = await Bus.findOne({empresa})
+        console.log("em", empresa.trim());
+        const sin = empresa.trim()
+        const empresaRegExp = new RegExp(`^${await helpersGeneral.quitarTildes(sin)}$`, 'i');
+        const bus = await Bus.findOne({ empresa: { $regex: empresaRegExp } })
+
 
         console.log("a",bus);
+        const {numero} = req.req.body
         if(bus){
-            if(bus._id!=req.req.body._id && req.req.method === "PUT"){
-                throw new Error('La empresa ya cuenta con ese número de bus')
-            }else if(req.req.method==='POST'){
-                throw new Error('La empresa ya cuenta con ese número de bus')
+            if(bus.numero==numero){
+                if(bus._id!=req.req.body._id && req.req.method === "PUT"){
+                    throw new Error('La empresa ya cuenta con ese número de bus')
+                }else if(req.req.method==='POST'){
+                    throw new Error('La empresa ya cuenta con ese número de bus')
+                }
+
             }
         }
     }

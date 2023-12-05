@@ -34,6 +34,7 @@ router.put("/editar/:id",[
   check("ciudad_destino", "Debe indicar el id de la ciudad de destino.").isMongoId(),
   check('ciudad_destino').custom(helpersRuta.ciudadActiva),
   check("hora_salida", "La hora es obligatoria").notEmpty(),
+  check('hora_salida').custom(helpersRuta.rutaRepetida),
   validarCampos, validarJWT,
 ], httpRuta.putRuta)
 
