@@ -1,4 +1,5 @@
 import Vendedor from "../models/vendedor.js";
+import helpersGeneral from "./general.js";
 
 const helpersVendedor = {
   existeVendedorById: async (id, req) => {
