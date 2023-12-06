@@ -21,7 +21,7 @@ const helpersRuta = {
   },
 
   rutaRepetida: async (hora_salida, req) => {
-    const { ciudad_origen, ciudad_destino } = req.req.body;
+    const { ciudad_origen, ciudad_destino, _id } = req.req.body;
 
     const divFecha = hora_salida.split("T");
     console.log(divFecha);
@@ -30,13 +30,13 @@ const helpersRuta = {
     const buscar = await ruta.findOne({
       ciudad_origen,
       ciudad_destino,
-      fecha_salida: defaultFecha,
+      hora_salida: defaultFecha,
     });
 
     console.log('br', buscar);
 
     if (buscar) {
-      if (existe._id != _id && req.req.method === "PUT")
+      if (buscar._id != _id && req.req.method === "PUT")
         throw new Error("La ruta ya esta registrada en la base de datos.");
       else if (req.req.method === "POST")
         throw new Error("La ruta ya esta registrada en la base de datos.");

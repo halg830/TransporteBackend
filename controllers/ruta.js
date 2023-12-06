@@ -78,7 +78,7 @@ const httpRuta = {
       const ruta = new Ruta({
         ciudad_origen,
         ciudad_destino,
-        defaultFecha,
+        hora_salida:defaultFecha,
       });
       await ruta.save();
       const rutasPopulate = await Ruta.findById(ruta._id)
