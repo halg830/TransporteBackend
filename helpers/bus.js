@@ -48,7 +48,7 @@ const helpersBus = {
 
     console.log("a", bus);
     if (bus) {
-      if (b._id != req.req.body._id && req.req.method === "PUT") {
+      if (bus._id != req.req.body._id && req.req.method === "PUT") {
         throw new Error("La empresa ya cuenta con ese número de bus");
       } else if (req.req.method === "POST") {
         throw new Error("La empresa ya cuenta con ese número de bus");
